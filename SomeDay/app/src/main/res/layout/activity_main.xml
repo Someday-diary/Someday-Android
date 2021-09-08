@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -19,15 +20,20 @@
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
-        android:layout_height="303dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:mcv_dateTextAppearance="@style/calendar_date"
+        app:mcv_headerTextAppearance="@style/calendar_header"
         app:mcv_leftArrowMask="@drawable/ic_left"
         app:mcv_rightArrowMask="@drawable/ic_right"
         app:mcv_selectionColor="#89D9C8"
-        app:mcv_showOtherDates="all" />
+        app:mcv_showOtherDates="all"
+        app:mcv_tileHeight="40dp"
+        app:mcv_tileSize="50dp"
+        app:mcv_titleAnimationOrientation="horizontal" />
 
     <View
         android:id="@+id/view"
@@ -39,25 +45,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+ 오늘의 일기 추가하기"
-        app:layout_constraintTop_toBottomOf="@id/view"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="16sp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        />
-
-    <ImageView
-        android:layout_width="181dp"
-        android:layout_height="167dp"
-        android:src="@drawable/mainimg"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

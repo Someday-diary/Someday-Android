@@ -1,5 +1,6 @@
 package com.yademos.someday
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,7 +12,6 @@ import com.prolificinteractive.materialcalendarview.CalendarMode
 import java.util.*
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter
 import java.text.SimpleDateFormat
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,14 +29,13 @@ class MainActivity : AppCompatActivity() {
 
         initToolbar()
 
+        calendarView.setSelectedDate(date)
         calendarView.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
             .setMinimumDate(CalendarDay.from(2020, 12, 31))
             .setMaximumDate(CalendarDay.from(2099, 12, 26))
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
-
-        calendarView.setSelectedDate(date)
 
         setCalendarViewTitle()
         calendarView.setOnMonthChangedListener { _, _ ->
