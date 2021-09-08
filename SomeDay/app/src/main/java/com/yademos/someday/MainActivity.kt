@@ -1,10 +1,10 @@
 package com.yademos.someday
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var calendarView: MaterialCalendarView
+    private lateinit var toolbarTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         toolbar = findViewById(R.id.toolbar)
         calendarView = findViewById(R.id.calendarView)
+        toolbarTitle = findViewById(R.id.toolbarTitle)
 
         initToolbar()
 
@@ -41,21 +43,21 @@ class MainActivity : AppCompatActivity() {
         calendarView.setOnMonthChangedListener { _, _ ->
             setCalendarViewTitle()
         }
-    }
 
+    }
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_memu)
     }
 
     private fun setCalendarViewTitle() {
         calendarView.setTitleFormatter(TitleFormatter {
-            supportActionBar?.title = it.year.toString()
-            val calendar_view_format = SimpleDateFormat("M월")
-            calendar_view_format.format(it.date.time)
+            toolbarTitle.text = it.year.toString()
+            val calendarViewFormat = SimpleDateFormat("M월")
+            calendarViewFormat.format(it.date.time)
         })
     }
 

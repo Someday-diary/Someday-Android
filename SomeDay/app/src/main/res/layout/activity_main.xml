@@ -10,10 +10,19 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="title"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -31,7 +40,7 @@
         app:mcv_rightArrowMask="@drawable/ic_right"
         app:mcv_selectionColor="#89D9C8"
         app:mcv_showOtherDates="all"
-        app:mcv_tileHeight="40dp"
+        app:mcv_tileHeight="45dp"
         app:mcv_tileSize="50dp"
         app:mcv_titleAnimationOrientation="horizontal" />
 
