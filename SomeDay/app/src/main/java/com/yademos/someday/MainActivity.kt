@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import java.util.*
@@ -22,12 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val now: Long = System.currentTimeMillis()
-        val date = Date(now)
 
         initToolbar()
 
-        binding.calendarView.setSelectedDate(date)
+        binding.calendarView.selectedDate = CalendarDay.today()
         binding.calendarView.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
             .setMinimumDate(CalendarDay.from(2020, 12, 31))
@@ -39,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         binding.calendarView.setOnMonthChangedListener { _, _ ->
             setCalendarViewTitle()
         }
-
     }
 
     private fun initToolbar() {
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setCalendarViewTitle() {
         binding.calendarView.setTitleFormatter(TitleFormatter {
-            binding.toolbarTitle.text = it.year.toString()
+            binding.toolbarTitle.text = it.year.toString() + "년"
             val calendarViewFormat = SimpleDateFormat("M월")
             calendarViewFormat.format(it.date.time)
         })
@@ -64,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     //액션버튼 클릭 했을 때
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.menu_search -> {
                 //검색 버튼 눌렀을 때
                 Toast.makeText(applicationContext, "검색 이벤트 실행", Toast.LENGTH_LONG).show()
