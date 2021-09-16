@@ -59,7 +59,7 @@
             app:mcv_titleAnimationOrientation="horizontal" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/dividingLine."
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="30dp"
@@ -70,6 +70,87 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/bottom_sheet" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_peekHeight="90dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="35dp"
+            android:layout_height="5dp"
+            android:background="@drawable/background_bottom_sheet_view"
+            app:layout_constraintBottom_toTopOf="@id/bottomSheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_bottom_sheet"
+            app:layout_constraintTop_toBottomOf="@id/view">
+
+            <TextView
+                android:id="@+id/list_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/circle_selected"
+                android:gravity="center"
+                tools:text="24"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/list_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                tools:text="# 태그"
+                android:textColor="@color/green3"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/list_date"
+                app:layout_constraintStart_toEndOf="@id/list_date"
+                app:layout_constraintTop_toTopOf="@id/list_date" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/list_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:text="수정"
+                android:background="?selectableItemBackground"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/list_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/list_tag" />
+
+            <TextView
+                android:id="@+id/list_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                tools:text="@tools:sample/lorem/random"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/list_edit"
+                app:layout_constraintStart_toStartOf="@id/list_date"
+                app:layout_constraintTop_toBottomOf="@id/list_date" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -25,7 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         initToolbar()
 
-        binding.calendarView.selectedDate = CalendarDay.today()
+        val today: CalendarDay = CalendarDay.today()
+
+        binding.calendarView.selectedDate = today
+        binding.listDate.text = today.day.toString()
+
         binding.calendarView.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
             .setMinimumDate(CalendarDay.from(2020, 12, 31))
@@ -36,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         setCalendarViewTitle()
         binding.calendarView.setOnMonthChangedListener { _, _ ->
             setCalendarViewTitle()
+        }
+
+        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
+            binding.listDate.text = date.day.toString()
         }
     }
 
