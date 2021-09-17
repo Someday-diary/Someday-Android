@@ -4,15 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
+import android.view.View
 import android.widget.Toast
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import java.util.*
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter
 import com.yademos.someday.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
+import androidx.core.content.res.ResourcesCompat
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,8 +25,44 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initToolbar()
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState != BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheet.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.background_bottom_sheet_sliding,
+                        null
+                    )
+                } else {
+                    bottomSheet.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.background_bottom_sheet,
+                        null
+                    )
+                }
+            }
 
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+
+        })
+
+        initToolbar() // Toolbar 설정
+        initCalendarView() // CalendarView 설정
+
+        setCalendarViewTitle() // 이번 달
+        binding.calendarView.setOnMonthChangedListener { _, _ -> // 그 다음달부터 달력 넘겼을때
+            setCalendarViewTitle()
+        }
+
+        binding.calendarView.setOnDateChangedListener { _, date, _ ->
+            binding.listDate.text = date.day.toString() // 날짜 클릭시 BottomSheet의 날짜 값이 바뀜
+        }
+    }
+
+    private fun initCalendarView() {
         val today: CalendarDay = CalendarDay.today()
 
         binding.calendarView.selectedDate = today
@@ -36,15 +74,6 @@ class MainActivity : AppCompatActivity() {
             .setMaximumDate(CalendarDay.from(2099, 12, 26))
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
-
-        setCalendarViewTitle()
-        binding.calendarView.setOnMonthChangedListener { _, _ ->
-            setCalendarViewTitle()
-        }
-
-        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
-            binding.listDate.text = date.day.toString()
-        }
     }
 
     private fun initToolbar() {
