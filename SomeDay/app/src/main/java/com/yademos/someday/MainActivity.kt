@@ -1,5 +1,6 @@
 package com.yademos.someday
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -24,8 +25,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        initToolbar() // Toolbar 설정
+        initCalendarView() // CalendarView 설정
+        setCalendarViewTitle() // 이번 달
+
+        startActivity(Intent(this, SplashActivity::class.java)) // Splash 실행
+
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -49,10 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        initToolbar() // Toolbar 설정
-        initCalendarView() // CalendarView 설정
 
-        setCalendarViewTitle() // 이번 달
         binding.calendarView.setOnMonthChangedListener { _, _ -> // 그 다음달부터 달력 넘겼을때
             setCalendarViewTitle()
         }
