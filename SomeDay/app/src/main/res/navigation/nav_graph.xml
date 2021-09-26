@@ -19,5 +19,6 @@
         android:id="@+id/diaryFragment"
         android:name="com.yademos.someday.Fragment.DiaryFragment"
         android:label="fragment_diary"
-        tools:layout="@layout/fragment_diary" />
+        tools:layout="@layout/fragment_diary" >
+    </fragment>
 </navigation>

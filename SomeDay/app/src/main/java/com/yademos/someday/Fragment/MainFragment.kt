@@ -3,7 +3,6 @@ package com.yademos.someday.Fragment
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -14,14 +13,31 @@ import com.yademos.someday.databinding.FragmentMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 class MainFragment : Fragment() {
+
+    fun newInstance(index: Int): MainFragment {
+        val f = MainFragment()
+
+        val args = Bundle()
+        args.putInt("index", index)
+        f.arguments = args
+        return f
+    }
+
+    fun getShownIndex(): Int {
+        return requireArguments().getInt("index", 0)
+    }
+
+    private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         setHasOptionsMenu(true);
         initToolbar(binding) // Toolbar 설정
@@ -60,6 +76,10 @@ class MainFragment : Fragment() {
             binding.listDate.text = date.day.toString()
         }
 
+        binding.listEdit.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_diaryFragment)
+        }
+
         return binding.root
     }
 
@@ -94,7 +114,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
+        inflater.inflate(R.menu.toolbar_menu_main, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
