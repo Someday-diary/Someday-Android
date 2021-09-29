@@ -1,36 +1,48 @@
-package com.yademos.someday
+package com.yademos.someday.Fragment
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
+import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
-import java.util.*
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter
-import com.yademos.someday.databinding.ActivityMainBinding
+import com.yademos.someday.R
+import com.yademos.someday.databinding.FragmentMainBinding
 import java.text.SimpleDateFormat
-import androidx.core.content.res.ResourcesCompat
+import java.util.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
+class MainFragment : Fragment() {
 
-class MainActivity : AppCompatActivity() {
+    fun newInstance(index: Int): MainFragment {
+        val f = MainFragment()
 
-    private lateinit var binding: ActivityMainBinding
+        val args = Bundle()
+        args.putInt("index", index)
+        f.arguments = args
+        return f
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    fun getShownIndex(): Int {
+        return requireArguments().getInt("index", 0)
+    }
+
+    private lateinit var binding: FragmentMainBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-        initToolbar() // Toolbar 설정
-        initCalendarView() // CalendarView 설정
-        setCalendarViewTitle() // 이번 달
-
-        startActivity(Intent(this, SplashActivity::class.java)) // Splash 실행
+        setHasOptionsMenu(true);
+        initToolbar(binding) // Toolbar 설정
+        initCalendarView(binding) // CalendarView 설정
+        setCalendarViewTitle(binding) // 이번 달
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
@@ -51,21 +63,35 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
             }
 
         })
 
-
         binding.calendarView.setOnMonthChangedListener { _, _ -> // 그 다음달부터 달력 넘겼을때
-            setCalendarViewTitle()
+            setCalendarViewTitle(binding)
         }
 
         binding.calendarView.setOnDateChangedListener { _, date, _ ->
-            binding.listDate.text = date.day.toString() // 날짜 클릭시 BottomSheet의 날짜 값이 바뀜
+            binding.listDate.text = date.day.toString()
         }
+
+        binding.listEdit.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_diaryFragment)
+        }
+
+        return binding.root
     }
 
-    private fun initCalendarView() {
+    private fun initToolbar(binding: FragmentMainBinding) {
+        val activity = activity as AppCompatActivity
+        activity.setSupportActionBar(binding.toolbar)
+        activity.supportActionBar?.setDisplayShowTitleEnabled(false)
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_memu)
+    }
+
+    private fun initCalendarView(binding: FragmentMainBinding) {
         val today: CalendarDay = CalendarDay.today()
 
         binding.calendarView.selectedDate = today
@@ -79,14 +105,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun initToolbar() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_memu)
-    }
-
-    private fun setCalendarViewTitle() {
+    private fun setCalendarViewTitle(binding: FragmentMainBinding) {
         binding.calendarView.setTitleFormatter(TitleFormatter {
             binding.toolbarTitle.text = it.year.toString() + "년"
             val calendarViewFormat = SimpleDateFormat("M월")
@@ -94,9 +113,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        return true
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar_menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     //액션버튼 클릭 했을 때
@@ -104,10 +123,10 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.menu_search -> {
                 //검색 버튼 눌렀을 때
-                Toast.makeText(applicationContext, "검색 이벤트 실행", Toast.LENGTH_LONG).show()
                 return super.onOptionsItemSelected(item)
             }
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
 }
