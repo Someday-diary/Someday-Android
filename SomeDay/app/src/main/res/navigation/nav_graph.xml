@@ -25,5 +25,17 @@
             app:destination="@id/mainFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="false" />
+        <argument
+            android:name="year"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="month"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="day"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
 </navigation>

@@ -7,23 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.yademos.someday.R
 import com.yademos.someday.databinding.FragmentDiaryBinding
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 
 class DiaryFragment : Fragment() {
 
-    fun newInstance(index: Int): DiaryFragment {
-        val f = DiaryFragment()
-
-        val args = Bundle()
-        args.putInt("index", index)
-        f.arguments = args
-        return f
-    }
-
-    fun getShownIndex(): Int {
-        return requireArguments().getInt("index", 0)
-    }
-
     private lateinit var binding: FragmentDiaryBinding
+    private val args: DiaryFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +36,7 @@ class DiaryFragment : Fragment() {
             supportActionBar?.setDisplayShowTitleEnabled(false)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+        binding.toolbarTitle.text = String.format("%s년 %s월 %s일", args.year, args.month, args.day)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

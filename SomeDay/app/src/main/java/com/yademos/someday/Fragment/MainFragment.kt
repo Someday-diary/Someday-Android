@@ -13,22 +13,9 @@ import com.yademos.someday.databinding.FragmentMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
 class MainFragment : Fragment() {
-
-    fun newInstance(index: Int): MainFragment {
-        val f = MainFragment()
-
-        val args = Bundle()
-        args.putInt("index", index)
-        f.arguments = args
-        return f
-    }
-
-    fun getShownIndex(): Int {
-        return requireArguments().getInt("index", 0)
-    }
 
     private lateinit var binding: FragmentMainBinding
 
@@ -76,7 +63,11 @@ class MainFragment : Fragment() {
         }
 
         binding.listEdit.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_diaryFragment)
+            val year = binding.calendarView.selectedDate.year.toString()
+            val month = (binding.calendarView.selectedDate.month + 1).toString()
+            val day = binding.calendarView.selectedDate.day.toString()
+//            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_diaryFragment)
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDiaryFragment(year, month, day))
         }
 
         return binding.root
