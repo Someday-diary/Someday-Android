@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 
 class MainFragment : Fragment() {
 
@@ -85,10 +84,15 @@ class MainFragment : Fragment() {
 
     private fun initToolbar(binding: FragmentMainBinding) {
         val activity = activity as AppCompatActivity
-        activity.setSupportActionBar(binding.toolbar)
-        activity.supportActionBar?.setDisplayShowTitleEnabled(false)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_memu)
+
+        activity.apply {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.apply {
+                setDisplayShowTitleEnabled(false)
+                setDisplayHomeAsUpEnabled(true)
+                setHomeAsUpIndicator(R.drawable.ic_memu)
+            }
+        }
     }
 
     private fun initCalendarView(binding: FragmentMainBinding) {
