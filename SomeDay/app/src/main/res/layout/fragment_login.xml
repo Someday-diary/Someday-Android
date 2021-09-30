@@ -19,31 +19,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/email_errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:textColor="#B3C1CF"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="이메일 형식이 맞지 않습니다." />
+
     <EditText
         android:id="@+id/email"
+        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="80dp"
-        android:backgroundTint="#DEE2E6"
         android:hint="이메일"
         android:inputType="textEmailAddress"
+        android:textColor="@color/black_app"
         android:textColorHint="#B3C1CF"
+        android:textCursorDrawable="@color/black_app"
         android:textSize="16sp"
+        android:textSelectHandle="@color/black_app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/icon" />
 
+    <TextView
+        android:id="@+id/password_errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:textColor="#B3C1CF"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/password"
+        style="@style/AppTheme"
+        android:textSelectHandle="@color/black_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:backgroundTint="#DEE2E6"
         android:hint="비밀번호"
         android:inputType="textPassword"
+        android:textColor="@color/black_app"
         android:textColorHint="#B3C1CF"
+        android:textCursorDrawable="@color/black_app"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +94,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

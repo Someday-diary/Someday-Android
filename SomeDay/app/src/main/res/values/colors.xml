@@ -11,4 +11,8 @@
     <color name="green1">#89D9C8</color>
     <color name="green2">#E1F5F1</color>
     <color name="green3">#64BDAA</color>
+
+    <color name="black_app">#3C3C3C</color>
+    <color name="main_dark">#64BDAA</color>
+    <color name="white_dark">#DEE2E6</color>
 </resources>

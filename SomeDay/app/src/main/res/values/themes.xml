@@ -14,4 +14,14 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/white_dark</item>
+        <item name="colorControlActivated">@color/main_dark</item>
+    </style>
+
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/main_dark</item>
+        <item name="colorControlActivated">@color/main_dark</item>
+    </style>
 </resources>
