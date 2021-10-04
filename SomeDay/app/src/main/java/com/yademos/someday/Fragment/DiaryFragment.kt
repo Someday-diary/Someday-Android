@@ -1,6 +1,9 @@
 package com.yademos.someday.Fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +29,31 @@ class DiaryFragment : Fragment() {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_diaryFragment_to_mainFragment)
         }
+
+        binding.tagEditText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus && binding.tagEditText.text.toString().isEmpty()) {
+                binding.tagEditText.append("#")
+            }
+        }
+
+        binding.tagEditText.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val c = binding.tagEditText.text.toString()
+//                Log.d("TEST", ""+("" + c[binding.tagEditText.length() - 1]).equals(" "))
+                if (("" + c[binding.tagEditText.length() - 1]).equals(" ")) {
+                    binding.tagEditText.append("#")
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
         return binding.root
     }
 
