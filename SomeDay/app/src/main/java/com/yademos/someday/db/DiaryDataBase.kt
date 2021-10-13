@@ -10,17 +10,21 @@ import com.yademos.someday.db.model.Diary
 @Database(entities = [Diary::class], version = 1)
 abstract class DiaryDataBase : RoomDatabase() {
 
-    private lateinit var INSTANCE: DiaryDataBase
     abstract fun diaryDao(): DiaryDao
 
-    fun getAppDatabase(context: Context?): DiaryDataBase? {
-        if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(
-                context!!,
-                DiaryDataBase::class.java,
-                "todo-db"
-            ).build()
+    companion object {
+        fun getAppDatabase(context: Context?): DiaryDataBase? {
+
+            var INSTANCE: DiaryDataBase? = null
+
+            if (null == INSTANCE) {
+                INSTANCE = Room.databaseBuilder(
+                    context!!,
+                    DiaryDataBase::class.java,
+                    "todo-db"
+                ).build()
+            }
+            return INSTANCE
         }
-        return INSTANCE
     }
 }
