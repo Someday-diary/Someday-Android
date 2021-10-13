@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.yademos.someday.Converter.DateConverter
 import com.yademos.someday.db.dao.DiaryDao
 import com.yademos.someday.db.model.Diary
 
 @Database(entities = [Diary::class], version = 1)
+@TypeConverters(DateConverter::class)
 abstract class DiaryDataBase : RoomDatabase() {
 
     abstract fun diaryDao(): DiaryDao
