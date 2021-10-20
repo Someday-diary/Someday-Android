@@ -1,4 +1,4 @@
-package com.yademos.someday.Converter
+package com.yademos.someday.converter
 
 import androidx.room.TypeConverter
 import java.util.*

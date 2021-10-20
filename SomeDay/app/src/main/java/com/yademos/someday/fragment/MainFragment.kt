@@ -1,4 +1,4 @@
-package com.yademos.someday.Fragment
+package com.yademos.someday.fragment
 
 import android.os.Bundle
 import android.view.*
@@ -63,13 +63,16 @@ class MainFragment : Fragment() {
         }
 
         binding.listEdit.setOnClickListener {
+            val date = binding.calendarView.selectedDate.date
+            val longDate = convertedDateToLong(date)
             val year = binding.calendarView.selectedDate.year.toString()
             val month = (binding.calendarView.selectedDate.month + 1).toString()
             val day = binding.calendarView.selectedDate.day.toString()
 //            Navigation.findNavController(binding.root).navigate(R.id.action_mainFragment_to_diaryFragment)
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDiaryFragment(year, month, day))
+//            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDiaryFragment(year, month, day, date))
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDiaryFragment(year, month, day, longDate))
         }
-
+//
         return binding.root
     }
 
@@ -106,6 +109,10 @@ class MainFragment : Fragment() {
             val calendarViewFormat = SimpleDateFormat("M월")
             calendarViewFormat.format(it.date.time)
         })
+    }
+
+    private fun convertedDateToLong(date: Date): Long {
+        return date.time
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
