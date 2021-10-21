@@ -19,4 +19,13 @@ class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
     fun insertTag(date: Date, tag: String) = viewModelScope.launch {
         repository.insertTag(date, tag)
     }
+
+    fun getData(date: Date) : LiveData<String> {
+        val result = MutableLiveData<String>()
+        viewModelScope.launch {
+            val data = repository.getData(date)
+            result.postValue(data)
+        }
+        return result
+    }
 }

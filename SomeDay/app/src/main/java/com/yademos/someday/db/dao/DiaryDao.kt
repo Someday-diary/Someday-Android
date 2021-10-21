@@ -18,4 +18,7 @@ interface DiaryDao {
 
     @Query("UPDATE diary SET tag = :tag WHERE date = :date")
     suspend fun insertTag(date: Date, tag: String)
+
+    @Query("SELECT data FROM diary WHERE date = :date")
+    suspend fun getData(date: Date) : String
 }

@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 data class Diary(
-    @PrimaryKey val date : Date?,
+    @PrimaryKey val date: Date,
     @ColumnInfo(name = "data") val data: String?,
     @ColumnInfo(name = "tag") val tag: String?
 )

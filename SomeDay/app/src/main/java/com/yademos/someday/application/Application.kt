@@ -15,22 +15,7 @@ import org.koin.core.logger.Level
 import org.koin.dsl.module
 
 class Application : Application() {
-    private val appModule = module {
-        val applicationScope = CoroutineScope(SupervisorJob())
 
-        single {
-            DiaryDataBase.getDatabase(androidApplication(), applicationScope)
-        }
-        single {
-            DiaryRepository(get())
-        }
-        single {
-            get<DiaryDataBase>().diaryDao()
-        }
-        viewModel {
-            DiaryViewModel(get())
-        }
-    }
     override fun onCreate() {
         super.onCreate()
         startKoin {

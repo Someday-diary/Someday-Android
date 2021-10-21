@@ -4,20 +4,16 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.app.AlertDialog
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import com.yademos.someday.R
 import com.yademos.someday.databinding.FragmentDiaryBinding
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.yademos.someday.viewModel.DiaryViewModel
-import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.*
+import androidx.lifecycle.Observer
 
 class DiaryFragment : Fragment() {
 
@@ -30,10 +26,15 @@ class DiaryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDiaryBinding.inflate(inflater, container, false)
+        val date = Date(args.date)
+
         setHasOptionsMenu(true)
-        bindingToolbar()
+        bindingToolbar() // Toolbar 설정
         bindingTagEditText()
-        bindingSaveButton()
+        bindingSaveButton(date)
+        bindingContextEditText(date)
+
+
 
         return binding.root
     }
@@ -79,7 +80,7 @@ class DiaryFragment : Fragment() {
         })
     }
 
-    private fun bindingSaveButton() {
+    private fun bindingSaveButton(date: Date) {
         binding.saveDiaryButton.setOnClickListener {
             val content = binding.contextEditText.text.toString()
             val tag = binding.tagEditText.text.toString()
@@ -87,12 +88,19 @@ class DiaryFragment : Fragment() {
             if (content.isEmpty()) {
 //                showDialog()
             } else {
-                val date = Date(args.date)
                 viewModel.insert(date, content)
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_diaryFragment_to_mainFragment)
             }
         }
+    }
+
+    private fun bindingContextEditText(date: Date) {
+        viewModel.getData(date).observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                binding.contextEditText.setText(it)
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -22,4 +22,9 @@ class DiaryRepository(private val diaryDao: DiaryDao) {
     suspend fun insertTag(date: Date, tag: String){
         diaryDao.insertTag(date, tag)
     }
+
+    @WorkerThread
+    suspend fun getData(date: Date) : String {
+        return diaryDao.getData(date)
+    }
 }
