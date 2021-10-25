@@ -1,16 +1,15 @@
 package com.yademos.someday.db.repository
 
 import androidx.annotation.WorkerThread
-import com.yademos.someday.db.DiaryDataBase
 import com.yademos.someday.db.dao.DiaryDao
-import org.koin.java.KoinJavaComponent.inject
+import com.yademos.someday.db.model.Diary
 import java.util.*
 
 class DiaryRepository(private val diaryDao: DiaryDao) {
 
     @WorkerThread
-    suspend fun insert(date: Date, data: String){
-        diaryDao.insertDiary(date, data)
+    suspend fun insert(date: Date, data: String, tag: String){
+        diaryDao.insertDiary(date, data, tag)
     }
 
     @WorkerThread
@@ -24,7 +23,7 @@ class DiaryRepository(private val diaryDao: DiaryDao) {
     }
 
     @WorkerThread
-    suspend fun getData(date: Date) : String {
-        return diaryDao.getData(date)
+    suspend fun getData(date: Date) : Diary {
+        return diaryDao.getDiary(date)
     }
 }

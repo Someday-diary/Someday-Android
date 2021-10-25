@@ -8,8 +8,8 @@ import java.util.*
 
 class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
 
-    fun insert(date: Date, data: String) = viewModelScope.launch {
-        repository.insert(date, data)
+    fun insert(date: Date, data: String, tag: String) = viewModelScope.launch {
+        repository.insert(date, data, tag)
     }
 
     fun delete(date: Date) = viewModelScope.launch {
@@ -20,8 +20,8 @@ class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
         repository.insertTag(date, tag)
     }
 
-    fun getData(date: Date) : LiveData<String> {
-        val result = MutableLiveData<String>()
+    fun getData(date: Date) : LiveData<Diary> {
+        val result = MutableLiveData<Diary>()
         viewModelScope.launch {
             val data = repository.getData(date)
             result.postValue(data)

@@ -88,7 +88,7 @@ class DiaryFragment : Fragment() {
             if (content.isEmpty()) {
 //                showDialog()
             } else {
-                viewModel.insert(date, content)
+                viewModel.insert(date, content, tag)
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_diaryFragment_to_mainFragment)
             }
@@ -98,7 +98,8 @@ class DiaryFragment : Fragment() {
     private fun bindingContextEditText(date: Date) {
         viewModel.getData(date).observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                binding.contextEditText.setText(it)
+                binding.contextEditText.setText(it.data)
+                binding.tagEditText.setText(it.tag)
             }
         })
     }
