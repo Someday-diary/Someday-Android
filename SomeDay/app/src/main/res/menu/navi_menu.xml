@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="테마 설정" />
+
+    <item android:title="일기 알림 설정" />
+
+    <item android:title="잠금 설정" />
+
+    <item android:title="앱 정보" />
+
+    <item android:title="사용자 피드백" />
+
+</menu>

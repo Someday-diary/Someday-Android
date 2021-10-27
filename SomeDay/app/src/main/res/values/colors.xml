@@ -15,4 +15,6 @@
     <color name="black_app">#3C3C3C</color>
     <color name="main_dark">#64BDAA</color>
     <color name="white_dark">#DEE2E6</color>
+    <color name="white_dark_text">#B3C1CF</color>
+    <color name="main">#89D9C8</color>
 </resources>

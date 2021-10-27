@@ -10,6 +10,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        startActivity(Intent(this, SplashActivity::class.java)) // Splash 실행
+        startActivity(Intent(this, SplashActivity::class.java)) // Splash 실행
     }
 }

@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".Fragment.LoginFragment">
-
+    tools:context=".Fragment.SignUpFragment">
 
     <ImageView
         android:id="@+id/icon"
@@ -19,74 +17,98 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
-        android:id="@+id/email_errorText"
+        android:id="@+id/email_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
+        android:text="이메일"
         android:textColor="#B3C1CF"
         android:textSize="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="이메일 형식이 맞지 않습니다." />
+        app:layout_constraintBottom_toTopOf="@+id/email_layout"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/email"
-        style="@style/AppTheme"
+    <LinearLayout
+        android:id="@+id/email_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="80dp"
-        android:hint="이메일"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/black_app"
-        android:textColorHint="#B3C1CF"
-        android:textCursorDrawable="@color/black_app"
-        android:textSize="16sp"
-        android:textSelectHandle="@color/black_app"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/icon">
+
+        <EditText
+            android:id="@+id/email"
+            style="@style/AppTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="이메일을 입력하세요."
+            android:inputType="textEmailAddress"
+            android:paddingStart="5dp"
+            android:textColor="@color/black_app"
+            android:textColorHint="#B3C1CF"
+            android:textCursorDrawable="@drawable/ic_custom_cursor"
+            android:textSelectHandle="@color/black_app"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/emailSend_button"
+            android:layout_width="60dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_send_email"
+            android:stateListAnimator="@null"
+            android:text="인증하기"
+            android:textColor="@color/green3"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/password_errorText"
+        android:id="@+id/sendNumber_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
+        android:text="인증번호"
         android:textColor="#B3C1CF"
         android:textSize="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintBottom_toTopOf="@+id/sendNumber"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/sendNumber"
         style="@style/AppTheme"
-        android:textSelectHandle="@color/black_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
+        android:hint="인증번호를 입력하세요."
+        android:inputType="number"
+        android:paddingStart="5dp"
         android:textColor="@color/black_app"
         android:textColorHint="#B3C1CF"
-        android:textCursorDrawable="@color/black_app"
+        android:textCursorDrawable="@drawable/ic_custom_cursor"
+        android:textSelectHandle="@color/black_app"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email" />
+        app:layout_constraintTop_toBottomOf="@id/email_layout" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_login"
+        android:id="@+id/button_signup"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:layout_gravity="bottom"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/ic_login_button"
+        android:background="@drawable/ic_login_button_enabled"
+        android:enabled="false"
         android:stateListAnimator="@null"
-        android:text="로그인"
-        android:textColor="#DEE2E6"
+        android:text="다음"
+        android:textColor="@color/white_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -94,19 +116,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/signup"
+        android:id="@+id/signin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_login">
+        app:layout_constraintTop_toBottomOf="@+id/button_signup">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="아직 회원이 아니신가요?"
+            android:text="오늘하루 회원이신가요?"
             android:textColor="#3c3c3c"
             android:textSize="14sp" />
 
@@ -114,10 +136,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@string/singup"
+            android:text="@string/signin"
             android:textColor="#64BDAA"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

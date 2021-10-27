@@ -4,13 +4,14 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.yademos.someday"
         minSdk 23
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -50,4 +51,18 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    def livedata_version = "2.4.0-rc01"
+
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version"
+
+    def retrofit_version = "2.9.0"
+    // 레트로핏
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    // gson 컨버터
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    // 레트로핏 로깅 인터셉터
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.2"
 }
