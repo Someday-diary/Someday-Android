@@ -8,22 +8,18 @@ import java.util.*
 
 class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
 
-    fun insert(date: Date, data: String, tag: String) = viewModelScope.launch {
-        repository.insert(date, data, tag)
+    fun insertDiary(diary: Diary) = viewModelScope.launch {
+        repository.insertDiary(diary)
     }
 
-    fun delete(date: Date) = viewModelScope.launch {
-        repository.delete(date)
+    fun deleteDiary(created_at: Date) = viewModelScope.launch {
+        repository.deleteDiary(created_at)
     }
 
-    fun insertTag(date: Date, tag: String) = viewModelScope.launch {
-        repository.insertTag(date, tag)
-    }
-
-    fun getData(date: Date) : LiveData<Diary> {
+    fun getDiary(created_at: Date) : LiveData<Diary> {
         val result = MutableLiveData<Diary>()
         viewModelScope.launch {
-            val data = repository.getData(date)
+            val data = repository.getDiary(created_at)
             result.postValue(data)
         }
         return result

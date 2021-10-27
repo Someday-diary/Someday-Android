@@ -24,9 +24,9 @@ abstract class DiaryDataBase : RoomDatabase() {
         fun getDatabase(context: Context, scope: CoroutineScope): DiaryDataBase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    DiaryDataBase::class.java,
-                    "word_database"
+                        context.applicationContext,
+                        DiaryDataBase::class.java,
+                        "diary_database"
                 ).build()
                 INSTANCE = instance
                 instance
