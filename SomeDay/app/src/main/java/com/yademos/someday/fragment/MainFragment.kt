@@ -13,11 +13,14 @@ import com.yademos.someday.databinding.FragmentMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
+import com.yademos.someday.databinding.DrawerLayoutBinding
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+    private lateinit var drawerBinding: DrawerLayoutBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,11 +28,16 @@ class MainFragment : Fragment() {
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
+        drawerBinding = DrawerLayoutBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true);
         initToolbar() // Toolbar 설정
         initCalendarView() // CalendarView 설정
         setCalendarViewTitle() // 이번 달
         bindingBottomSheetBehavior() // BottomSheet 설정
+
+        binding.toolbar.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment2_to_signInFragment)
+        }
 
         return binding.root
     }
@@ -113,7 +121,7 @@ class MainFragment : Fragment() {
             val year = binding.calendarView.selectedDate.year.toString()
             val month = (binding.calendarView.selectedDate.month + 1).toString()
             val day = binding.calendarView.selectedDate.day.toString()
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDiaryFragment(year, month, day, longDate))
+            findNavController().navigate(MainFragmentDirections.actionMainfragmentToDiaryfragment(year, month, day, longDate))
         }
     }
 
@@ -128,6 +136,10 @@ class MainFragment : Fragment() {
             R.id.menu_search -> {
                 //검색 버튼 눌렀을 때
                 return super.onOptionsItemSelected(item)
+            }
+            R.id.home -> {
+                drawerBinding.drawerLayout.openDrawer(GravityCompat.START)
+                return true
             }
             else -> return super.onOptionsItemSelected(item)
         }

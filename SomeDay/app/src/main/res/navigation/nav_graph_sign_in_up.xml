@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_login"
+    app:startDestination="@id/signUpFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.yademos.someday.Fragment.SignInFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_mainFragment2"
+            app:destination="@id/mainFragment2"/>
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.yademos.someday.Fragment.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpPwdFragment"
+            app:destination="@id/signUpPwdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment2"
+        android:name="com.yademos.someday.Fragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment2_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpPwdFragment"
+        android:name="com.yademos.someday.Fragment.SignUpPwdFragment"
+        android:label="fragment_sign_up_pwd"
+        tools:layout="@layout/fragment_sign_up_pwd" >
+        <action
+            android:id="@+id/action_signUpPwdFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signUpPwdFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+</navigation>

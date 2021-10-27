@@ -8,6 +8,7 @@
     app:navGraph="@navigation/nav_graph"
     tools:context=".fragment.MainFragment">
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -65,6 +66,8 @@
                 app:mcv_titleAnimationOrientation="horizontal" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <!--    <View-->
         <!--        android:id="@+id/view"-->
