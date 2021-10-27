@@ -12,6 +12,7 @@ import com.yademos.someday.R
 import com.yademos.someday.databinding.FragmentDiaryBinding
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.navigation.fragment.findNavController
 
 
 class DiaryFragment : Fragment() {
