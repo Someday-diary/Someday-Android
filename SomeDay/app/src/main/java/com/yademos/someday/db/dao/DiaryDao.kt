@@ -10,13 +10,13 @@ import java.util.*
 
 @Dao
 interface DiaryDao {
-    @Insert
-    suspend fun insertDiary(diary: Diary)
+    @Query("INSERT INTO diary VALUES (:date, :data, :tag)")
+    suspend fun insertDiary(date: Date, data: String, tag: String)
 
-    @Query("DELETE FROM Diary WHERE create_at = :create_at")
-    suspend fun deleteDiary(create_at: Date)
+    @Query("DELETE FROM Diary WHERE date = :date")
+    suspend fun deleteDiary(date: Date)
 
-    @Query("SELECT * FROM diary WHERE create_at = :create_at")
-    suspend fun getDiary(create_at: Date) : Diary
+    @Query("SELECT * FROM diary WHERE date = :date")
+    suspend fun getDiary(date: Date) : Diary
 
 }

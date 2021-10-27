@@ -17,7 +17,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.yademos.someday.db.model.Diary
 
 class DiaryFragment : Fragment() {
 
@@ -89,7 +88,7 @@ class DiaryFragment : Fragment() {
             if (content.isEmpty()) {
 //                showDialog()
             } else {
-                viewModel.insertDiary(Diary(createUUID(), content, date))
+                viewModel.insert(date, content, tag)
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_diaryFragment_to_mainFragment)
             }
@@ -97,15 +96,12 @@ class DiaryFragment : Fragment() {
     }
 
     private fun bindingContextEditText(date: Date) {
-        viewModel.getDiary(date).observe(viewLifecycleOwner, Observer {
+        viewModel.getData(date).observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                binding.contextEditText.setText(it.contents)
+                binding.contextEditText.setText(it.data)
+                binding.tagEditText.setText(it.tag)
             }
         })
-    }
-
-    private fun createUUID() : String {
-        return UUID.randomUUID().toString()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -118,7 +114,7 @@ class DiaryFragment : Fragment() {
         when (item.itemId) {
             R.id.menu_delete -> {
                 val date = Date(args.date)
-                viewModel.deleteDiary(date)
+                viewModel.delete(date)
                 findNavController().navigate(DiaryFragmentDirections.actionDiaryFragmentToMainFragment())
                 return super.onOptionsItemSelected(item)
             }
