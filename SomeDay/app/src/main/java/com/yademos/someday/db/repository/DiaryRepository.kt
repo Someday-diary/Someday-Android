@@ -8,22 +8,18 @@ import java.util.*
 class DiaryRepository(private val diaryDao: DiaryDao) {
 
     @WorkerThread
-    suspend fun insert(date: Date, data: String, tag: String){
-        diaryDao.insertDiary(date, data, tag)
+    suspend fun insertDiary(diary: Diary){
+        diaryDao.insertDiary(diary)
     }
 
     @WorkerThread
-    suspend fun delete(date: Date){
-        diaryDao.deleteDiary(date)
+    suspend fun deleteDiary(create_at: Date){
+        diaryDao.deleteDiary(create_at)
     }
 
-    @WorkerThread
-    suspend fun insertTag(date: Date, tag: String){
-        diaryDao.insertTag(date, tag)
-    }
 
     @WorkerThread
-    suspend fun getData(date: Date) : Diary {
-        return diaryDao.getDiary(date)
+    suspend fun getDiary(create_at: Date) : Diary {
+        return diaryDao.getDiary(create_at)
     }
 }
