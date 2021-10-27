@@ -53,5 +53,8 @@
             android:name="email"
             app:argType="string"
             android:defaultValue='""' />
+        <action
+            android:id="@+id/action_signUpPwdFragment_to_signInFragment2"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>
