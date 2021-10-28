@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import com.yademos.someday.R
 import com.yademos.someday.databinding.FragmentDiaryBinding
 import androidx.navigation.Navigation
@@ -18,22 +19,28 @@ import java.util.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.yademos.someday.db.model.Diary
+import com.yademos.someday.viewModel.MainViewModel
 
 class DiaryFragment : Fragment() {
 
     private lateinit var binding: FragmentDiaryBinding
-    private val args: DiaryFragmentArgs by navArgs()
+//    private val args: DiaryFragmentArgs by navArgs()
     private val viewModel: DiaryViewModel by viewModel()
+    private val mViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDiaryBinding.inflate(inflater, container, false)
-        val date = Date(args.date)
+//        val date = Date(args.date)
+        val date = mViewModel.date.value?.let { Date(it) }
+        val year = mViewModel.year.value
+        val month = mViewModel.month.value
+        val day = mViewModel.day.value
 
         setHasOptionsMenu(true)
-        bindingToolbar() // Toolbar 설정
+        bindingToolbar(year, month, day) // Toolbar 설정
         bindingTagEditText()
         bindingSaveButton(date)
         bindingContextEditText(date)
@@ -41,14 +48,14 @@ class DiaryFragment : Fragment() {
         return binding.root
     }
 
-    private fun bindingToolbar() {
+    private fun bindingToolbar(year: String?, month: String?, day: String?) {
         val activity = activity as AppCompatActivity
         activity.apply {
             setSupportActionBar(binding.toolbar)
             supportActionBar?.setDisplayShowTitleEnabled(false)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-        binding.toolbarTitle.text = String.format("%s년 %s월 %s일", args.year, args.month, args.day)
+        binding.toolbarTitle.text = String.format("%s년 %s월 %s일", year, month, day)
 
         binding.toolbar.setNavigationOnClickListener {
             Navigation.findNavController(binding.root)
@@ -81,7 +88,7 @@ class DiaryFragment : Fragment() {
         })
     }
 
-    private fun bindingSaveButton(date: Date) {
+    private fun bindingSaveButton(date: Date?) {
         binding.saveDiaryButton.setOnClickListener {
             val content = binding.contextEditText.text.toString()
             val tag = binding.tagEditText.text.toString()
@@ -96,12 +103,14 @@ class DiaryFragment : Fragment() {
         }
     }
 
-    private fun bindingContextEditText(date: Date) {
-        viewModel.getDiary(date).observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                binding.contextEditText.setText(it.contents)
-            }
-        })
+    private fun bindingContextEditText(date: Date?) {
+        if (date != null) {
+            viewModel.getDiary(date).observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    binding.contextEditText.setText(it.contents)
+                }
+            })
+        }
     }
 
     private fun createUUID() : String{
@@ -117,8 +126,10 @@ class DiaryFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_delete -> {
-                val date = Date(args.date)
-                viewModel.deleteDiary(date)
+                val date = mViewModel.date.value?.let { Date(it) }
+                if (date != null) {
+                    viewModel.deleteDiary(date)
+                }
                 findNavController().navigate(DiaryFragmentDirections.actionDiaryFragmentToMainFragment())
                 return super.onOptionsItemSelected(item)
             }

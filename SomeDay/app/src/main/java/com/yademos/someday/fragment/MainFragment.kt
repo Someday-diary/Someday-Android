@@ -14,13 +14,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.yademos.someday.databinding.DrawerLayoutBinding
+import com.yademos.someday.viewModel.MainViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var drawerBinding: DrawerLayoutBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -117,11 +121,11 @@ class MainFragment : Fragment() {
 
         binding.listEdit.setOnClickListener {
             val date = binding.calendarView.selectedDate.date
-            val longDate = convertedDateToLong(date)
-            val year = binding.calendarView.selectedDate.year.toString()
-            val month = (binding.calendarView.selectedDate.month + 1).toString()
-            val day = binding.calendarView.selectedDate.day.toString()
-            findNavController().navigate(MainFragmentDirections.actionMainfragmentToDiaryfragment(year, month, day, longDate))
+            viewModel.setDate(convertedDateToLong(date))
+            viewModel.setYear(binding.calendarView.selectedDate.year.toString())
+            viewModel.setMonth((binding.calendarView.selectedDate.month + 1).toString())
+            viewModel.setDay(binding.calendarView.selectedDate.day.toString())
+            findNavController().navigate(R.id.action_mainFragment_to_diaryFragment)
         }
     }
 

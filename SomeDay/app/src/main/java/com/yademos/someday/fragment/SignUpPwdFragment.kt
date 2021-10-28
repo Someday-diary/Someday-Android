@@ -107,7 +107,7 @@ class SignUpPwdFragment : Fragment() {
                 Log.d("TAG", "서버 결과 -> $responseState $code")
                 when (responseState) {
                     ResponseState.OKAY -> {
-                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
+                        findNavController().navigate(R.id.action_signUpPwdFragment_to_signInFragment)
                     }
                     ResponseState.FAIL -> {
                         Toast.makeText(activity, "$code", Toast.LENGTH_SHORT).show()
