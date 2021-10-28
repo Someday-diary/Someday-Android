@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.yademos.someday.Fragment.MainFragment"
+        android:name="com.yademos.someday.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -17,8 +17,11 @@
 
     <fragment
         android:id="@+id/diaryFragment"
-        android:name="com.yademos.someday.Fragment.DiaryFragment"
+        android:name="com.yademos.someday.fragment.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" >
+        <action
+            android:id="@+id/action_diaryFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

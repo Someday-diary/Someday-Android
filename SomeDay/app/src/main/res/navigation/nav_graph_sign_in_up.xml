@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment2"
-        android:name="com.yademos.someday.Fragment.MainFragment"
+        android:name="com.yademos.someday.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -53,8 +53,5 @@
             android:name="email"
             app:argType="string"
             android:defaultValue='""' />
-        <action
-            android:id="@+id/action_signUpPwdFragment_to_signInFragment2"
-            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

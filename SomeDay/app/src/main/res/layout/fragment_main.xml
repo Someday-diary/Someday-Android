@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:defaultNavHost="true"
     app:navGraph="@navigation/nav_graph"
-    tools:context=".Fragment.MainFragment">
+    tools:context=".fragment.MainFragment">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -64,16 +64,6 @@
                 app:mcv_tileHeight="48dp"
                 app:mcv_tileSize="48dp"
                 app:mcv_titleAnimationOrientation="horizontal" />
-
-            <View
-                android:id="@+id/dividingLine."
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="30dp"
-                android:background="#F2F2F2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.yademos.someday.Fragment
+package com.yademos.someday.fragment
 
 import android.os.Bundle
 import android.view.*
@@ -14,44 +14,87 @@ import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.yademos.someday.databinding.DrawerLayoutBinding
+import com.yademos.someday.viewModel.MainViewModel
 
 class MainFragment : Fragment() {
 
-    fun newInstance(index: Int): MainFragment {
-        val f = MainFragment()
-
-        val args = Bundle()
-        args.putInt("index", index)
-        f.arguments = args
-        return f
-    }
-
-    fun getShownIndex(): Int {
-        return requireArguments().getInt("index", 0)
-    }
-
     private lateinit var binding: FragmentMainBinding
     private lateinit var drawerBinding: DrawerLayoutBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+
         drawerBinding = DrawerLayoutBinding.inflate(inflater, container, false)
-        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         setHasOptionsMenu(true);
-        initToolbar(binding) // Toolbar 설정
-        initCalendarView(binding) // CalendarView 설정
-        setCalendarViewTitle(binding) // 이번 달
+        initToolbar() // Toolbar 설정
+        initCalendarView() // CalendarView 설정
+        setCalendarViewTitle() // 이번 달
+        bindingBottomSheetBehavior() // BottomSheet 설정
 
         binding.toolbar.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment2_to_signInFragment)
         }
 
+        return binding.root
+    }
+
+    private fun initToolbar() {
+        val activity = activity as AppCompatActivity
+
+        activity.apply {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.apply {
+                setDisplayShowTitleEnabled(false)
+                setDisplayHomeAsUpEnabled(true)
+                setHomeAsUpIndicator(R.drawable.ic_memu)
+            }
+        }
+    }
+
+    private fun initCalendarView() {
+        val today: CalendarDay = CalendarDay.today()
+        binding.listDate.text = today.day.toString()
+
+
+        binding.calendarView.apply {
+            state().edit()
+                .setFirstDayOfWeek(Calendar.SUNDAY)
+                .setMinimumDate(CalendarDay.from(2020, 12, 31))
+                .setMaximumDate(CalendarDay.from(2099, 12, 26))
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit()
+            selectedDate = today
+            setOnMonthChangedListener { _, _ -> // 그 다음달부터 달력 넘겼을때
+                setCalendarViewTitle()
+            }
+            setOnDateChangedListener { _, date, _ ->
+                binding.listDate.text = date.day.toString()
+            }
+        }
+    }
+
+    private fun setCalendarViewTitle() {
+        binding.calendarView.setTitleFormatter(TitleFormatter {
+            binding.toolbarTitle.text = it.year.toString() + "년"
+            val calendarViewFormat = SimpleDateFormat("M월")
+            calendarViewFormat.format(it.date.time)
+        })
+    }
+
+    private fun convertedDateToLong(date: Date): Long {
+        return date.time
+    }
+
+    private fun bindingBottomSheetBehavior() {
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -76,51 +119,14 @@ class MainFragment : Fragment() {
 
         })
 
-        binding.calendarView.setOnMonthChangedListener { _, _ -> // 그 다음달부터 달력 넘겼을때
-            setCalendarViewTitle(binding)
-        }
-
-        binding.calendarView.setOnDateChangedListener { _, date, _ ->
-            binding.listDate.text = date.day.toString()
-        }
-
         binding.listEdit.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_mainFragment_to_diaryFragment)
+            val date = binding.calendarView.selectedDate.date
+            viewModel.setDate(convertedDateToLong(date))
+            viewModel.setYear(binding.calendarView.selectedDate.year.toString())
+            viewModel.setMonth((binding.calendarView.selectedDate.month + 1).toString())
+            viewModel.setDay(binding.calendarView.selectedDate.day.toString())
+            findNavController().navigate(R.id.action_mainFragment_to_diaryFragment)
         }
-
-
-        return binding.root
-    }
-
-    private fun initToolbar(binding: FragmentMainBinding) {
-        val activity = activity as AppCompatActivity
-        activity.setSupportActionBar(binding.toolbar)
-        activity.supportActionBar?.setDisplayShowTitleEnabled(false)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_memu)
-    }
-
-    private fun initCalendarView(binding: FragmentMainBinding) {
-        val today: CalendarDay = CalendarDay.today()
-
-        binding.calendarView.selectedDate = today
-        binding.listDate.text = today.day.toString()
-
-        binding.calendarView.state().edit()
-            .setFirstDayOfWeek(Calendar.SUNDAY)
-            .setMinimumDate(CalendarDay.from(2020, 12, 31))
-            .setMaximumDate(CalendarDay.from(2099, 12, 26))
-            .setCalendarDisplayMode(CalendarMode.MONTHS)
-            .commit()
-    }
-
-    private fun setCalendarViewTitle(binding: FragmentMainBinding) {
-        binding.calendarView.setTitleFormatter(TitleFormatter {
-            binding.toolbarTitle.text = it.year.toString() + "년"
-            val calendarViewFormat = SimpleDateFormat("M월")
-            calendarViewFormat.format(it.date.time)
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -135,7 +141,7 @@ class MainFragment : Fragment() {
                 //검색 버튼 눌렀을 때
                 return super.onOptionsItemSelected(item)
             }
-            R.id.home ->{
+            R.id.home -> {
                 drawerBinding.drawerLayout.openDrawer(GravityCompat.START)
                 return true
             }
