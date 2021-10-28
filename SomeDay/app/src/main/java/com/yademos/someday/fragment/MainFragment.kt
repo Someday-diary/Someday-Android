@@ -39,9 +39,9 @@ class MainFragment : Fragment() {
         setCalendarViewTitle() // 이번 달
         bindingBottomSheetBehavior() // BottomSheet 설정
 
-        binding.toolbar.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment2_to_signInFragment)
-        }
+//        binding.toolbar.setOnClickListener {
+//            findNavController().navigate(R.id.action_mainFragment2_to_signInFragment)
+//        }
 
         return binding.root
     }

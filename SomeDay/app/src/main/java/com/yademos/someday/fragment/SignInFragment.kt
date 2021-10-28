@@ -2,6 +2,7 @@ package com.yademos.someday.Fragment
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +21,7 @@ import com.yademos.someday.Enum.ResponseState
 import com.yademos.someday.R
 import com.yademos.someday.Retrofit.RetrofitManager
 import com.yademos.someday.Viewmodel.SignInViewModel
+import com.yademos.someday.activity.MainActivity
 import com.yademos.someday.databinding.FragmentSignInBinding
 
 class SignInFragment : Fragment() {
@@ -81,7 +83,9 @@ class SignInFragment : Fragment() {
                 when (responseState) {
                     ResponseState.OKAY -> {
                         signInViewModel.clickToast("로그인 버튼", activity as Context)
-                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
+//                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
                     }
                     ResponseState.FAIL -> {
                         Toast.makeText(activity, "$msg", Toast.LENGTH_SHORT).show()

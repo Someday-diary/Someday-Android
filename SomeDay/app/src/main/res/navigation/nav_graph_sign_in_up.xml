@@ -13,9 +13,9 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_mainFragment2"
-            app:destination="@id/mainFragment2"/>
+<!--        <action-->
+<!--            android:id="@+id/action_signInFragment_to_mainFragment2"-->
+<!--            app:destination="@id/mainFragment2"/>-->
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -29,15 +29,15 @@
             android:id="@+id/action_signUpFragment_to_signUpPwdFragment"
             app:destination="@id/signUpPwdFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/mainFragment2"
-        android:name="com.yademos.someday.fragment.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment2_to_signInFragment"
-            app:destination="@id/signInFragment" />
-    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/mainFragment2"-->
+<!--        android:name="com.yademos.someday.fragment.MainFragment"-->
+<!--        android:label="fragment_main"-->
+<!--        tools:layout="@layout/fragment_main" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_mainFragment2_to_signInFragment"-->
+<!--            app:destination="@id/signInFragment" />-->
+<!--    </fragment>-->
     <fragment
         android:id="@+id/signUpPwdFragment"
         android:name="com.yademos.someday.Fragment.SignUpPwdFragment"
