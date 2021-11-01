@@ -18,30 +18,23 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.yademos.someday.databinding.DrawerLayoutBinding
-import com.yademos.someday.viewModel.MainViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var drawerBinding: DrawerLayoutBinding
-    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-
         drawerBinding = DrawerLayoutBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true);
         initToolbar() // Toolbar 설정
         initCalendarView() // CalendarView 설정
         setCalendarViewTitle() // 이번 달
         bindingBottomSheetBehavior() // BottomSheet 설정
-
-//        binding.toolbar.setOnClickListener {
-//            findNavController().navigate(R.id.action_mainFragment2_to_signInFragment)
-//        }
 
         return binding.root
     }
@@ -121,11 +114,11 @@ class MainFragment : Fragment() {
 
         binding.listEdit.setOnClickListener {
             val date = binding.calendarView.selectedDate.date
-            viewModel.setDate(convertedDateToLong(date))
-            viewModel.setYear(binding.calendarView.selectedDate.year.toString())
-            viewModel.setMonth((binding.calendarView.selectedDate.month + 1).toString())
-            viewModel.setDay(binding.calendarView.selectedDate.day.toString())
-            findNavController().navigate(R.id.action_mainFragment_to_diaryFragment)
+            val longDate = convertedDateToLong(date)
+            val year = binding.calendarView.selectedDate.year.toString()
+            val month = (binding.calendarView.selectedDate.month + 1).toString()
+            val day = binding.calendarView.selectedDate.day.toString()
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDiaryFragment(year, month, day, longDate))
         }
     }
 

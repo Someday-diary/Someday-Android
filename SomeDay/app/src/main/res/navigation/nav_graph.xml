@@ -23,5 +23,17 @@
         <action
             android:id="@+id/action_diaryFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="year"
+            app:argType="string" />
+        <argument
+            android:name="month"
+            app:argType="string" />
+        <argument
+            android:name="day"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="long" />
     </fragment>
 </navigation>
