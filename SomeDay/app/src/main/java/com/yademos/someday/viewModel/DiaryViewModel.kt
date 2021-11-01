@@ -20,7 +20,7 @@ import java.util.*
 
 class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
 
-    val diaryListLiveData = MutableLiveData<List<DiaryRequest>?>()
+    val diaryListLiveData = MutableLiveData<DiaryRequest?>()
     val diaryLiveData = MutableLiveData<Diaries?>()
     val code = MutableLiveData<Code>()
 
@@ -77,17 +77,17 @@ class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
     }
 
     fun callGetDiary(tags: List<TagRequest>) {
-        retrofit?.getDiary(tags)?.enqueue(object : Callback<List<DiaryRequest>>{
+        retrofit?.getDiary(tags)?.enqueue(object : Callback<DiaryRequest>{
             override fun onResponse(
-                call: Call<List<DiaryRequest>>,
-                response: Response<List<DiaryRequest>>
+                call: Call<DiaryRequest>,
+                response: Response<DiaryRequest>
             ) {
                 if (response.isSuccessful) {
                     diaryListLiveData.postValue(response.body())
                 }
             }
 
-            override fun onFailure(call: Call<List<DiaryRequest>>, t: Throwable) {
+            override fun onFailure(call: Call<DiaryRequest>, t: Throwable) {
                 diaryListLiveData.postValue(null)
             }
         })

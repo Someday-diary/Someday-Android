@@ -96,7 +96,7 @@ class DiaryFragment : Fragment() {
                         viewModel.insertDiary(Diary(createUUID(), content, date))
                         viewModel.callCreateDiary(requestDiary())
                     } else {
-                        viewModel.callUpdateDiary(requestUpdateDiary(date))
+                        viewModel.callUpdateDiary(requestUpdateDiary())
                     }
                 })
                 Navigation.findNavController(binding.root)
@@ -110,10 +110,10 @@ class DiaryFragment : Fragment() {
         val postId = viewModel.getDiary(date).value!!.id
         viewModel.callGetDiaryWithPostId(postId)
         viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
-            binding.contextEditText.setText(it?.get(0)?.diaries?.get(0)?.contents.toString())
-            for (i in 0..it?.get(0)?.diaries?.get(0)?.tag?.size!!) {
+            binding.contextEditText.setText(it?.diaries?.get(0)?.contents.toString())
+            for (i in 0..it?.diaries?.get(0)?.tag?.size!!) {
                 binding.tagEditText.append("#")
-                binding.tagEditText.append(it[0].diaries?.get(0)?.tag?.get(i).toString() + " ")
+                binding.tagEditText.append(it.diaries[0].tag?.get(i).toString() + " ")
             }
         })
     }
@@ -146,7 +146,7 @@ class DiaryFragment : Fragment() {
         )
     }
 
-    private fun requestUpdateDiary(date: Date?): UpdateDiaryRequest {
+    private fun requestUpdateDiary(): UpdateDiaryRequest {
         val date = Date(args.date)
         return UpdateDiaryRequest(
             listOf(

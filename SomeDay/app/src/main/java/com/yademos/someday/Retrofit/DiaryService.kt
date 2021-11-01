@@ -17,7 +17,7 @@ interface DiaryService {
 
     /* 일기 가져오기 */
     @GET("/diary")
-    fun getDiary(@Body tags: List<TagRequest>) : Call<List<DiaryRequest>>
+    fun getDiary(@Body tags: List<TagRequest>) : Call<DiaryRequest>
 
     /* 일기 가져오기 (post_id) */
     @GET("/diary/{post_id}")

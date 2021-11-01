@@ -14,15 +14,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yademos.someday.databinding.DrawerLayoutBinding
+import com.yademos.someday.decoration.CalendarDecorator
+import com.yademos.someday.viewModel.DiaryViewModel
 
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var drawerBinding: DrawerLayoutBinding
+    private val viewModel: DiaryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +58,6 @@ class MainFragment : Fragment() {
         val today: CalendarDay = CalendarDay.today()
         binding.listDate.text = today.day.toString()
 
-
         binding.calendarView.apply {
             state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -65,10 +66,20 @@ class MainFragment : Fragment() {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit()
             selectedDate = today
-            setOnMonthChangedListener { _, _ -> // 그 다음달부터 달력 넘겼을때
+            setOnMonthChangedListener { _, date -> // 그 다음달부터 달력 넘겼을때
                 setCalendarViewTitle()
+                val existList = existDiary(date.year, date.month)
+                for (existDay in existList) {
+                    binding.calendarView.addDecorators(
+                        CalendarDecorator(
+                            requireActivity(),
+                            existDay
+                        )
+                    )
+                }
             }
             setOnDateChangedListener { _, date, _ ->
+                existDayDiary()
                 binding.listDate.text = date.day.toString()
             }
         }
@@ -109,7 +120,6 @@ class MainFragment : Fragment() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
             }
-
         })
 
         binding.listEdit.setOnClickListener {
@@ -118,8 +128,40 @@ class MainFragment : Fragment() {
             val year = binding.calendarView.selectedDate.year.toString()
             val month = (binding.calendarView.selectedDate.month + 1).toString()
             val day = binding.calendarView.selectedDate.day.toString()
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDiaryFragment(year, month, day, longDate))
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToDiaryFragment(
+                    year,
+                    month,
+                    day,
+                    longDate
+                )
+            )
         }
+    }
+
+    private fun existDiary(year: Int, month: Int): List<CalendarDay> {
+        val existContentList: MutableList<CalendarDay> = mutableListOf()
+        viewModel.callGetDiary(emptyList())
+        viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
+            for (i in 0..it?.diaries!!.size) {
+                if (it.diaries[i].date?.year == year && it.diaries[i].date?.month == month) {
+                    val day = CalendarDay(it.diaries[i].date)
+                    existContentList.add(day)
+                }
+            }
+        })
+        return existContentList
+    }
+
+    private fun existDayDiary() {
+        viewModel.callGetDiary(emptyList())
+        viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
+            for (i in 0..it?.diaries!!.size) {
+                if (binding.calendarView.selectedDate.date.day == it.diaries[i].date?.day) {
+                    binding.listEdit.text = "수정"
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
