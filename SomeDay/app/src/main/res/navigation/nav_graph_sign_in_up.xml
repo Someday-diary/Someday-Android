@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.yademos.someday.Fragment.SignInFragment"
+        android:name="com.diary.someday.Fragment.SignInFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.yademos.someday.Fragment.SignUpFragment"
+        android:name="com.diary.someday.Fragment.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -40,7 +40,7 @@
 <!--    </fragment>-->
     <fragment
         android:id="@+id/signUpPwdFragment"
-        android:name="com.yademos.someday.Fragment.SignUpPwdFragment"
+        android:name="com.diary.someday.Fragment.SignUpPwdFragment"
         android:label="fragment_sign_up_pwd"
         tools:layout="@layout/fragment_sign_up_pwd" >
         <action
