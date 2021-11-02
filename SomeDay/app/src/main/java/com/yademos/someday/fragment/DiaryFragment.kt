@@ -111,9 +111,9 @@ class DiaryFragment : Fragment() {
         viewModel.callGetDiaryWithPostId(postId)
         viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
             binding.contextEditText.setText(it?.diaries?.get(0)?.contents.toString())
-            for (i in 0..it?.diaries?.get(0)?.tag?.size!!) {
+            for (i in 0..it?.diaries?.get(0)?.tags?.size!!) {
                 binding.tagEditText.append("#")
-                binding.tagEditText.append(it.diaries[0].tag?.get(i).toString() + " ")
+                binding.tagEditText.append(it.diaries[0].tags?.get(i).toString() + " ")
             }
         })
     }
@@ -133,16 +133,14 @@ class DiaryFragment : Fragment() {
         return tagRequest
     }
 
-    private fun requestDiary(): DiaryRequest {
+    private fun requestDiary(): Diaries {
         val date = Date(args.date)
-        return DiaryRequest(
-            listOf(
-                Diaries(
-                    listOf(TagRequest(splitTag())),
-                    binding.contextEditText.text.toString(),
-                    date
-                )
-            )
+        viewModel.getDiary(date)
+        return Diaries(
+            splitTag(),
+            binding.contextEditText.text.toString(),
+            date,
+            viewModel.diaryLiveData.value?.id
         )
     }
 

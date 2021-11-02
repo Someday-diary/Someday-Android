@@ -141,7 +141,7 @@ class MainFragment : Fragment() {
 
     private fun existDiary(year: Int, month: Int): List<CalendarDay> {
         val existContentList: MutableList<CalendarDay> = mutableListOf()
-        viewModel.callGetDiary(emptyList())
+        viewModel.callGetDiary()
         viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
             for (i in 0..it?.diaries!!.size) {
                 if (it.diaries[i].date?.year == year && it.diaries[i].date?.month == month) {
@@ -154,11 +154,16 @@ class MainFragment : Fragment() {
     }
 
     private fun existDayDiary() {
-        viewModel.callGetDiary(emptyList())
+        viewModel.callGetDiary()
         viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
             for (i in 0..it?.diaries!!.size) {
                 if (binding.calendarView.selectedDate.date.day == it.diaries[i].date?.day) {
                     binding.listEdit.text = "수정"
+                    binding.listContent.text = it.diaries[i].contents
+                    for (j in 0..it.diaries[i].tags!!.size) {
+                        binding.listTag.append("#")
+                        binding.listTag.append(it.diaries[i].tags!![j].tag + " ")
+                    }
                 }
             }
         })

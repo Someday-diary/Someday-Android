@@ -6,6 +6,7 @@ import com.yademos.someday.Data.diary.DiaryRequest
 import com.yademos.someday.Data.diary.TagRequest
 import com.yademos.someday.Data.diary.UpdateDiaryRequest
 import com.yademos.someday.Data.diary.Diaries
+import com.yademos.someday.Data.diary.Tag
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -13,11 +14,11 @@ interface DiaryService {
 
     /* 일기 생성 */
     @POST("/diary")
-    fun createDiary(@Body requestDiary: DiaryRequest) : Call<Code>
+    fun createDiary(@Body diaries: Diaries) : Call<Code>
 
-    /* 일기 가져오기 */
+    /* 전체 일기 가져오기 */
     @GET("/diary")
-    fun getDiary(@Body tags: List<TagRequest>) : Call<DiaryRequest>
+    fun getDiary(@Query("tags") tags: List<Tag>? = null) : Call<DiaryRequest>
 
     /* 일기 가져오기 (post_id) */
     @GET("/diary/{post_id}")

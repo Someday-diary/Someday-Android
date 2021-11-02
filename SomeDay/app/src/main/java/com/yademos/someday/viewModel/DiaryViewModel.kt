@@ -1,13 +1,9 @@
 package com.yademos.someday.viewModel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.yademos.someday.Constants.API
 import com.yademos.someday.Data.Code
-import com.yademos.someday.Data.diary.Diaries
-import com.yademos.someday.Data.diary.DiaryRequest
-import com.yademos.someday.Data.diary.TagRequest
-import com.yademos.someday.Data.diary.UpdateDiaryRequest
+import com.yademos.someday.Data.diary.*
 import com.yademos.someday.Retrofit.DiaryService
 import com.yademos.someday.Retrofit.RetrofitClient
 import com.yademos.someday.db.model.Diary
@@ -45,8 +41,8 @@ class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
         return result
     }
 
-    fun callCreateDiary(requestDiary: DiaryRequest) {
-        retrofit?.createDiary(requestDiary)?.enqueue(object : Callback<Code> {
+    fun callCreateDiary(diaries: Diaries) {
+        retrofit?.createDiary(diaries)?.enqueue(object : Callback<Code> {
             override fun onResponse(call: Call<Code>, response: Response<Code>) {
                 if (response.isSuccessful) {
                     code.postValue(response.body())
@@ -76,7 +72,24 @@ class DiaryViewModel(private val repository: DiaryRepository) : ViewModel() {
         })
     }
 
-    fun callGetDiary(tags: List<TagRequest>) {
+    fun callGetDiary() {
+        retrofit?.getDiary()?.enqueue(object : Callback<DiaryRequest>{
+            override fun onResponse(
+                call: Call<DiaryRequest>,
+                response: Response<DiaryRequest>
+            ) {
+                if (response.isSuccessful) {
+                    diaryListLiveData.postValue(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<DiaryRequest>, t: Throwable) {
+                diaryListLiveData.postValue(null)
+            }
+        })
+    }
+
+    fun callGetDiaryWithTag(tags: List<Tag>) {
         retrofit?.getDiary(tags)?.enqueue(object : Callback<DiaryRequest>{
             override fun onResponse(
                 call: Call<DiaryRequest>,
