@@ -8,7 +8,6 @@
     app:navGraph="@navigation/nav_graph"
     tools:context=".fragment.MainFragment">
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -63,7 +62,9 @@
                 app:mcv_showOtherDates="all"
                 app:mcv_tileHeight="48dp"
                 app:mcv_tileSize="48dp"
-                app:mcv_titleAnimationOrientation="horizontal" >
+                app:mcv_titleAnimationOrientation="horizontal">
+
+            </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
 
                 <androidx.coordinatorlayout.widget.CoordinatorLayout
                     android:layout_width="match_parent"
@@ -138,20 +139,8 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-            </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-        <!--    <View-->
-        <!--        android:id="@+id/view"-->
-        <!--        android:layout_width="35dp"-->
-        <!--        android:layout_height="5dp"-->
-        <!--        android:background="@drawable/background_bottom_sheet_view"-->
-        <!--        app:layout_constraintBottom_toTopOf="@id/bottomSheet"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
