@@ -58,6 +58,7 @@ class MainFragment : Fragment() {
         val today: CalendarDay = CalendarDay.today()
         binding.listDate.text = today.day.toString()
 
+
         binding.calendarView.apply {
             state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -66,22 +67,28 @@ class MainFragment : Fragment() {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit()
             selectedDate = today
+
+//            addDecoration(today.year, today.month) // 이번달 일기들 표시
             setOnMonthChangedListener { _, date -> // 그 다음달부터 달력 넘겼을때
                 setCalendarViewTitle()
-                val existList = existDiary(date.year, date.month)
-                for (existDay in existList) {
-                    binding.calendarView.addDecorators(
-                        CalendarDecorator(
-                            requireActivity(),
-                            existDay
-                        )
-                    )
-                }
+                addDecoration(date.year, date.month)
             }
             setOnDateChangedListener { _, date, _ ->
-                existDayDiary()
+                existDayDiary(date)
                 binding.listDate.text = date.day.toString()
             }
+        }
+    }
+
+    private fun addDecoration(year: Int, month: Int) {
+        val existList = existMonthDiary(year, month)
+        for (existDay in existList) {
+            binding.calendarView.addDecorators(
+                CalendarDecorator(
+                    requireActivity(),
+                    existDay
+                )
+            )
         }
     }
 
@@ -91,10 +98,6 @@ class MainFragment : Fragment() {
             val calendarViewFormat = SimpleDateFormat("M월")
             calendarViewFormat.format(it.date.time)
         })
-    }
-
-    private fun convertedDateToLong(date: Date): Long {
-        return date.time
     }
 
     private fun bindingBottomSheetBehavior() {
@@ -121,10 +124,8 @@ class MainFragment : Fragment() {
 
             }
         })
-
         binding.listEdit.setOnClickListener {
-            val date = binding.calendarView.selectedDate.date
-            val longDate = convertedDateToLong(date)
+            val date = binding.calendarView.selectedDate.date.time
             val year = binding.calendarView.selectedDate.year.toString()
             val month = (binding.calendarView.selectedDate.month + 1).toString()
             val day = binding.calendarView.selectedDate.day.toString()
@@ -133,37 +134,38 @@ class MainFragment : Fragment() {
                     year,
                     month,
                     day,
-                    longDate
+                    date,
+                    viewModel.dateDiaryLiveData.value!!.post.post_id
                 )
             )
         }
     }
 
-    private fun existDiary(year: Int, month: Int): List<CalendarDay> {
+    private fun existMonthDiary(year: Int, month: Int): List<CalendarDay> {
         val existContentList: MutableList<CalendarDay> = mutableListOf()
-        viewModel.callGetDiary()
-        viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
-            for (i in 0..it?.diaries!!.size) {
-                if (it.diaries[i].date?.year == year && it.diaries[i].date?.month == month) {
-                    val day = CalendarDay(it.diaries[i].date)
-                    existContentList.add(day)
-                }
+        viewModel.callGetMonthDiary(year, month)
+        viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, {
+            for (i in 0..it!!.posts.size) {
+                val day = CalendarDay(it.posts[i].date)
+                existContentList.add(day)
             }
         })
         return existContentList
     }
 
-    private fun existDayDiary() {
-        viewModel.callGetDiary()
-        viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
-            for (i in 0..it?.diaries!!.size) {
-                if (binding.calendarView.selectedDate.date.day == it.diaries[i].date?.day) {
-                    binding.listEdit.text = "수정"
-                    binding.listContent.text = it.diaries[i].contents
-                    for (j in 0..it.diaries[i].tags!!.size) {
-                        binding.listTag.append("#")
-                        binding.listTag.append(it.diaries[i].tags!![j].tag + " ")
-                    }
+    private fun existDayDiary(date: CalendarDay) {
+        val selectDate = date.date
+        viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, { monthIt ->
+            for (i in 0..monthIt!!.posts.size) {
+                if (monthIt.posts[i].date == selectDate) {
+                    viewModel.callGetDiaryWithPostId(monthIt.posts[i].post_id)
+                    viewModel.diaryLiveData.observe(viewLifecycleOwner, {
+                        binding.listContent.text = it!!.post.contents
+                        for (j in 0..it.post.tags.size) {
+                            binding.listTag.append("#")
+                            binding.listTag.append(it.post.tags[j].tag + " ")
+                        }
+                    })
                 }
             }
         })

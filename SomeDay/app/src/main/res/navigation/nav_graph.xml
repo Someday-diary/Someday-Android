@@ -35,5 +35,8 @@
         <argument
             android:name="date"
             app:argType="long" />
+        <argument
+            android:name="postId"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.diary.someday.Data.diary
+package com.diary.someday.Data.request
 
 data class Tag(
     val tag: String

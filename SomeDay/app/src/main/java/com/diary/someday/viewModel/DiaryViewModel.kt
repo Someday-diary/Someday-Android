@@ -2,12 +2,13 @@ package com.diary.someday.viewModel
 
 import androidx.lifecycle.*
 import com.diary.someday.Constants.API
-import com.diary.someday.Data.Code
+import com.diary.someday.Data.response.Code
 import com.diary.someday.Data.request.DiaryRequest
 import com.diary.someday.Data.request.Tag
 import com.diary.someday.Data.request.UpdateDiaryRequest
 import com.diary.someday.Data.response.DiaryResponse
 import com.diary.someday.Data.response.DateDiaryResponse
+import com.diary.someday.Data.response.MonthDiaryResponse
 import com.diary.someday.Retrofit.DiaryService
 import com.diary.someday.Retrofit.RetrofitClient
 import retrofit2.Call
@@ -18,8 +19,9 @@ class DiaryViewModel() : ViewModel() {
 
     val diaryLiveData = MutableLiveData<DiaryResponse?>()
     val diaryListLiveData = MutableLiveData<List<DiaryResponse>?>()
-    val monthDiaryLiveData = MutableLiveData<List<DateDiaryResponse>?>()
-    val code = MutableLiveData<Code>()
+    val monthDiaryLiveData = MutableLiveData<MonthDiaryResponse?>()
+    val dateDiaryLiveData = MutableLiveData<DateDiaryResponse?>()
+    val code = MutableLiveData<Code?>()
 
     private val retrofit: DiaryService? =
         RetrofitClient.getClient(API.BASE_URL)?.create(DiaryService::class.java)
@@ -33,7 +35,7 @@ class DiaryViewModel() : ViewModel() {
             }
 
             override fun onFailure(call: Call<Code>, t: Throwable) {
-                TODO("Not yet implemented")
+                code.postValue(null)
             }
         })
     }
@@ -90,15 +92,32 @@ class DiaryViewModel() : ViewModel() {
     }
 
     fun callGetMonthDiary(year: Int, month: Int) {
-        retrofit?.getMonthDiary(year, month)?.enqueue(object : Callback<List<DateDiaryResponse>> {
-            override fun onResponse(call: Call<List<DateDiaryResponse>>, response: Response<List<DateDiaryResponse>>) {
+        retrofit?.getMonthDiary(year, month)?.enqueue(object : Callback<MonthDiaryResponse>{
+            override fun onResponse(call: Call<MonthDiaryResponse>, response: Response<MonthDiaryResponse>) {
                 if (response.isSuccessful) {
                     monthDiaryLiveData.postValue(response.body())
                 }
             }
 
-            override fun onFailure(call: Call<List<DateDiaryResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<MonthDiaryResponse>, t: Throwable) {
                 monthDiaryLiveData.postValue(null)
+            }
+        })
+    }
+
+    fun callGetDateDiary(year: Int, month: Int, day: Int) {
+        retrofit?.getDateDiary(year, month, day)?.enqueue(object : Callback<DateDiaryResponse> {
+            override fun onResponse(
+                call: Call<DateDiaryResponse>,
+                response: Response<DateDiaryResponse>
+            ) {
+                if (response.isSuccessful) {
+                    dateDiaryLiveData.postValue(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<DateDiaryResponse>, t: Throwable) {
+                dateDiaryLiveData.postValue(null)
             }
         })
     }
@@ -110,7 +129,7 @@ class DiaryViewModel() : ViewModel() {
             }
 
             override fun onFailure(call: Call<Code>, t: Throwable) {
-                TODO("Not yet implemented")
+                code.postValue(null)
             }
         })
     }
@@ -122,7 +141,7 @@ class DiaryViewModel() : ViewModel() {
             }
 
             override fun onFailure(call: Call<Code>, t: Throwable) {
-                TODO("Not yet implemented")
+                code.postValue(null)
             }
         })
     }

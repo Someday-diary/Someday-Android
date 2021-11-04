@@ -15,13 +15,16 @@ import com.diary.someday.viewModel.DiaryViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 import androidx.navigation.fragment.findNavController
-import com.diary.someday.Data.diary.*
+import com.diary.someday.Data.request.DiaryRequest
+import com.diary.someday.Data.request.Tag
+import com.diary.someday.Data.request.UpdateDiaryRequest
 import com.diary.someday.db.model.Diary
 
 class DiaryFragment : Fragment() {
 
     private lateinit var binding: FragmentDiaryBinding
 
+    private lateinit var postId: String
     private val args: DiaryFragmentArgs by navArgs()
     private val viewModel: DiaryViewModel by viewModel()
 
@@ -88,11 +91,10 @@ class DiaryFragment : Fragment() {
             if (content.isEmpty() || tag.isEmpty()) {
 //                showDialog()
             } else {
-                val postId = viewModel.getDiary(date).value!!.id
                 viewModel.callGetDiaryWithPostId(postId)
                 viewModel.diaryLiveData.observe(viewLifecycleOwner, {
                     if (it == null) {
-                        viewModel.insertDiary(Diary(createUUID(), content, date))
+//                        viewModel.insertDiary(Diary(createUUID(), content, date))
                         viewModel.callCreateDiary(requestDiary())
                     } else {
                         viewModel.callUpdateDiary(requestUpdateDiary())
@@ -105,14 +107,12 @@ class DiaryFragment : Fragment() {
     }
 
     private fun bindingContextEditText() {
-        val date = Date(args.date)
-        val postId = viewModel.getDiary(date).value!!.id
         viewModel.callGetDiaryWithPostId(postId)
-        viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
-            binding.contextEditText.setText(it?.diaries?.get(0)?.contents.toString())
-            for (i in 0..it?.diaries?.get(0)?.tags?.size!!) {
+        viewModel.diaryLiveData.observe(viewLifecycleOwner, {
+            binding.contextEditText.setText(it?.post?.contents)
+            for (i in 0..it!!.post.tags.size) {
                 binding.tagEditText.append("#")
-                binding.tagEditText.append(it.diaries[0].tags?.get(i).toString() + " ")
+                binding.tagEditText.append(it.post.tags[i].tag + " ")
             }
         })
     }
@@ -132,28 +132,23 @@ class DiaryFragment : Fragment() {
         return tagRequest
     }
 
-    private fun requestDiary(): Diaries {
+    private fun requestDiary(): DiaryRequest {
         val date = Date(args.date)
-        viewModel.getDiary(date)
-        return Diaries(
+//        viewModel.getDiary(date)
+        return DiaryRequest(
             splitTag(),
             binding.contextEditText.text.toString(),
             date,
-            viewModel.diaryLiveData.value?.id
+            createUUID(),
         )
     }
 
     private fun requestUpdateDiary(): UpdateDiaryRequest {
         val date = Date(args.date)
         return UpdateDiaryRequest(
-            listOf(
-                UpdateDiary(
-                    viewModel.getDiary(date).value!!.id,
-                    listOf(TagRequest(splitTag())),
-                    binding.contextEditText.text.toString(),
-                    date
-                )
-            )
+            postId,
+            binding.contextEditText.text.toString(),
+            splitTag(),
         )
     }
 
@@ -166,9 +161,8 @@ class DiaryFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_delete -> {
-                val date = Date(args.date)
-                viewModel.deleteDiary(date)
-                viewModel.callDeleteDiary(viewModel.getDiary(date).value!!.id)
+//                viewModel.deleteDiary(date)
+                viewModel.callDeleteDiary(postId)
                 findNavController().navigate(DiaryFragmentDirections.actionDiaryFragmentToMainFragment())
                 return super.onOptionsItemSelected(item)
             }
