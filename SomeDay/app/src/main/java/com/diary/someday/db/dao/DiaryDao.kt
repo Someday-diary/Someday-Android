@@ -11,10 +11,9 @@ interface DiaryDao {
     @Insert
     suspend fun insertDiary(diary: Diary)
 
-    @Query("DELETE FROM Diary WHERE created_at = :created_at")
-    suspend fun deleteDiary(created_at: Date)
+    @Query("DELETE FROM Diary WHERE created_at = :create_at")
+    suspend fun deleteDiary(create_at: Date)
 
-    @Query("SELECT * FROM Diary WHERE created_at = :created_at")
-    suspend fun getDiary(created_at: Date) : Diary
-
+    @Query("SELECT * FROM Diary WHERE created_at = :create_at")
+    suspend fun getDiary(create_at: Date) : Diary
 }

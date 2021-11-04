@@ -2,6 +2,7 @@ package com.diary.someday.application
 
 import com.diary.someday.db.AppDataBase
 import com.diary.someday.db.repository.DiaryRepository
+import com.diary.someday.viewModel.DiaryDBViewModel
 import com.diary.someday.viewModel.DiaryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -22,6 +23,7 @@ val DiaryModule = module {
         get<AppDataBase>().diaryDao()
     }
     viewModel {
-        DiaryViewModel(get())
+        DiaryDBViewModel(get())
     }
+
 }

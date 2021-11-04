@@ -7,16 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.diary.someday.converter.DateConverter
 import com.diary.someday.db.dao.DiaryDao
-import com.diary.someday.db.dao.TagDao
 import com.diary.someday.db.model.Diary
-import com.diary.someday.db.model.Tag
 import kotlinx.coroutines.CoroutineScope
 
-@Database(entities = [Diary::class, Tag::class], version = 1)
+@Database(entities = [Diary::class], version = 1)
 @TypeConverters(DateConverter::class)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun diaryDao(): DiaryDao
-    abstract fun tagDao(): TagDao
 
     companion object {
         @Volatile
