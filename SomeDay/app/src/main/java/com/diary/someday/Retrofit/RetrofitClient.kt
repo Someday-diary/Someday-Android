@@ -2,6 +2,7 @@ package com.diary.someday.Retrofit
 
 
 import android.util.Log
+import com.diary.someday.util.TokenInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
@@ -17,6 +18,7 @@ object RetrofitClient {
 
         val client = OkHttpClient.Builder()
 
+        val tokenInterceptor: TokenInterceptor = TokenInterceptor()
         val logginInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 try {
@@ -30,6 +32,7 @@ object RetrofitClient {
 
         logginInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
+        client.addInterceptor(tokenInterceptor)
         client.addInterceptor(logginInterceptor)
 
 
