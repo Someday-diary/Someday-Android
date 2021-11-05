@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import com.yademos.someday.R
-import com.yademos.someday.databinding.FragmentAddAlarmBinding
+import com.diary.someday.R
+import com.diary.someday.databinding.FragmentAddAlarmBinding
 
 class AddAlarmFragment : Fragment() {
     lateinit var binding: FragmentAddAlarmBinding
@@ -19,7 +19,6 @@ class AddAlarmFragment : Fragment() {
         binding = FragmentAddAlarmBinding.inflate(inflater, container, false)
 
 //        binding.numberPicekrNotification.selectionDividerHeight =
-        binding.numberPicekrNotification.selectionDividerHeight = 50
         return binding.root
     }
 }

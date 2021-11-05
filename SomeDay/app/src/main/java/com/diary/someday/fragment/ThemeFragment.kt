@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
-import com.yademos.someday.R
-import com.yademos.someday.application.Application
-import com.yademos.someday.databinding.FragmentThemeBinding
+import com.diary.someday.R
+import com.diary.someday.application.Application
+import com.diary.someday.databinding.FragmentThemeBinding
 
 class ThemeFragment : Fragment() {
     lateinit var binding: FragmentThemeBinding

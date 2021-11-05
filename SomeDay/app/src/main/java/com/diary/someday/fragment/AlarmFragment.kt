@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.yademos.someday.R
-import com.yademos.someday.databinding.FragmentAlarmBinding
+import com.diary.someday.R
+import com.diary.someday.databinding.FragmentAlarmBinding
 
 class AlarmFragment : Fragment() {
     lateinit var binding: FragmentAlarmBinding

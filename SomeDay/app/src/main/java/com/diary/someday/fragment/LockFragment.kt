@@ -15,9 +15,9 @@ import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
-import com.yademos.someday.R
-import com.yademos.someday.application.Application
-import com.yademos.someday.databinding.FragmentLockBinding
+import com.diary.someday.R
+import com.diary.someday.application.Application
+import com.diary.someday.databinding.FragmentLockBinding
 import java.util.concurrent.Executor
 
 class LockFragment : Fragment() {

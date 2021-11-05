@@ -29,8 +29,6 @@ import com.diary.someday.viewModel.DiaryViewModel
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.diary.someday.application.Application
-import com.diary.someday.databinding.DrawerLayoutBinding
-import com.diary.someday.viewModel.MainViewModel
 
 class MainFragment : Fragment() {
 
@@ -269,7 +267,7 @@ class MainFragment : Fragment() {
                 binding.calendarLayout.listDate.text = date.day.toString()
                 initContents()
                 existDayDiary(date)
-                binding.listDate.text = date.day.toString()
+                binding.calendarLayout.listDate.text = date.day.toString()
             }
         }
     }
@@ -306,11 +304,11 @@ class MainFragment : Fragment() {
 
             }
         })
-        binding.listEdit.setOnClickListener {
-            val date = binding.calendarView.selectedDate.date.time
-            val year = binding.calendarView.selectedDate.year.toString()
-            val month = (binding.calendarView.selectedDate.month + 1).toString()
-            val day = binding.calendarView.selectedDate.day.toString()
+        binding.calendarLayout.listEdit.setOnClickListener {
+            val date = binding.calendarLayout.calendarView.selectedDate.date.time
+            val year = binding.calendarLayout.calendarView.selectedDate.year.toString()
+            val month = (binding.calendarLayout.calendarView.selectedDate.month + 1).toString()
+            val day = binding.calendarLayout.calendarView.selectedDate.day.toString()
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDiaryFragment(
                     year,
@@ -320,23 +318,15 @@ class MainFragment : Fragment() {
                 )
             )
 
-        binding.calendarLayout.listEdit.setOnClickListener {
-            val date = binding.calendarLayout.calendarView.selectedDate.date
-            viewModel.setDate(convertedDateToLong(date))
-            viewModel.setYear(binding.calendarLayout.calendarView.selectedDate.year.toString())
-            viewModel.setMonth((binding.calendarLayout.calendarView.selectedDate.month + 1).toString())
-            viewModel.setDay(binding.calendarLayout.calendarView.selectedDate.day.toString())
-            findNavController().navigate(R.id.action_mainFragment_to_diaryFragment)
         }
     }
-
     private fun existMonthDiary(year: Int, month: Int) {
         viewModel.callGetMonthDiary(year, month + 1)
         viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, {
             for (i in it!!.posts) {
                 Log.d("code : ", it.code.toString())
                 val cDay = CalendarDay(i.date)
-                binding.calendarView.addDecorators(CalendarDecorator(requireActivity(), cDay))
+                binding.calendarLayout.calendarView.addDecorators(CalendarDecorator(requireActivity(), cDay))
             }
         })
     }
@@ -346,23 +336,23 @@ class MainFragment : Fragment() {
         viewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
             initContents()
             if (it?.post == null) {
-                binding.listEdit.text = "일기 작성"
+                binding.calendarLayout.listEdit.text = "일기 작성"
             } else {
-                binding.listEdit.text = "수정"
+                binding.calendarLayout.listEdit.text = "수정"
             }
-            binding.listContent.text = it?.post?.contents
+            binding.calendarLayout.listContent.text = it?.post?.contents
             if (it?.post?.tags != null) {
                 for (i in it.post.tags) {
-                    binding.listTag.append("#")
-                    binding.listTag.append(i.tag_name + " ")
+                    binding.calendarLayout.listTag.append("#")
+                    binding.calendarLayout.listTag.append(i.tag_name + " ")
                 }
             }
         })
     }
 
     private fun initContents() {
-        binding.listContent.text = ""
-        binding.listTag.text = ""
+        binding.calendarLayout.listContent.text = ""
+        binding.calendarLayout.listTag.text = ""
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -384,5 +374,4 @@ class MainFragment : Fragment() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
-
 }

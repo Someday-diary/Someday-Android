@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
-import com.yademos.someday.R
-import com.yademos.someday.application.Application
-import com.yademos.someday.databinding.FragmentEditPwdBinding
+import com.diary.someday.R
+import com.diary.someday.application.Application
+import com.diary.someday.databinding.FragmentEditPwdBinding
 
 class EditPwdFragment : Fragment() {
     private lateinit var binding: FragmentEditPwdBinding
