@@ -365,6 +365,7 @@ class MainFragment : Fragment() {
         when (item.itemId) {
             R.id.menu_search -> {
                 //검색 버튼 눌렀을 때
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToSearchFragment())
                 return super.onOptionsItemSelected(item)
             }
             android.R.id.home -> {
