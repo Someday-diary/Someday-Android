@@ -8,7 +8,7 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.diary.someday.R
 
 class CalendarDecorator(context: Activity?, currentDay: CalendarDay) : DayViewDecorator {
-    private val drawable: Drawable = context?.getDrawable(R.drawable.exist_diary_decorator)!!
+    private val drawable: Drawable = context?.getDrawable(R.drawable.select_circle)!!
     private val myDay = currentDay
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
