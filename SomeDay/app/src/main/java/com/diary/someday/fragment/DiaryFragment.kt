@@ -3,30 +3,31 @@ package com.diary.someday.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import com.diary.someday.R
 import com.diary.someday.databinding.FragmentDiaryBinding
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.diary.someday.viewModel.DiaryViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.Data.request.DiaryRequest
 import com.diary.someday.Data.request.Tag
 import com.diary.someday.Data.request.UpdateDiaryRequest
-import com.diary.someday.db.model.Diary
+import java.text.SimpleDateFormat
 
 class DiaryFragment : Fragment() {
 
     private lateinit var binding: FragmentDiaryBinding
 
-    private lateinit var postId: String
     private val args: DiaryFragmentArgs by navArgs()
-    private val viewModel: DiaryViewModel by viewModel()
+    private val viewModel: DiaryViewModel by viewModels()
+    private var postId = ""
+    private var editState = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,28 +92,31 @@ class DiaryFragment : Fragment() {
             if (content.isEmpty() || tag.isEmpty()) {
 //                showDialog()
             } else {
-                viewModel.callGetDiaryWithPostId(postId)
-                viewModel.diaryLiveData.observe(viewLifecycleOwner, {
-                    if (it == null) {
-//                        viewModel.insertDiary(Diary(createUUID(), content, date))
-                        viewModel.callCreateDiary(requestDiary())
-                    } else {
-                        viewModel.callUpdateDiary(requestUpdateDiary())
-                    }
-                })
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_diaryFragment_to_mainFragment)
+                if (!editState) {
+                    viewModel.callCreateDiary(requestDiary())
+                    Toast.makeText(requireContext(), "일기가 정상적으로 저장되었습니다!", Toast.LENGTH_SHORT)
+                        .show()
+                    Navigation.findNavController(binding.root)
+                        .navigate(R.id.action_diaryFragment_to_mainFragment)
+                } else {
+                    viewModel.callUpdateDiary(postId, requestUpdateDiary())
+                    Toast.makeText(requireContext(), "일기가 정상적으로 수정되었습니다!", Toast.LENGTH_SHORT).show()
+                    Navigation.findNavController(binding.root)
+                        .navigate(R.id.action_diaryFragment_to_mainFragment)
+                }
             }
         }
     }
 
     private fun bindingContextEditText() {
-        viewModel.callGetDiaryWithPostId(postId)
-        viewModel.diaryLiveData.observe(viewLifecycleOwner, {
-            binding.contextEditText.setText(it?.post?.contents)
-            for (i in 0..it!!.post.tags.size) {
-                binding.tagEditText.append("#")
-                binding.tagEditText.append(it.post.tags[i].tag + " ")
+        viewModel.callGetDateDiary(args.year.toInt(), args.month.toInt(), args.day.toInt())
+        viewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
+            postId = it?.post?.post_id!!
+            binding.contextEditText.setText(it.post.contents)
+            binding.tagEditText.append("#")
+            for (element in it.post.tags) {
+                binding.tagEditText.append(element.tag_name + " ")
+                editState = true
             }
         })
     }
@@ -122,31 +126,32 @@ class DiaryFragment : Fragment() {
     }
 
     private fun splitTag(): List<Tag> {
-        val tagRequest = mutableListOf<Tag>()
+        val tagList = mutableListOf<Tag>()
         val split = binding.tagEditText.text.split("#")
-        for (i in 0..split.size) {
-            Log.d("splitTag : ", split[i])
-            val tag = Tag(split[i])
-            tagRequest.add(tag)
+        for (i in 1 until split.size) {
+            tagList.add(Tag(split[i]))
         }
-        return tagRequest
+        return tagList
     }
 
     private fun requestDiary(): DiaryRequest {
-        val date = Date(args.date)
 //        viewModel.getDiary(date)
         return DiaryRequest(
             splitTag(),
             binding.contextEditText.text.toString(),
-            date,
+            ChangeDateFormat(args.date),
             createUUID(),
         )
     }
 
+    private fun ChangeDateFormat(date: Long): String {
+        val myDate = Date(date)
+        val df = SimpleDateFormat("yyyy-MM-dd")
+        return df.format(myDate)
+    }
+
     private fun requestUpdateDiary(): UpdateDiaryRequest {
-        val date = Date(args.date)
         return UpdateDiaryRequest(
-            postId,
             binding.contextEditText.text.toString(),
             splitTag(),
         )
@@ -163,6 +168,7 @@ class DiaryFragment : Fragment() {
             R.id.menu_delete -> {
 //                viewModel.deleteDiary(date)
                 viewModel.callDeleteDiary(postId)
+                Toast.makeText(requireContext(), "일기가 정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(DiaryFragmentDirections.actionDiaryFragmentToMainFragment())
                 return super.onOptionsItemSelected(item)
             }

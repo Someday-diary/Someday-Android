@@ -28,12 +28,13 @@ interface DiaryService {
     @GET("/diary/month")
     fun getMonthDiary(@Query("year") year: Int, @Query("month") month: Int): Call<MonthDiaryResponse>
 
-    @GET("diary/Date")
+    /* 일기 가져오기 (date)*/
+    @GET("diary/date")
     fun getDateDiary(@Query("year") year: Int, @Query("month") month: Int, @Query("day") day: Int) : Call<DateDiaryResponse>
 
     /* 일기 수정 */
-    @PATCH("/diary")
-    fun updateDiary(@Body updateDiaryRequest: UpdateDiaryRequest) : Call<Code>
+    @PATCH("/diary/{post_id}")
+    fun updateDiary(@Path("post_id") post_id: String, @Body updateDiaryRequest: UpdateDiaryRequest) : Call<Code>
 
     /* 일기 삭제 */
     @DELETE("/diary/{post_id}")

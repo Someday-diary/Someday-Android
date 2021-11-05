@@ -11,6 +11,7 @@ import com.diary.someday.Data.response.DateDiaryResponse
 import com.diary.someday.Data.response.MonthDiaryResponse
 import com.diary.someday.Retrofit.DiaryService
 import com.diary.someday.Retrofit.RetrofitClient
+import okhttp3.internal.notify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,9 +45,6 @@ class DiaryViewModel() : ViewModel() {
         retrofit?.getDiaryWithPostId(post_id)?.enqueue(object : Callback<DiaryResponse> {
             override fun onResponse(call: Call<DiaryResponse>, response: Response<DiaryResponse>) {
                 if (response.isSuccessful) {
-                    if (response.code() == 110) {
-                        diaryLiveData.postValue(null)
-                    }
                     diaryLiveData.postValue(response.body())
                 }
             }
@@ -92,8 +90,11 @@ class DiaryViewModel() : ViewModel() {
     }
 
     fun callGetMonthDiary(year: Int, month: Int) {
-        retrofit?.getMonthDiary(year, month)?.enqueue(object : Callback<MonthDiaryResponse>{
-            override fun onResponse(call: Call<MonthDiaryResponse>, response: Response<MonthDiaryResponse>) {
+        retrofit?.getMonthDiary(year, month)?.enqueue(object : Callback<MonthDiaryResponse> {
+            override fun onResponse(
+                call: Call<MonthDiaryResponse>,
+                response: Response<MonthDiaryResponse>
+            ) {
                 if (response.isSuccessful) {
                     monthDiaryLiveData.postValue(response.body())
                 }
@@ -112,6 +113,9 @@ class DiaryViewModel() : ViewModel() {
                 response: Response<DateDiaryResponse>
             ) {
                 if (response.isSuccessful) {
+                    if (response.code() == 400) {
+                        dateDiaryLiveData.postValue(null)
+                    }
                     dateDiaryLiveData.postValue(response.body())
                 }
             }
@@ -122,8 +126,8 @@ class DiaryViewModel() : ViewModel() {
         })
     }
 
-    fun callUpdateDiary(updateDiaryRequest: UpdateDiaryRequest) {
-        retrofit?.updateDiary(updateDiaryRequest)?.enqueue(object : Callback<Code> {
+    fun callUpdateDiary(post_id: String, updateDiaryRequest: UpdateDiaryRequest) {
+        retrofit?.updateDiary(post_id, updateDiaryRequest)?.enqueue(object : Callback<Code> {
             override fun onResponse(call: Call<Code>, response: Response<Code>) {
                 code.postValue(response.body())
             }

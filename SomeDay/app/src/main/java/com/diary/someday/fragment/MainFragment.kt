@@ -1,6 +1,7 @@
 package com.diary.someday.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.content.res.ResourcesCompat
@@ -68,27 +69,17 @@ class MainFragment : Fragment() {
                 .commit()
             selectedDate = today
 
-//            addDecoration(today.year, today.month) // 이번달 일기들 표시
+            existDayDiary(today)
+            existMonthDiary(today.year, today.month) // 이번달 일기들 표시
             setOnMonthChangedListener { _, date -> // 그 다음달부터 달력 넘겼을때
                 setCalendarViewTitle()
-                addDecoration(date.year, date.month)
+                existMonthDiary(date.year, date.month)
             }
             setOnDateChangedListener { _, date, _ ->
+                initContents()
                 existDayDiary(date)
                 binding.listDate.text = date.day.toString()
             }
-        }
-    }
-
-    private fun addDecoration(year: Int, month: Int) {
-        val existList = existMonthDiary(year, month)
-        for (existDay in existList) {
-            binding.calendarView.addDecorators(
-                CalendarDecorator(
-                    requireActivity(),
-                    existDay
-                )
-            )
         }
     }
 
@@ -135,40 +126,40 @@ class MainFragment : Fragment() {
                     month,
                     day,
                     date,
-                    viewModel.dateDiaryLiveData.value!!.post.post_id
                 )
             )
         }
     }
 
-    private fun existMonthDiary(year: Int, month: Int): List<CalendarDay> {
-        val existContentList: MutableList<CalendarDay> = mutableListOf()
-        viewModel.callGetMonthDiary(year, month)
+    private fun existMonthDiary(year: Int, month: Int) {
+        viewModel.callGetMonthDiary(year, month + 1)
         viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, {
-            for (i in 0..it!!.posts.size) {
-                val day = CalendarDay(it.posts[i].date)
-                existContentList.add(day)
+            for (i in it!!.posts) {
+                Log.d("code : ", it.code.toString())
+                val cDay = CalendarDay(i.date)
+                binding.calendarView.addDecorators(CalendarDecorator(requireActivity(), cDay))
             }
         })
-        return existContentList
     }
 
     private fun existDayDiary(date: CalendarDay) {
-        val selectDate = date.date
-        viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, { monthIt ->
-            for (i in 0..monthIt!!.posts.size) {
-                if (monthIt.posts[i].date == selectDate) {
-                    viewModel.callGetDiaryWithPostId(monthIt.posts[i].post_id)
-                    viewModel.diaryLiveData.observe(viewLifecycleOwner, {
-                        binding.listContent.text = it!!.post.contents
-                        for (j in 0..it.post.tags.size) {
-                            binding.listTag.append("#")
-                            binding.listTag.append(it.post.tags[j].tag + " ")
-                        }
-                    })
+        viewModel.callGetDateDiary(date.year, date.month + 1, date.day)
+        viewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
+            initContents()
+            binding.listEdit.text = "수정"
+            binding.listContent.text = it?.post?.contents
+            if (it?.post?.tags != null) {
+                for (i in it.post.tags) {
+                    binding.listTag.append("#")
+                    binding.listTag.append(i.tag_name + " ")
                 }
             }
         })
+    }
+
+    private fun initContents() {
+        binding.listContent.text = ""
+        binding.listTag.text = ""
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
