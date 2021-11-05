@@ -22,6 +22,7 @@ import com.diary.someday.R
 import com.diary.someday.Retrofit.RetrofitManager
 import com.diary.someday.Viewmodel.SignInViewModel
 import com.diary.someday.activity.MainActivity
+import com.diary.someday.application.Application
 import com.diary.someday.databinding.FragmentSignInBinding
 import com.diary.someday.util.PreferenceUtils
 
@@ -86,6 +87,7 @@ class SignInFragment : Fragment() {
                         PreferenceUtils.token = token
                         signInViewModel.clickToast("로그인 버튼", activity as Context)
 //                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
+                        Application.signInCheck.signIn()
                         val intent = Intent(requireContext(), MainActivity::class.java)
                         startActivity(intent)
                     }

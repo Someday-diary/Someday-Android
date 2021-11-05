@@ -1,6 +1,7 @@
 package com.diary.someday.application
 
 import android.app.Application
+import com.diary.someday.SharedPreferences.SignInCheck
 import com.diary.someday.util.PreferenceUtils
 import com.yademos.someday.SharedPreferences.*
 import org.koin.android.ext.koin.androidContext
@@ -18,6 +19,7 @@ class Application : Application() {
         lateinit var lockNumber: LockNumber
         lateinit var lockNumberCheck: LockNumberCheck
         lateinit var switchState: SwitchState
+        lateinit var signInCheck: SignInCheck
     }
 
     override fun onCreate() {
@@ -27,6 +29,7 @@ class Application : Application() {
         lockNumber = LockNumber(applicationContext)
         lockNumberCheck = LockNumberCheck(applicationContext)
         switchState = SwitchState(applicationContext)
+        signInCheck = SignInCheck(applicationContext)
         PreferenceUtils.init(applicationContext)
         super.onCreate()
         startKoin {

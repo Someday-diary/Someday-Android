@@ -1,6 +1,7 @@
 package com.diary.someday.Fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,6 +20,8 @@ import com.diary.someday.Enum.ResponseState
 import com.diary.someday.R
 import com.diary.someday.Retrofit.RetrofitManager
 import com.diary.someday.Viewmodel.SignUpViewModel
+import com.diary.someday.activity.MainActivity
+import com.diary.someday.application.Application
 import com.diary.someday.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {
@@ -32,6 +35,12 @@ class SignUpFragment : Fragment() {
     ): View? {
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        if (Application.signInCheck.checkSignIn()) {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        } else if (Application.signUpCheck.checkSignUp()) {
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+        }
 
         signUpViewModel.buttonState.observe(activity as LifecycleOwner, Observer {
             if (it == true) {
@@ -65,7 +74,8 @@ class SignUpFragment : Fragment() {
                 when (responseState) {
                     ResponseState.OKAY -> {
                         Toast.makeText(activity, "인증완료 되었습니다.", Toast.LENGTH_SHORT).show()
-                        var action = SignUpFragmentDirections.actionSignUpFragmentToSignUpPwdFragment(binding.email.text.toString())
+                        var action =
+                            SignUpFragmentDirections.actionSignUpFragmentToSignUpPwdFragment(binding.email.text.toString())
                         findNavController().navigate(action)
                     }
                     ResponseState.FAIL -> {

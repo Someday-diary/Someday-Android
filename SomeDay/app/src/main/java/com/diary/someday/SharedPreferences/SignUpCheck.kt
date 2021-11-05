@@ -13,9 +13,6 @@ class SignUpCheck(context: Context) {
     }
 
     fun checkSignUp(): Boolean {
-        if (sharedPreferences.getBoolean("check",false)){
-            return true
-        }
-        return false
+        return sharedPreferences.getBoolean("check",false)
     }
 }

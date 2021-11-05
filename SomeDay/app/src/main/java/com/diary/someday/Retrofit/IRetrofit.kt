@@ -14,7 +14,7 @@ interface IRetrofit {
     @POST("user/login")
     fun signIn(@Body signIn: SignIn): Call<JsonElement>
 
-    @POST("/user")
+    @POST("user/sign_up")
     fun signUp(@Body signUp: SignUp) : Call<JsonElement>
 
     @POST("user/verify")
