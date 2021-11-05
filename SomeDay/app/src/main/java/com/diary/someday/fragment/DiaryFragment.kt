@@ -100,7 +100,8 @@ class DiaryFragment : Fragment() {
                         .navigate(R.id.action_diaryFragment_to_mainFragment)
                 } else {
                     viewModel.callUpdateDiary(postId, requestUpdateDiary())
-                    Toast.makeText(requireContext(), "일기가 정상적으로 수정되었습니다!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "일기가 정상적으로 수정되었습니다!", Toast.LENGTH_SHORT)
+                        .show()
                     Navigation.findNavController(binding.root)
                         .navigate(R.id.action_diaryFragment_to_mainFragment)
                 }
@@ -111,12 +112,14 @@ class DiaryFragment : Fragment() {
     private fun bindingContextEditText() {
         viewModel.callGetDateDiary(args.year.toInt(), args.month.toInt(), args.day.toInt())
         viewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
-            postId = it?.post?.post_id!!
-            binding.contextEditText.setText(it.post.contents)
-            binding.tagEditText.append("#")
-            for (element in it.post.tags) {
-                binding.tagEditText.append(element.tag_name + " ")
-                editState = true
+            if (it != null) {
+                postId = it.post.post_id
+                binding.contextEditText.setText(it.post.contents)
+                binding.tagEditText.append("#")
+                for (element in it.post.tags) {
+                    binding.tagEditText.append(element.tag_name + " ")
+                    editState = true
+                }
             }
         })
     }
@@ -129,7 +132,11 @@ class DiaryFragment : Fragment() {
         val tagList = mutableListOf<Tag>()
         val split = binding.tagEditText.text.split("#")
         for (i in 1 until split.size) {
-            tagList.add(Tag(split[i]))
+            val str = split[i].replace(" ", "")
+            if (str == "") {
+                continue
+            }
+            tagList.add(Tag(str))
         }
         return tagList
     }
