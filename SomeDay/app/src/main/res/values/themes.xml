@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="navigationIcon">@drawable/ic_back_light</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -18,4 +20,51 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlActivated">@color/main_dark</item>
     </style>
+    <style name="TextColorLightDrawer">
+        <item name="android:textColor">@color/light_textColor_drawer</item>
+    </style>
+    <style name="BackButtonStroke">
+        <item name="android:strokeColor">@color/back_buttonColor_drawer</item>
+    </style>
+    <style name="TextColorDarkDrawer">
+        <item name="android:textColor">@color/dark_textColor_drawer</item>
+    </style>
+
+    <style name="LineForDrawer">
+        <item name="android:background">@color/line_lightMode_drawer</item>
+    </style>
+    <style name="BackgroundApp">
+        <item name="android:background">@color/background_lightMode</item>
+    </style>
+
+    <style name="AlarmAddButton">
+        <item name="android:textColor">@color/alram_main_theme</item>
+    </style>
+
+
+
+
+
+
+    <style name="toolbar_lock">
+        <item name="android:background">@drawable/ic_back_light</item>
+    </style>
+
+    <style name="erase_button">
+        <item name="android:background">@drawable/ic_erase_button_light</item>
+    </style>
+
+    <style name="text_lock">
+        <item name="android:background">@drawable/lock_text_click_animation_light</item>
+        <item name="android:textColor">@color/lock_text_light</item>
+    </style>
+
+    <style name="text_lock_center">
+        <item name="android:textColor">@color/lock_text_light</item>
+    </style>
+
+    <style name="background_lock">
+        <item name="android:background">@color/lock_background_color_light</item>
+    </style>
+
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#5F6D89">
+    <item android:id="@+id/background">
+
+        <vector
+            android:width="40dp"
+            android:height="40dp"
+            android:viewportWidth="40"
+            android:viewportHeight="40">
+            <path
+                android:fillColor="#F6F9FF"
+                android:pathData="M20,20m-20,0a20,20 0,1 1,40 0a20,20 0,1 1,-40 0" />
+            <path
+                android:fillColor="#00000000"
+                android:pathData="M29,19.7143H11M11,19.7143L18.5,12M11,19.7143L18.5,27.4286"
+                android:strokeWidth="2"
+                android:strokeColor="#353B47" />
+        </vector>
+
+    </item>
+</ripple>
+
+

@@ -6,77 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".fragment.DiaryFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@id/toolbar"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:text="title" />
 
-                <TextView
-                    android:id="@+id/toolbarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    tools:text="title" />
+        </androidx.appcompat.widget.Toolbar>
 
-            </androidx.appcompat.widget.Toolbar>
+        <EditText
+            android:id="@+id/contextEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="80dp"
+            android:backgroundTint="@color/green3"
+            android:gravity="start"
+            android:hint="오늘 하루를 기록하세요."
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="10dp"
+            android:minHeight="130dp"
+            android:textColorHint="@color/green2"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-            <EditText
-                android:id="@+id/contextEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                android:layout_marginTop="80dp"
-                android:backgroundTint="@color/green3"
-                android:gravity="start"
-                android:hint="오늘 하루를 기록하세요."
-                android:inputType="textMultiLine"
-                android:lineSpacingExtra="10dp"
-                android:minHeight="130dp"
-                android:textColorHint="@color/green2"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        <EditText
+            android:id="@+id/tagEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/green1"
+            android:hint="# 태그 작성"
+            android:textColor="@color/green3"
+            android:textColorHint="@color/green1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contextEditText" />
 
-            <EditText
-                android:id="@+id/tagEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                android:layout_marginTop="50dp"
-                android:backgroundTint="@color/green1"
-                android:hint="# 태그 작성"
-                android:textColor="@color/green3"
-                android:textColorHint="@color/green1"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/contextEditText" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveDiaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/background_diary_button"
+            android:stateListAnimator="@null"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/saveDiaryButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="40dp"
-                android:layout_marginHorizontal="30dp"
-                android:text="확인"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@drawable/background_diary_button"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

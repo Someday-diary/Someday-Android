@@ -19,6 +19,7 @@ import com.yademos.someday.Enum.ResponseState
 import com.yademos.someday.R
 import com.yademos.someday.Retrofit.RetrofitManager
 import com.yademos.someday.Viewmodel.SignUpViewModel
+import com.yademos.someday.application.Application
 import com.yademos.someday.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {
@@ -32,6 +33,10 @@ class SignUpFragment : Fragment() {
     ): View? {
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+
+        if (Application.signUpCheck.checkSignUp()){
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+        }
 
         signUpViewModel.buttonState.observe(activity as LifecycleOwner, Observer {
             if (it == true) {

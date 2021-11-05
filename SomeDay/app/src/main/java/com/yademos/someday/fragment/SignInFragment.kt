@@ -22,6 +22,7 @@ import com.yademos.someday.R
 import com.yademos.someday.Retrofit.RetrofitManager
 import com.yademos.someday.Viewmodel.SignInViewModel
 import com.yademos.someday.activity.MainActivity
+import com.yademos.someday.application.Application
 import com.yademos.someday.databinding.FragmentSignInBinding
 
 class SignInFragment : Fragment() {
@@ -36,6 +37,8 @@ class SignInFragment : Fragment() {
     ): View? {
         binding = FragmentSignInBinding.inflate(inflater, container, false)
         signInViewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
+
+
 
 
         binding.signupButton.setOnClickListener {
@@ -84,6 +87,7 @@ class SignInFragment : Fragment() {
                     ResponseState.OKAY -> {
                         signInViewModel.clickToast("로그인 버튼", activity as Context)
 //                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
+
                         val intent = Intent(requireContext(), MainActivity::class.java)
                         startActivity(intent)
                     }
