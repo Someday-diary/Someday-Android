@@ -19,6 +19,7 @@ import com.diary.someday.Enum.ResponseState
 import com.diary.someday.R
 import com.diary.someday.Retrofit.RetrofitManager
 import com.diary.someday.Viewmodel.SignUpViewModel
+import com.diary.someday.application.Application
 import com.diary.someday.databinding.FragmentSignUpPwdBinding
 
 class SignUpPwdFragment : Fragment() {
@@ -32,6 +33,9 @@ class SignUpPwdFragment : Fragment() {
     ): View? {
         binding = FragmentSignUpPwdBinding.inflate(inflater, container, false)
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+
+
+
 
         signUpViewModel.buttonStateSignUp.observe(activity as LifecycleOwner, Observer {
             if (it == true) {
@@ -106,6 +110,7 @@ class SignUpPwdFragment : Fragment() {
                 Log.d("TAG", "서버 결과 -> $responseState $code")
                 when (responseState) {
                     ResponseState.OKAY -> {
+                        Application.signUpCheck.signUp()
                         findNavController().navigate(R.id.action_signUpPwdFragment_to_signInFragment)
                     }
                     ResponseState.FAIL -> {

@@ -12,9 +12,52 @@
     <color name="green2">#E1F5F1</color>
     <color name="green3">#64BDAA</color>
 
+    <color name="blue1">#83ADFF</color>
+    <color name="blue2">#E0EBFF</color>
+    <color name="blue3">#588BEF</color>
+
+    <color name="purple1">#B28AF4</color>
+    <color name="purple2">#E4D5FB</color>
+    <color name="purple3">#9158EF</color>
+
+    <color name="yellow1">#F9E370</color>
+    <color name="yellow2">#FDF7D4</color>
+    <color name="yellow3">#F5CE00</color>
+
+    <color name="red1">#F27979</color>
+    <color name="red2">#FBD5D5</color>
+    <color name="red3">#EF5858</color>
+
+    <color name="lock_text">#353B47</color>
+
+    <color name="lock_background_color_light">#F6F9FF</color>
+    <color name="lock_background_color_dark">#3E4354</color>
+
+
+
     <color name="black_app">#3C3C3C</color>
     <color name="main_dark">#64BDAA</color>
     <color name="white_dark">#DEE2E6</color>
     <color name="white_dark_text">#B3C1CF</color>
     <color name="main">#89D9C8</color>
+
+    <color name="main_theme">#19C29E</color>
+    <color name="switch_track_off">#E4E4E4</color>
+
+
+
+
+    <color name="dark_textColor_drawer">#2D475F</color>
+    <color name="light_textColor_drawer">#B3C1CF</color>
+    <color name="back_buttonColor_drawer">#486279</color>
+
+    <color name="line_lightMode_drawer">#E7EBF3</color>
+    <color name="line_darkMode_drawer">#0E1624</color>
+
+    <color name="background_lightMode">#FFFFFF</color>
+    <color name="background_darkMode">#232734</color>
+    
+    <color name="alram_main_theme">#5F6D89</color>
+
+    <color name="lock_text_light">#353B47</color>
 </resources>
