@@ -10,8 +10,8 @@ import org.koin.core.logger.Level
 class Application : Application() {
 
     override fun onCreate() {
-        PreferenceUtils.init(applicationContext)
         super.onCreate()
+        PreferenceUtils.init(applicationContext)
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@Application)

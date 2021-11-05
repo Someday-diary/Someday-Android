@@ -23,6 +23,7 @@ import com.diary.someday.Retrofit.RetrofitManager
 import com.diary.someday.Viewmodel.SignInViewModel
 import com.diary.someday.activity.MainActivity
 import com.diary.someday.databinding.FragmentSignInBinding
+import com.diary.someday.util.PreferenceUtils
 
 class SignInFragment : Fragment() {
 
@@ -78,10 +79,11 @@ class SignInFragment : Fragment() {
             RetrofitManager.instance.signIn(
                 binding.email.text.toString(),
                 binding.password.text.toString()
-            ) { responseState, msg ->
+            ) { responseState, msg, token ->
                 Log.d("TAG", "서버 결과 -> $responseState $msg")
                 when (responseState) {
                     ResponseState.OKAY -> {
+                        PreferenceUtils.token = token
                         signInViewModel.clickToast("로그인 버튼", activity as Context)
 //                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
                         val intent = Intent(requireContext(), MainActivity::class.java)

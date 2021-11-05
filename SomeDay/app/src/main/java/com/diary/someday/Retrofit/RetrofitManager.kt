@@ -20,7 +20,7 @@ class RetrofitManager {
     private val iRetrofit: IRetrofit? =
         RetrofitClient.getClient(BASE_URL)?.create(IRetrofit::class.java)
 
-    fun signIn(email: String?, pwd: String?, completion: (ResponseState, Int) -> Unit) {
+    fun signIn(email: String?, pwd: String?, completion: (ResponseState, Int, String) -> Unit) {
         val email_check: String = email.let {
             it
         } ?: ""
@@ -42,8 +42,10 @@ class RetrofitManager {
                         val body = it.asJsonObject
 
                         val code = body.get("code").asInt
+                        val token = body.get("token").asString
+
                         Log.d("TAG", "code: $code")
-                        completion(ResponseState.OKAY, code)
+                        completion(ResponseState.OKAY, code, token)
 
                     }
                 } else {
@@ -51,9 +53,11 @@ class RetrofitManager {
                         val body = it.asJsonObject
 
                         val code = body.get("code").asInt
+                        val token = body.get("token").asString
+
                         Log.d("TAG", "code: $code")
 
-                        completion(ResponseState.FAIL, code)
+                        completion(ResponseState.FAIL, code, token)
 
                     }
                 }

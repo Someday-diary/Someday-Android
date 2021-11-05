@@ -16,4 +16,5 @@ object PreferenceUtils {
             preferences.getString("token", null)
         set(value) =
             preferences.edit().putString("token", value).apply()
+
 }
