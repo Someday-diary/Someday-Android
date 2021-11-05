@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.yademos.someday.fragment.MainFragment"
+        android:name="com.diary.someday.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -26,12 +26,24 @@
 
     <fragment
         android:id="@+id/diaryFragment"
-        android:name="com.yademos.someday.fragment.DiaryFragment"
+        android:name="com.diary.someday.fragment.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" >
         <action
             android:id="@+id/action_diaryFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="year"
+            app:argType="string" />
+        <argument
+            android:name="month"
+            app:argType="string" />
+        <argument
+            android:name="day"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/themeFragment"

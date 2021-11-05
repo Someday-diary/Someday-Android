@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yademos.someday">
+    package="com.diary.someday">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,26 +9,27 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
-        android:name=".application.Application"
+        android:name="com.diary.someday.application.Application"
+        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SomeDay">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.diary.someday.activity.SplashActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.LoginActivity"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".activity.MainActivity"
+            android:name="com.diary.someday.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.diary.someday.activity.MainActivity"
+            android:exported="true">
+
         </activity>
     </application>
 
