@@ -113,10 +113,9 @@ class DiaryViewModel() : ViewModel() {
                 response: Response<DateDiaryResponse>
             ) {
                 if (response.isSuccessful) {
-                    if (response.code() == 400) {
-                        dateDiaryLiveData.postValue(null)
-                    }
                     dateDiaryLiveData.postValue(response.body())
+                } else {
+                    dateDiaryLiveData.postValue(null)
                 }
             }
 

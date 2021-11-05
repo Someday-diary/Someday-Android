@@ -146,7 +146,11 @@ class MainFragment : Fragment() {
         viewModel.callGetDateDiary(date.year, date.month + 1, date.day)
         viewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
             initContents()
-            binding.listEdit.text = "수정"
+            if (it?.post == null) {
+                binding.listEdit.text = "일기 작성"
+            } else {
+                binding.listEdit.text = "수정"
+            }
             binding.listContent.text = it?.post?.contents
             if (it?.post?.tags != null) {
                 for (i in it.post.tags) {
