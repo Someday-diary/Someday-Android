@@ -20,7 +20,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:id="@+id/search_editText"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:hint="검색어를 입력하세요"
+                android:singleLine="true"
+                android:padding="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/custom_search_edittext"
                 android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
