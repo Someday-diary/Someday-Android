@@ -1,6 +1,6 @@
 package com.diary.someday.Data.response
 
-import com.diary.someday.Data.request.Tag
+import com.diary.someday.Data.response.Tag
 import java.util.*
 
 data class DiaryResponse(

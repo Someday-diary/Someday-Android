@@ -2,13 +2,10 @@ package com.diary.someday.viewModel
 
 import androidx.lifecycle.*
 import com.diary.someday.Constants.API
-import com.diary.someday.Data.response.Code
 import com.diary.someday.Data.request.DiaryRequest
 import com.diary.someday.Data.request.Tag
 import com.diary.someday.Data.request.UpdateDiaryRequest
-import com.diary.someday.Data.response.DiaryResponse
-import com.diary.someday.Data.response.DateDiaryResponse
-import com.diary.someday.Data.response.MonthDiaryResponse
+import com.diary.someday.Data.response.*
 import com.diary.someday.Retrofit.DiaryService
 import com.diary.someday.Retrofit.RetrofitClient
 import okhttp3.internal.notify
@@ -19,7 +16,7 @@ import retrofit2.Response
 class DiaryViewModel() : ViewModel() {
 
     val diaryLiveData = MutableLiveData<DiaryResponse?>()
-    val diaryListLiveData = MutableLiveData<List<DiaryResponse>?>()
+    val diaryListLiveData = MutableLiveData<DiaryListResponse?>()
     val monthDiaryLiveData = MutableLiveData<MonthDiaryResponse?>()
     val dateDiaryLiveData = MutableLiveData<DateDiaryResponse?>()
     val code = MutableLiveData<Code?>()
@@ -56,34 +53,36 @@ class DiaryViewModel() : ViewModel() {
     }
 
     fun callGetDiary() {
-        retrofit?.getDiary()?.enqueue(object : Callback<List<DiaryResponse>> {
+        retrofit?.getDiary()?.enqueue(object : Callback<DiaryListResponse> {
             override fun onResponse(
-                call: Call<List<DiaryResponse>>,
-                response: Response<List<DiaryResponse>>
+                call: Call<DiaryListResponse>,
+                response: Response<DiaryListResponse>
             ) {
                 if (response.isSuccessful) {
                     diaryListLiveData.postValue(response.body())
                 }
             }
 
-            override fun onFailure(call: Call<List<DiaryResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<DiaryListResponse>, t: Throwable) {
                 diaryListLiveData.postValue(null)
             }
         })
     }
 
-    fun callGetDiaryWithTag(tags: List<Tag>) {
-        retrofit?.getDiary(tags)?.enqueue(object : Callback<List<DiaryResponse>> {
+    fun callGetDiaryWithTag(tags: List<String>) {
+        retrofit?.getDiary(tags)?.enqueue(object : Callback<DiaryListResponse> {
             override fun onResponse(
-                call: Call<List<DiaryResponse>>,
-                response: Response<List<DiaryResponse>>
+                call: Call<DiaryListResponse>,
+                response: Response<DiaryListResponse>
             ) {
                 if (response.isSuccessful) {
                     diaryListLiveData.postValue(response.body())
+                } else {
+                    diaryListLiveData.postValue(null)
                 }
             }
 
-            override fun onFailure(call: Call<List<DiaryResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<DiaryListResponse>, t: Throwable) {
                 diaryListLiveData.postValue(null)
             }
         })

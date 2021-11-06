@@ -1,12 +1,9 @@
 package com.diary.someday.Retrofit
 
-import com.diary.someday.Data.response.Code
 import com.diary.someday.Data.request.DiaryRequest
 import com.diary.someday.Data.request.Tag
 import com.diary.someday.Data.request.UpdateDiaryRequest
-import com.diary.someday.Data.response.DiaryResponse
-import com.diary.someday.Data.response.DateDiaryResponse
-import com.diary.someday.Data.response.MonthDiaryResponse
+import com.diary.someday.Data.response.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -18,7 +15,7 @@ interface DiaryService {
 
     /* 전체 일기 가져오기 */
     @GET("/diary")
-    fun getDiary(@Query("tags") tags: List<Tag>? = null) : Call<List<DiaryResponse>>
+    fun getDiary(@Query("tags") tags: List<String>? = null) : Call<DiaryListResponse>
 
     /* 일기 가져오기 (post_id) */
     @GET("/diary/{post_id}")
