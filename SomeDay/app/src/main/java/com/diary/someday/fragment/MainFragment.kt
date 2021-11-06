@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         drawerBinding = DrawerLayoutBinding.inflate(inflater, container, false)
-        if (Application.switchState.getSettingAll()){
+        if (Application.switchState.getSettingAll()) {
             Application.lockState.lockMode(2)
             findNavController().navigate(R.id.action_mainFragment_to_checkPwdFragment)
         }
@@ -324,13 +324,21 @@ class MainFragment : Fragment() {
 
         }
     }
+
     private fun existMonthDiary(year: Int, month: Int) {
         viewModel.callGetMonthDiary(year, month + 1)
         viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, {
-            for (i in it!!.posts) {
-                Log.d("code : ", it.code.toString())
-                val cDay = CalendarDay(i.date)
-                binding.calendarLayout.calendarView.addDecorators(CalendarDecorator(requireActivity(), cDay))
+            if (it != null) {
+                for (i in it!!.posts) {
+                    Log.d("code : ", it.code.toString())
+                    val cDay = CalendarDay(i.date)
+                    binding.calendarLayout.calendarView.addDecorators(
+                        CalendarDecorator(
+                            requireActivity(),
+                            cDay
+                        )
+                    )
+                }
             }
         })
     }
