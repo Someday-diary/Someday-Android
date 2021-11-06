@@ -330,7 +330,6 @@ class MainFragment : Fragment() {
         viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, {
             if (it != null) {
                 for (i in it!!.posts) {
-                    Log.d("code : ", it.code.toString())
                     val cDay = CalendarDay(i.date)
                     binding.calendarLayout.calendarView.addDecorators(
                         CalendarDecorator(

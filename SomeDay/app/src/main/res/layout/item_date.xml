@@ -39,7 +39,7 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_content"
-        android:text="# 외식 # 소고기"
+        tools:text="# 외식 # 소고기"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
