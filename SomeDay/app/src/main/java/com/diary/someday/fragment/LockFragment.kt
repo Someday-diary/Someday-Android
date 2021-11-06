@@ -33,6 +33,9 @@ class LockFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLockBinding.inflate(inflater, container, false)
+        if (Application.switchState.getSettingAll()){
+            binding.switchLock.isChecked = true
+        }
 
         executor = ContextCompat.getMainExecutor(activity as Context)
         biometricPrompt = BiometricPrompt(
@@ -74,11 +77,11 @@ class LockFragment : Fragment() {
                 } else if(settingAll){
                     binding.switchBiometric.isEnabled = true
                     binding.changePassword.isEnabled = true
-                    Application.switchState.deleteAll()
+                    Application.switchState.delete()
                     Toast.makeText(activity,"비밀번호 설정을 완료하였습니다.",Toast.LENGTH_SHORT).show()
                     Log.d("TAG", "${switchAction}")
                 } else{
-                    Application.switchState.deleteAll()
+                    Application.switchState.delete()
                     binding.switchLock.isChecked = false
                     binding.switchBiometric.isChecked = false
                     binding.switchBiometric.isEnabled = false

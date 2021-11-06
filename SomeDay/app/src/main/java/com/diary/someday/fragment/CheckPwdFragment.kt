@@ -9,26 +9,84 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.R
 import com.diary.someday.application.Application
 import com.diary.someday.databinding.FragmentCheckPwdBinding
+import com.diary.someday.viewModel.CheckPwdViewModel
 
 class CheckPwdFragment : Fragment() {
 
-    private lateinit var binding : FragmentCheckPwdBinding
+    private lateinit var binding: FragmentCheckPwdBinding
+    private lateinit var checkPwdViewModel: CheckPwdViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCheckPwdBinding.inflate(inflater,container,false)
-
-        Application.lockNumberCheck.removeAll()
+        binding = FragmentCheckPwdBinding.inflate(inflater, container, false)
+        checkPwdViewModel = ViewModelProvider(this).get(CheckPwdViewModel::class.java)
+        if (Application.lockState.getLockMode() == 2) {
+            binding.lockText.text = "비밀번호를 입력하세요."
+        }
 
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            if (Application.lockState.getLockMode() == 2) {
+            } else {
+                findNavController().popBackStack()
+            }
         }
+
+        checkPwdViewModel.checkState.observe(activity as LifecycleOwner, {
+            Log.d("TAG", "checkState 호출 $it\n\n")
+            if (it) {
+                if (Application.lockState.getLockMode() == 2) {
+                    Toast.makeText(activity, "인증되었습니다.", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
+                Application.switchState.settingAll()
+            } else {
+                binding.lockText.text = "다시 입력해주세요."
+                Toast.makeText(activity, "잘못 입력했습니다.", Toast.LENGTH_SHORT).show()
+                checkPwdViewModel.reset()
+            }
+        })
+
+        checkPwdViewModel.num1State.observe(activity as LifecycleOwner, {
+            Log.d("TAG", "num1State 호출 $it\n\n")
+            if (it) {
+                changeCircle(1)
+            } else {
+                changeCircle(0)
+            }
+        })
+
+
+
+        checkPwdViewModel.num2State.observe(activity as LifecycleOwner, {
+            Log.d("TAG", "num2State 호출 $it\n\n")
+            if (it) {
+                changeCircle(2)
+            } else {
+                changeCircle(1)
+            }
+        })
+
+        checkPwdViewModel.num3State.observe(activity as LifecycleOwner, {
+            Log.d("TAG", "num3State 호출 $it\n\n")
+            if (it) {
+                changeCircle(3)
+            } else {
+                changeCircle(2)
+            }
+        })
+
+        checkPwdViewModel.num4State.observe(activity as LifecycleOwner, {
+            Log.d("TAG", "num4State 호출 $it\n\n")
+            checkPwdViewModel.checkLockNumber()
+        })
 
         binding.number0.setOnClickListener { add(0) }
 
@@ -56,34 +114,11 @@ class CheckPwdFragment : Fragment() {
     }
 
     fun add(num: Int) {
-        Application.lockNumberCheck.addNumber(num)
-        if (Application.lockNumberCheck.getSelectAll()) {
-            Log.d("TAG", "add: lockNumberCheck 값 ${Application.lockNumberCheck.getNumberCheck()}")
-            Log.d("TAG", "add: lockNumber 값 ${Application.lockNumber.getNumber()}")
-            val lockNumberCheck = Application.lockNumberCheck.getNumberCheck()
-            val lockNumber = Application.lockNumber.getNumber()
-            if (lockNumber.equals(lockNumberCheck)){
-                Application.switchState.settingAll()
-                findNavController().popBackStack()
-            }else{
-                binding.lockText.text = "다시 입력해주세요."
-                Toast.makeText(activity,"잘못 입력했습니다.",Toast.LENGTH_SHORT).show()
-                Application.lockNumberCheck.removeAll()
-                val circleNumber = Application.lockNumberCheck.getCircleChangeNumber()
-                Log.d("TAG", "remove하고 난 후 : ${Application.lockNumberCheck.getCircleChangeNumber()}")
-                changeCircle(circleNumber)
-            }
-
-        } else {
-            val circleNumber = Application.lockNumberCheck.getCircleChangeNumber()
-            changeCircle(circleNumber)
-        }
+        checkPwdViewModel.addNumber(num)
     }
 
     fun remove() {
-        Application.lockNumberCheck.removeNumber()
-        val circleNumber = Application.lockNumberCheck.getCircleChangeNumber()
-        changeCircle(circleNumber)
+        checkPwdViewModel.deleteNumber()
     }
 
     fun changeCircle(num: Int) {

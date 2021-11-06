@@ -15,9 +15,8 @@ class SwitchState(context: Context) {
     fun getCanecelNav(): Boolean {
         return sharedPreferences.getBoolean("cancelNav", true)
     }
-
-    fun deleteAll() {
-        editor.clear()
+    fun delete(){
+        editor.remove("cancelNav")
         editor.commit()
     }
 

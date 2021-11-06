@@ -36,8 +36,9 @@ class SignUpFragment : Fragment() {
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         signUpViewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
         if (Application.signInCheck.checkSignIn()) {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+//            val intent = Intent(requireContext(), MainActivity::class.java)
+//            startActivity(intent)
         } else if (Application.signUpCheck.checkSignUp()) {
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }

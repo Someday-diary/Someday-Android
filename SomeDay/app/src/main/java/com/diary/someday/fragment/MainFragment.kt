@@ -42,6 +42,10 @@ class MainFragment : Fragment() {
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         drawerBinding = DrawerLayoutBinding.inflate(inflater, container, false)
+        if (Application.switchState.getSettingAll()){
+            Application.lockState.lockMode(2)
+            findNavController().navigate(R.id.action_mainFragment_to_checkPwdFragment)
+        }
         setHasOptionsMenu(true)
         initToolbar() // Toolbar 설정
         initCalendarView() // CalendarView 설정
@@ -373,5 +377,17 @@ class MainFragment : Fragment() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("TAG", "\n\n\nonDestroyView: ")
+        Application.lockState.delete()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TAG", "\n\n\nonDestroy: ")
+        Application.lockState.delete()
     }
 }

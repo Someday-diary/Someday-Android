@@ -8,29 +8,68 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.R
 import com.diary.someday.application.Application
 import com.diary.someday.databinding.FragmentEditPwdBinding
+import com.diary.someday.viewModel.EditPwdViewModel
 
 class EditPwdFragment : Fragment() {
     private lateinit var binding: FragmentEditPwdBinding
+    private lateinit var editPwdViewModel: EditPwdViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Application.switchState.cancelNav()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEditPwdBinding.inflate(inflater, container, false)
-        Application.switchState.cancelNav()
-        Application.lockNumber.removeAll()
+        editPwdViewModel = ViewModelProvider(this).get(EditPwdViewModel::class.java)
 
-        if (Application.switchState.getSettingAll()){
+        if (Application.switchState.getSettingAll()) {
             findNavController().popBackStack()
         }
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+
+        editPwdViewModel.num1State.observe(activity as LifecycleOwner, {
+            if (it) {
+                changeCircle(1)
+            } else {
+                changeCircle(0)
+            }
+        })
+
+
+
+        editPwdViewModel.num2State.observe(activity as LifecycleOwner,{
+            if (it){
+                changeCircle(2)
+            }else{
+                changeCircle(1)
+            }
+        })
+
+        editPwdViewModel.num3State.observe(activity as LifecycleOwner,{
+            if (it){
+                changeCircle(3)
+            }else{
+                changeCircle(2)
+            }
+        })
+
+        editPwdViewModel.num4State.observe(activity as LifecycleOwner,{
+            editPwdViewModel.setPreference()
+            findNavController().navigate(R.id.action_editPwdFragment_to_checkPwdFragment)
+        })
 
         binding.number0.setOnClickListener { add(0) }
 
@@ -58,20 +97,11 @@ class EditPwdFragment : Fragment() {
     }
 
     fun add(num: Int) {
-        Application.lockNumber.addNumber(num)
-        if (Application.lockNumber.getSelectAll()) {
-            Log.d("TAG", "add: lockNumber 값 ${Application.lockNumber.getNumber()}")
-            findNavController().navigate(R.id.action_editPwdFragment_to_checkPwdFragment)
-        } else {
-            val circleNumber = Application.lockNumber.getCircleChangeNumber()
-            changeCircle(circleNumber)
-        }
+        editPwdViewModel.addNumber(num)
     }
 
     fun remove() {
-        Application.lockNumber.removeNumber()
-        val circleNumber = Application.lockNumber.getCircleChangeNumber()
-        changeCircle(circleNumber)
+        editPwdViewModel.deleteNumber()
     }
 
     fun changeCircle(num: Int) {
@@ -110,10 +140,5 @@ class EditPwdFragment : Fragment() {
                 )
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("TAG", "onDestroyView: ")
     }
 }

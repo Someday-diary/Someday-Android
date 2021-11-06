@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainFragment_to_lockFragment"
             app:destination="@id/lockFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_checkPwdFragment"
+            app:destination="@id/checkPwdFragment" />
     </fragment>
 
     <fragment
