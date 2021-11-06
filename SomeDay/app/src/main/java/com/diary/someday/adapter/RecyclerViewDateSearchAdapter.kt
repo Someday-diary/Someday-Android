@@ -9,23 +9,25 @@ import com.diary.someday.Data.SearchDate
 import com.diary.someday.Data.SearchMonth
 import com.diary.someday.R
 
-class RecyclerViewDateSearchAdapter: RecyclerView.Adapter<RecyclerViewDateSearchAdapter.ViewHolder>() {
+class RecyclerViewDateSearchAdapter :
+    RecyclerView.Adapter<RecyclerViewDateSearchAdapter.ViewHolder>() {
 
     var data = mutableListOf<SearchDate>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val date = view.findViewById<TextView>(R.id.item_date)
         val content = view.findViewById<TextView>(R.id.item_content)
-        val tag = view.findViewWithTag<TextView>(R.id.item_tag)
+        val tag = view.findViewById<TextView>(R.id.item_tag)
 
         fun bind(data: SearchDate) {
             date.text = data.date.toString()
             content.text = data.content
 
-            for (i in data.tag) {
+            for (i in data.tag!!) {
                 tag.append("#")
-                tag.append(i.tag + " ")
+                tag.append(i.tag_name + " ")
             }
+
         }
     }
 

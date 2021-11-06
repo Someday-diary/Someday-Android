@@ -14,13 +14,20 @@ import com.diary.someday.R
 
 class RecyclerViewMonthSearchAdapter(val context: Context): RecyclerView.Adapter<RecyclerViewMonthSearchAdapter.ViewHolder>() {
 
-    var data = mutableListOf<SearchMonth>()
+    private var data = mutableListOf<SearchMonth>()
+
+
+    fun setData(data: List<SearchMonth>) {
+        this.data.clear()
+        this.data.addAll(data)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val month = view.findViewById<TextView>(R.id.item_month)
         val dateList = view.findViewById<RecyclerView>(R.id.item_recyclerView)
         fun bind(data: SearchMonth, context: Context) {
-            month.text = data.month
+            month.text = data.year + "년 " + data.month + "월"
 
             val recyclerViewDate = RecyclerViewDateSearchAdapter()
             val dataList = data.dateList
