@@ -15,8 +15,14 @@ class SwitchState(context: Context) {
     fun getCanecelNav(): Boolean {
         return sharedPreferences.getBoolean("cancelNav", true)
     }
-    fun delete(){
+
+    fun delete() {
         editor.remove("cancelNav")
+        editor.commit()
+    }
+
+    fun deleteAll() {
+        editor.clear()
         editor.commit()
     }
 
@@ -28,5 +34,17 @@ class SwitchState(context: Context) {
     fun getSettingAll(): Boolean {
         return sharedPreferences.getBoolean("settingAll", false)
     }
+
+    fun bioSwitchOn(){
+        editor.putBoolean("bioSwitchOn",true)
+        editor.commit()
+    }
+
+    fun bioSwitchOff(){
+        editor.putBoolean("bioSwitchOn",false)
+        editor.commit()
+    }
+
+    fun getBioSwitch() : Boolean = sharedPreferences.getBoolean("bioSwitchOn",false)
 
 }

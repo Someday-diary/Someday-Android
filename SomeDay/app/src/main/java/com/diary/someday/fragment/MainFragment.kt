@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.text.style.ForegroundColorSpan
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -18,17 +19,21 @@ import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.diary.someday.Constants.PWD_TYPE
 import com.diary.someday.databinding.DrawerLayoutBinding
 import com.diary.someday.decoration.CalendarDecorator
 import com.diary.someday.viewModel.DiaryViewModel
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.diary.someday.application.Application
+import java.util.concurrent.Executor
 
 class MainFragment : Fragment() {
 
@@ -36,16 +41,30 @@ class MainFragment : Fragment() {
     private lateinit var drawerBinding: DrawerLayoutBinding
     private val viewModel: DiaryViewModel by viewModels()
 
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Application.switchState.getSettingAll()) {
+            if (Application.switchState.getBioSwitch()) {
+                biometric()
+            } else {
+                Application.lockNumber.addType(PWD_TYPE.CHECK_LOCK_MAIN)
+                findNavController().navigate(R.id.action_mainFragment_to_editPwdFragment)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         drawerBinding = DrawerLayoutBinding.inflate(inflater, container, false)
-        if (Application.switchState.getSettingAll()) {
-            Application.lockState.lockMode(2)
-            findNavController().navigate(R.id.action_mainFragment_to_checkPwdFragment)
-        }
+
         setHasOptionsMenu(true)
         initToolbar() // Toolbar 설정
         initCalendarView() // CalendarView 설정
@@ -97,6 +116,26 @@ class MainFragment : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
+    }
+
+    private fun biometric() {
+        executor = ContextCompat.getMainExecutor(activity as Context)
+        biometricPrompt = BiometricPrompt(
+            requireActivity(), executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    Toast.makeText(activity as Context, "성공했어요.", Toast.LENGTH_SHORT).show()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("생체 정보로 인증해주세요")
+            .setNegativeButtonText("비밀번호로 인증")
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            .build()
+
+        biometricPrompt.authenticate(promptInfo)
     }
 
     private fun changeModeColor(number: Int) {
@@ -390,12 +429,11 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         Log.d("TAG", "\n\n\nonDestroyView: ")
-        Application.lockState.delete()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         Log.d("TAG", "\n\n\nonDestroy: ")
-        Application.lockState.delete()
+        Application.lockNumber.delete()
     }
 }

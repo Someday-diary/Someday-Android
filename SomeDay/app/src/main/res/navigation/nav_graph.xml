@@ -23,11 +23,11 @@
             android:id="@+id/action_mainFragment_to_lockFragment"
             app:destination="@id/lockFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_checkPwdFragment"
-            app:destination="@id/checkPwdFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_editPwdFragment"
+            app:destination="@id/editPwdFragment" />
     </fragment>
 
     <fragment
@@ -88,15 +88,7 @@
         android:name="com.yademos.someday.fragment.EditPwdFragment"
         android:label="fragment_edit_pwd"
         tools:layout="@layout/fragment_edit_pwd" >
-        <action
-            android:id="@+id/action_editPwdFragment_to_checkPwdFragment"
-            app:destination="@id/checkPwdFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/checkPwdFragment"
-        android:name="com.yademos.someday.fragment.CheckPwdFragment"
-        android:label="fragment_check_pwd"
-        tools:layout="@layout/fragment_check_pwd" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.diary.someday.fragment.SearchFragment"

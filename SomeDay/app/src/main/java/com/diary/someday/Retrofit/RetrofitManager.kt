@@ -212,5 +212,41 @@ class RetrofitManager {
         })
     }
 
+    fun logout(completion: (ResponseState, Int) -> Unit) {
+        val call: Call<JsonElement> = iRetrofit?.logout().let {
+            it
+        } ?: return
+
+        call.enqueue(object :Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                if (response.code() == 200) {
+                    response.body()?.let {
+                        val body = it.asJsonObject
+
+                        val code = body.get("code").asInt
+                        Log.d("TAG", "code: $code")
+                        completion(ResponseState.OKAY, code)
+
+                    }
+                } else {
+                    response.body()?.let {
+                        val body = it.asJsonObject
+
+                        val code = body.get("code").asInt
+                        Log.d("TAG", "code: $code")
+
+                        completion(ResponseState.FAIL, code)
+
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d("TAG", "onFailure: $t")
+            }
+
+        })
+    }
+
 
 }

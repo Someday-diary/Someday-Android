@@ -15,6 +15,7 @@ import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import com.diary.someday.Constants.PWD_TYPE
 import com.diary.someday.R
 import com.diary.someday.application.Application
 import com.diary.someday.databinding.FragmentLockBinding
@@ -23,9 +24,7 @@ import java.util.concurrent.Executor
 class LockFragment : Fragment() {
 
     private lateinit var binding: FragmentLockBinding
-    private lateinit var executor: Executor
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+
 
 
     override fun onCreateView(
@@ -33,38 +32,31 @@ class LockFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLockBinding.inflate(inflater, container, false)
-        if (Application.switchState.getSettingAll()){
+        if (Application.switchState.getSettingAll()) {
             binding.switchLock.isChecked = true
         }
+        if(Application.switchState.getBioSwitch()){
+            binding.switchBiometric.isChecked = true
+        }
 
-        executor = ContextCompat.getMainExecutor(activity as Context)
-        biometricPrompt = BiometricPrompt(
-            requireActivity(), executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    Toast.makeText(activity as Context, "성공했어요.", Toast.LENGTH_SHORT).show()
-                }
-            })
 
-        promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("생체 정보로 인증해주세요")
-            .setNegativeButtonText("비밀번호로 인증")
-            .setAllowedAuthenticators(BIOMETRIC_STRONG or BIOMETRIC_WEAK)
-            .build()
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
-        }
-        binding.changePassword.setOnClickListener {
-
         }
 
         binding.switchBiometric.setOnCheckedChangeListener { compoundButton, isChecked ->
             if (isChecked) {
                 if (biometricsAvailable()) {
-                    biometricPrompt.authenticate(promptInfo)
+                    Toast.makeText(activity, "생체인증을 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                    Application.switchState.bioSwitchOn()
+                } else {
+                    Toast.makeText(activity, "생체인증을 지원하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    binding.switchBiometric.isChecked = false
+                    Application.switchState.bioSwitchOff()
                 }
+            } else {
+                Application.switchState.bioSwitchOff()
             }
         }
 
@@ -73,14 +65,15 @@ class LockFragment : Fragment() {
             val settingAll = Application.switchState.getSettingAll()
             if (isChecked) {
                 if (switchAction) {
+                    Application.lockNumber.addType(PWD_TYPE.ENABLE_LOCK)
                     findNavController().navigate(R.id.action_lockFragment_to_editPwdFragment)
-                } else if(settingAll){
+                } else if (settingAll) {
                     binding.switchBiometric.isEnabled = true
                     binding.changePassword.isEnabled = true
                     Application.switchState.delete()
-                    Toast.makeText(activity,"비밀번호 설정을 완료하였습니다.",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "비밀번호 설정을 완료하였습니다.", Toast.LENGTH_SHORT).show()
                     Log.d("TAG", "${switchAction}")
-                } else{
+                } else {
                     Application.switchState.delete()
                     binding.switchLock.isChecked = false
                     binding.switchBiometric.isChecked = false
@@ -88,10 +81,16 @@ class LockFragment : Fragment() {
                     binding.changePassword.isEnabled = false
                 }
             } else {
+                Application.switchState.deleteAll()
                 binding.switchBiometric.isChecked = false
                 binding.switchBiometric.isEnabled = false
                 binding.changePassword.isEnabled = false
             }
+        }
+
+        binding.changePassword.setOnClickListener {
+            Application.lockNumber.addType(PWD_TYPE.CHANGE_LOCK)
+            findNavController().navigate(R.id.action_lockFragment_to_editPwdFragment)
         }
         return binding.root
     }

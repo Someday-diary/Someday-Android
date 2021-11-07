@@ -22,4 +22,7 @@ interface IRetrofit {
 
     @POST("user/verify/confirm")
     fun emailSendCheck(@Body emailSendCheck: EmailSendCheck): Call<JsonElement>
+
+    @DELETE("user/logout")
+    fun logout() :Call<JsonElement>
 }

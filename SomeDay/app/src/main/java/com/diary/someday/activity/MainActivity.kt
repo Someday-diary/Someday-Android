@@ -1,7 +1,9 @@
 package com.diary.someday.activity
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.diary.someday.application.Application
 import com.diary.someday.databinding.ActivityMainBinding
 
 
@@ -15,5 +17,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Application.lockNumber.delete()
     }
 }
