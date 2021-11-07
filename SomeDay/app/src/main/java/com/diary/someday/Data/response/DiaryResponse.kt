@@ -11,6 +11,6 @@ data class DiaryResponse(
 data class Posts(
     val post_id: String,
     val contents: String,
-    val date: Date,
+    val date: String,
     val tags: List<Tag>
 )
