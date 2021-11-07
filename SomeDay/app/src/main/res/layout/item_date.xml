@@ -42,4 +42,13 @@
         tools:text="# 외식 # 소고기"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c4c4c4"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/item_tag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
