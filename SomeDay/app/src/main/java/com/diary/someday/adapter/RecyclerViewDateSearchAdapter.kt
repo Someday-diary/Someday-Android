@@ -9,10 +9,15 @@ import com.diary.someday.Data.SearchDate
 import com.diary.someday.Data.SearchMonth
 import com.diary.someday.R
 
-class RecyclerViewDateSearchAdapter :
-    RecyclerView.Adapter<RecyclerViewDateSearchAdapter.ViewHolder>() {
+class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearchAdapter.ViewHolder>() {
 
-    var data = mutableListOf<SearchDate>()
+    private val data = mutableListOf<SearchDate>()
+
+    fun setData(data: List<SearchDate>) {
+        this.data.clear()
+        this.data.addAll(data)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val date = view.findViewById<TextView>(R.id.item_date)

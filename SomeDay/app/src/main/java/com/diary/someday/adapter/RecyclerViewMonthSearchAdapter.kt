@@ -14,8 +14,7 @@ import com.diary.someday.R
 
 class RecyclerViewMonthSearchAdapter(val context: Context): RecyclerView.Adapter<RecyclerViewMonthSearchAdapter.ViewHolder>() {
 
-    private var data = mutableListOf<SearchMonth>()
-
+    private val data = mutableListOf<SearchMonth>()
 
     fun setData(data: List<SearchMonth>) {
         this.data.clear()
@@ -31,7 +30,7 @@ class RecyclerViewMonthSearchAdapter(val context: Context): RecyclerView.Adapter
 
             val recyclerViewDate = RecyclerViewDateSearchAdapter()
             val dataList = data.dateList
-            recyclerViewDate.data = dataList
+            recyclerViewDate.setData(dataList)
 
             dateList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             dateList.adapter = recyclerViewDate
