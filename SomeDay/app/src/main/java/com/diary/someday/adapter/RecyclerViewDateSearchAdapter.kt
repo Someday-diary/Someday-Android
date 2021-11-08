@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.diary.someday.Data.SearchDate
-import com.diary.someday.Data.SearchMonth
 import com.diary.someday.R
 
 class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearchAdapter.ViewHolder>() {
@@ -20,12 +19,12 @@ class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearc
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val date = view.findViewById<TextView>(R.id.item_date)
+        val day = view.findViewById<TextView>(R.id.item_date)
         val content = view.findViewById<TextView>(R.id.item_content)
         val tag = view.findViewById<TextView>(R.id.item_tag)
 
         fun bind(data: SearchDate) {
-            date.text = data.date.toString()
+            day.text = data.day.toString()
             content.text = data.content
 
             for (i in data.tag!!) {
