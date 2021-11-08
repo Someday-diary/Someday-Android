@@ -25,12 +25,15 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: DiaryViewModel by viewModels()
     private lateinit var recyclerViewAdapter: RecyclerViewMonthSearchAdapter
+    private lateinit var listData: MutableList<SearchMonth>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+
+        listData = mutableListOf()
 
         initToolbar()
         initRecyclerView()
@@ -63,23 +66,38 @@ class SearchFragment : Fragment() {
                 binding.errorMsg.visibility = View.GONE
 
                 val diaryList = diary.posts.sortedBy { it.date }
-                var cursor = diaryList[0].date.month + 1
+                Log.d("diaryList", diaryList.toString())
+
+                val split = diaryList[0].date.split("-")
+                var dateSplit: List<String> = listOf()
+                var cursor = split[1]
 
                 binding.searchTag.text = "#" + binding.searchEditText.text
                 binding.searchTag.visibility = View.VISIBLE
                 binding.searchRecyclerView.visibility = View.VISIBLE
 
                 for (i in diaryList.indices) {
-                    if (diaryList[i].date.month + 1 == cursor) {
-                        dateList.add(SearchDate(diaryList[i].date.day, diaryList[i].contents, diaryList[i].tags))
+                    dateSplit = diaryList[i].date.split("-")
+                    if (dateSplit[1] == cursor) {
+                        dateList.add(SearchDate(dateSplit[2], diaryList[i].contents, diaryList[i].tags))
+                        Log.d("dateList", dateList.toString())
                     } else {
-                        monthList.add(SearchMonth(diaryList[i].date.year.toString(), cursor.toString(), dateList))
-                        cursor = diaryList[i].date.month + 1
-                        dateList.add(SearchDate(diaryList[i].date.day, diaryList[i].contents, diaryList[i].tags))
+                        monthList.add(SearchMonth(dateSplit[0], cursor, dateList))
+                        Log.d("monthList", monthList.toString())
+                        cursor = dateSplit[1]
                         dateList = mutableListOf()
+                        Log.d("dateList", dateList.toString())
+                        dateList.add(SearchDate(dateSplit[2], diaryList[i].contents, diaryList[i].tags))
+                        Log.d("dateList", dateList.toString())
                     }
                 }
-                recyclerViewAdapter.setData(monthList)
+                monthList.add(SearchMonth(dateSplit[0], cursor, dateList))
+                listData.addAll(monthList)
+                recyclerViewAdapter.setData(listData)
+                Log.d("listData", listData.toString())
+                listData.clear()
+                Log.d("monthList", monthList.toString())
+
             } else {
                 binding.searchTag.visibility = View.GONE
                 binding.searchRecyclerView.visibility = View.GONE
