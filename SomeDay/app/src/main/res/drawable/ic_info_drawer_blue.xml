@@ -1,15 +1,19 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="29dp"
     android:height="27dp"
     android:viewportWidth="29"
     android:viewportHeight="27">
   <path
       android:pathData="M18,16m-11,0a11,11 0,1 1,22 0a11,11 0,1 1,-22 0"
-      android:fillColor="#E1F5F1"/>
+      android:fillColor="@color/blue2"
+      tools:ignore="VectorRaster"/>
   <path
       android:pathData="M24,12C24,18.6274 18.6274,24 12,24C5.3726,24 0,18.6274 0,12C0,5.3726 5.3726,0 12,0C18.6274,0 24,5.3726 24,12ZM2.4,12C2.4,17.3019 6.6981,21.6 12,21.6C17.3019,21.6 21.6,17.3019 21.6,12C21.6,6.6981 17.3019,2.4 12,2.4C6.6981,2.4 2.4,6.6981 2.4,12Z"
-      android:fillColor="#89D9C8"/>
+      android:fillColor="@color/blue1"
+      tools:ignore="VectorRaster"/>
   <path
       android:pathData="M10.692,16.956H13.068V19.296H10.692V16.956ZM10.944,15.21L10.602,4.626H13.158L12.816,15.21H10.944Z"
-      android:fillColor="#89D9C8"/>
+      android:fillColor="@color/blue1"
+      tools:ignore="VectorRaster"/>
 </vector>

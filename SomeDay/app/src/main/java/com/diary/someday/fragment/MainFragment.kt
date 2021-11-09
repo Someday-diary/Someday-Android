@@ -1,6 +1,7 @@
 package com.diary.someday.fragment
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -87,14 +88,16 @@ class MainFragment : Fragment() {
         }
 
 
-        changeMode(Application.themeSetting.getThemeType())
+//        changeMode(Application.themeSetting.getThemeType())
 
 
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TAG", "onResume: ")
         changeModeColor(Application.themeSettingColor.getThemeTypeColor())
     }
 
@@ -126,6 +129,7 @@ class MainFragment : Fragment() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
                     Toast.makeText(activity as Context, "성공했어요.", Toast.LENGTH_SHORT).show()
+                    Application.lockNumber.done()
                 }
             })
 
@@ -165,6 +169,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.circle_selected_green
                 )
+                binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
+                    activity as Context,
+                    R.color.green1
+                )
+                binding.navigationView.menu.clear()
+                binding.navigationView.inflateMenu(R.menu.navi_menu_green)
             }
             2 -> {
                 binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
@@ -191,6 +201,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.circle_selected_blue
                 )
+                binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
+                    activity as Context,
+                    R.color.blue1
+                )
+                binding.navigationView.menu.clear()
+                binding.navigationView.inflateMenu(R.menu.navi_menu_blue)
             }
             3 -> {
                 binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
@@ -217,6 +233,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.circle_selected_purple
                 )
+                binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
+                    activity as Context,
+                    R.color.purple1
+                )
+                binding.navigationView.menu.clear()
+                binding.navigationView.inflateMenu(R.menu.navi_menu_purple)
             }
             4 -> {
                 binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
@@ -243,6 +265,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.circle_selected_yellow
                 )
+                binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
+                    activity as Context,
+                    R.color.yellow1
+                )
+                binding.navigationView.menu.clear()
+                binding.navigationView.inflateMenu(R.menu.navi_menu_yellow)
             }
             5 -> {
                 binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
@@ -269,6 +297,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.circle_selected_red
                 )
+                binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
+                    activity as Context,
+                    R.color.red1
+                )
+                binding.navigationView.menu.clear()
+                binding.navigationView.inflateMenu(R.menu.navi_menu_red)
             }
         }
     }
@@ -335,11 +369,44 @@ class MainFragment : Fragment() {
                         null
                     )
                 } else {
-                    bottomSheet.background = ResourcesCompat.getDrawable(
-                        resources,
-                        R.drawable.background_bottom_sheet_green,
-                        null
-                    )
+                    when (Application.themeSettingColor.getThemeTypeColor()) {
+                        1 -> {
+                            bottomSheet.background = ResourcesCompat.getDrawable(
+                                resources,
+                                R.drawable.background_bottom_sheet_green,
+                                null
+                            )
+                        }
+                        2 -> {
+                            bottomSheet.background = ResourcesCompat.getDrawable(
+                                resources,
+                                R.drawable.background_bottom_sheet_blue,
+                                null
+                            )
+                        }
+                        3 -> {
+                            bottomSheet.background = ResourcesCompat.getDrawable(
+                                resources,
+                                R.drawable.background_bottom_sheet_purple,
+                                null
+                            )
+                        }
+                        4 -> {
+                            bottomSheet.background = ResourcesCompat.getDrawable(
+                                resources,
+                                R.drawable.background_bottom_sheet_yellow,
+                                null
+                            )
+                        }
+                        5 -> {
+                            bottomSheet.background = ResourcesCompat.getDrawable(
+                                resources,
+                                R.drawable.background_bottom_sheet_red,
+                                null
+                            )
+                        }
+                    }
+
                 }
             }
 

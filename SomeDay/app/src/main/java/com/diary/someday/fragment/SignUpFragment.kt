@@ -1,7 +1,5 @@
 package com.diary.someday.Fragment
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,7 +18,6 @@ import com.diary.someday.Enum.ResponseState
 import com.diary.someday.R
 import com.diary.someday.Retrofit.RetrofitManager
 import com.diary.someday.Viewmodel.SignUpViewModel
-import com.diary.someday.activity.MainActivity
 import com.diary.someday.application.Application
 import com.diary.someday.databinding.FragmentSignUpBinding
 
@@ -45,7 +42,7 @@ class SignUpFragment : Fragment() {
 
         signUpViewModel.buttonState.observe(activity as LifecycleOwner, Observer {
             if (it == true) {
-                binding.buttonSignup.setBackgroundResource(R.drawable.ic_login_button_abled)
+                binding.buttonSignup.setBackgroundResource(R.drawable.ic_login_button_abled_green)
                 binding.buttonSignup.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),

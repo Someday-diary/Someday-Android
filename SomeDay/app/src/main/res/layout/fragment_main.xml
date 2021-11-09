@@ -17,13 +17,15 @@
 
     <com.google.android.material.navigation.NavigationView
         style="@style/BackgroundApp"
+        android:theme="@style/NavigationTheme"
         android:id="@+id/navigation_view"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navi_header"
-        app:menu="@menu/navi_menu" />
+
+        app:menu="@menu/navi_menu_green" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -39,7 +39,7 @@ class SignUpPwdFragment : Fragment() {
 
         signUpViewModel.buttonStateSignUp.observe(activity as LifecycleOwner, Observer {
             if (it == true) {
-                binding.buttonSignup.setBackgroundResource(R.drawable.ic_login_button_abled)
+                binding.buttonSignup.setBackgroundResource(R.drawable.ic_login_button_abled_green)
                 binding.buttonSignup.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),

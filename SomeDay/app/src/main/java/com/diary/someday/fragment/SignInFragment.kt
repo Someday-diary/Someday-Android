@@ -31,6 +31,11 @@ class SignInFragment : Fragment() {
     lateinit var signInViewModel: SignInViewModel
     lateinit var binding: FragmentSignInBinding
 
+    override fun onStart() {
+        super.onStart()
+        changeModeColor(Application.themeSettingColor.getThemeTypeColor())
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,25 +59,7 @@ class SignInFragment : Fragment() {
         })
 
         signInViewModel.buttonState.observe(activity as LifecycleOwner, Observer {
-            if (it == true) {
-                binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_abled)
-                binding.buttonSignin.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.white
-                    )
-                )
-                binding.buttonSignin.isEnabled = true
-            } else {
-                binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_enabled)
-                binding.buttonSignin.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.white_dark
-                    )
-                )
-                binding.buttonSignin.isEnabled = false
-            }
+            changedButton(it)
         })
 
         binding.buttonSignin.setOnClickListener {
@@ -125,10 +112,119 @@ class SignInFragment : Fragment() {
         return binding.root
     }
 
+    private fun changeModeColor(number: Int) {
+        Log.d("TAG", "changeModeColor: number $number")
 
-    fun changedButton() {
-        binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_abled)
-        binding.buttonSignin.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-        binding.buttonSignin.isEnabled = true
+        when (number) {
+            1 -> {
+                binding.icon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_icon_green
+                    )
+                )
+                binding.gotoSignUp.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.green3
+                    )
+                )
+            }
+            2 -> {
+                binding.icon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_icon_blue
+                    )
+                )
+                binding.gotoSignUp.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.blue3
+                    )
+                )
+            }
+            3 -> {
+                binding.icon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_icon_purple
+                    )
+                )
+                binding.gotoSignUp.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.purple3
+                    )
+                )
+            }
+            4 -> {
+                binding.icon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_icon_yellow
+                    )
+                )
+                binding.gotoSignUp.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.yellow3
+                    )
+                )
+            }
+            5 -> {
+                binding.icon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_icon_red
+                    )
+                )
+                binding.gotoSignUp.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.red3
+                    )
+                )
+            }
+        }
+    }
+
+
+    fun changedButton(check: Boolean) {
+        if (check) {
+            when (Application.themeSettingColor.getThemeTypeColor()) {
+                1 -> {
+                    binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_abled_green)
+                }
+                2 -> {
+                    binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_abled_blue)
+                }
+                3 -> {
+                    binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_abled_purple)
+                }
+                4 -> {
+                    binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_abled_yellow)
+                }
+                5 -> {
+                    binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_abled_red)
+                }
+            }
+            binding.buttonSignin.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.white
+                )
+            )
+            binding.buttonSignin.isEnabled = true
+        } else {
+            binding.buttonSignin.setBackgroundResource(R.drawable.ic_login_button_enabled)
+            binding.buttonSignin.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.white_dark
+                )
+            )
+            binding.buttonSignin.isEnabled = false
+        }
     }
 }

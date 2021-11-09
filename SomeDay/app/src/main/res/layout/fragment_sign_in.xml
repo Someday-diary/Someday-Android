@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:src="@drawable/ic_icon"
+        android:src="@drawable/ic_icon_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,6 @@
 
     <EditText
         android:id="@+id/email"
-        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -61,7 +60,6 @@
 
     <EditText
         android:id="@+id/password"
-        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -114,11 +112,12 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/goto_signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/singup"
-            android:textColor="#64BDAA"
+            android:textColor="@color/green3"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>

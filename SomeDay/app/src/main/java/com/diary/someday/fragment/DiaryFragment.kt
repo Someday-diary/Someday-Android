@@ -1,5 +1,9 @@
 package com.diary.someday.fragment
 
+import android.content.Context
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +11,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.diary.someday.R
 import com.diary.someday.databinding.FragmentDiaryBinding
@@ -18,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import com.diary.someday.Data.request.DiaryRequest
 import com.diary.someday.Data.request.Tag
 import com.diary.someday.Data.request.UpdateDiaryRequest
+import com.diary.someday.application.Application
 import java.text.SimpleDateFormat
 
 class DiaryFragment : Fragment() {
@@ -42,6 +48,201 @@ class DiaryFragment : Fragment() {
         bindingContextEditText()
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        changeModeColor(Application.themeSettingColor.getThemeTypeColor())
+    }
+
+    private fun changeModeColor(number: Int) {
+        when (number) {
+            1 -> {
+                binding.saveDiaryButton.setBackgroundResource(R.drawable.ic_login_button_abled_green)
+                binding.tagEditText.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.green3
+                    )
+                )
+                binding.tagEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.green1
+                    )
+                )
+                binding.contextEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.green2
+                    )
+                )
+                binding.tagEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.green1
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                binding.contextEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.green3
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    binding.contextEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_green)
+                    binding.tagEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_green)
+                }
+            }
+            2 -> {
+                binding.saveDiaryButton.setBackgroundResource(R.drawable.ic_login_button_abled_blue)
+                binding.tagEditText.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.blue3
+                    )
+                )
+                binding.tagEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.blue1
+                    )
+                )
+                binding.contextEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.blue2
+                    )
+                )
+                binding.tagEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.blue1
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                binding.contextEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.blue3
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    binding.contextEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_blue)
+                    binding.tagEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_blue)
+                }
+            }
+            3 -> {
+                binding.saveDiaryButton.setBackgroundResource(R.drawable.ic_login_button_abled_purple)
+                binding.tagEditText.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.purple3
+                    )
+                )
+                binding.tagEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.purple1
+                    )
+                )
+                binding.contextEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.purple2
+                    )
+                )
+                binding.tagEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.purple1
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                binding.contextEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.purple3
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    binding.contextEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_purple)
+                    binding.tagEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_purple)
+                }
+            }
+            4 -> {
+                binding.saveDiaryButton.setBackgroundResource(R.drawable.ic_login_button_abled_yellow)
+                binding.tagEditText.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.yellow3
+                    )
+                )
+                binding.tagEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.yellow1
+                    )
+                )
+                binding.contextEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.yellow2
+                    )
+                )
+                binding.tagEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.yellow1
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                binding.contextEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.yellow3
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    binding.contextEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_yellow)
+                    binding.tagEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_yellow)
+                }
+            }
+            5 -> {
+                binding.saveDiaryButton.setBackgroundResource(R.drawable.ic_login_button_abled_red)
+                binding.tagEditText.setTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.red3
+                    )
+                )
+                binding.tagEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.red1
+                    )
+                )
+                binding.contextEditText.setHintTextColor(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.red2
+                    )
+                )
+                binding.tagEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.red1
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                binding.tagEditText.background.colorFilter = PorterDuffColorFilter(
+                    ContextCompat.getColor(
+                        activity as Context,
+                        R.color.red3
+                    ), PorterDuff.Mode.SRC_ATOP
+                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    binding.contextEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_red)
+                    binding.tagEditText.textCursorDrawable = ContextCompat.getDrawable(activity as Context,R.drawable.ic_custom_cursor_red)
+                }
+            }
+        }
     }
 
     private fun bindingToolbar() {
@@ -96,14 +297,16 @@ class DiaryFragment : Fragment() {
                     viewModel.callCreateDiary(requestDiary())
                     Toast.makeText(requireContext(), "일기가 정상적으로 저장되었습니다!", Toast.LENGTH_SHORT)
                         .show()
-                    Navigation.findNavController(binding.root)
-                        .navigate(R.id.action_diaryFragment_to_mainFragment)
+//                    Navigation.findNavController(binding.root)
+//                        .navigate(R.id.action_diaryFragment_to_mainFragment)
+                    findNavController().popBackStack()
                 } else {
                     viewModel.callUpdateDiary(postId, requestUpdateDiary())
                     Toast.makeText(requireContext(), "일기가 정상적으로 수정되었습니다!", Toast.LENGTH_SHORT)
                         .show()
-                    Navigation.findNavController(binding.root)
-                        .navigate(R.id.action_diaryFragment_to_mainFragment)
+//                    Navigation.findNavController(binding.root)
+//                        .navigate(R.id.action_diaryFragment_to_mainFragment)
+                    findNavController().popBackStack()
                 }
             }
         }
@@ -176,7 +379,7 @@ class DiaryFragment : Fragment() {
 //                viewModel.deleteDiary(date)
                 viewModel.callDeleteDiary(postId)
                 Toast.makeText(requireContext(), "일기가 정상적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(DiaryFragmentDirections.actionDiaryFragmentToMainFragment())
+                findNavController().popBackStack()
                 return super.onOptionsItemSelected(item)
             }
             else -> return super.onOptionsItemSelected(item)

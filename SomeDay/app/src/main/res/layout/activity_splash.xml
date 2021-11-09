@@ -21,9 +21,10 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_icon" />
+            android:src="@drawable/ic_icon_green" />
 
         <TextView
+            android:id="@+id/splash_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
