@@ -1,6 +1,7 @@
 package com.diary.someday.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,7 @@ import com.diary.someday.R
 
 class RecyclerViewMonthSearchAdapter(val context: Context): RecyclerView.Adapter<RecyclerViewMonthSearchAdapter.ViewHolder>() {
 
-    private var data = mutableListOf<SearchMonth>()
-
+    private val data = mutableListOf<SearchMonth>()
 
     fun setData(data: List<SearchMonth>) {
         this.data.clear()
@@ -29,18 +29,26 @@ class RecyclerViewMonthSearchAdapter(val context: Context): RecyclerView.Adapter
         fun bind(data: SearchMonth, context: Context) {
             month.text = data.year + "년 " + data.month + "월"
 
-            val recyclerViewDate = RecyclerViewDateSearchAdapter()
-            val dataList = data.dateList
-            recyclerViewDate.data = dataList
-
+            val recyclerViewDateAdapter = RecyclerViewDateSearchAdapter()
             dateList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            dateList.adapter = recyclerViewDate
-            recyclerViewDate.notifyDataSetChanged()
+            dateList.adapter = recyclerViewDateAdapter
+
+            val dataList = data.dateList
+            recyclerViewDateAdapter.setData(dataList)
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_month, parent, false)
+
+        val layoutParams = view.layoutParams
+
+        with(layoutParams) {
+            width = ViewGroup.LayoutParams.MATCH_PARENT
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
+        }
+        view.layoutParams = layoutParams
 
         return ViewHolder(view)
     }
