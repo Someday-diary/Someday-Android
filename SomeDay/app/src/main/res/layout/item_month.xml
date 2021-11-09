@@ -18,11 +18,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_recyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_date"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_month" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
