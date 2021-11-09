@@ -1,5 +1,6 @@
 package com.diary.someday.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,10 +39,19 @@ class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearc
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_date, parent, false)
 
+        val layoutParams = view.layoutParams
+
+        with(layoutParams) {
+            width = ViewGroup.LayoutParams.MATCH_PARENT
+            height = ViewGroup.LayoutParams.WRAP_CONTENT
+        }
+        view.layoutParams = layoutParams
+
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("Adapter", "onBindViewHolder:")
         holder.bind(data[position])
     }
 
