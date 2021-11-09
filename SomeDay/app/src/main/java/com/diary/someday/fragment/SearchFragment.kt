@@ -17,6 +17,7 @@ import com.diary.someday.Data.SearchMonth
 import com.diary.someday.Data.response.DiaryListResponse
 import com.diary.someday.Data.response.DiaryResponse
 import com.diary.someday.adapter.RecyclerViewMonthSearchAdapter
+import com.diary.someday.decoration.RecyclerViewDecoration
 import com.diary.someday.viewModel.DiaryViewModel
 
 
@@ -50,10 +51,12 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
+        val decoration: RecyclerViewDecoration = RecyclerViewDecoration(40)
         binding.searchRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             recyclerViewAdapter = RecyclerViewMonthSearchAdapter(context)
             adapter = recyclerViewAdapter
+            addItemDecoration(decoration)
         }
     }
 
