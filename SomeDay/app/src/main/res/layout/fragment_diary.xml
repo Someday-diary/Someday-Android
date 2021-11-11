@@ -57,6 +57,8 @@
             android:backgroundTint="@color/green1"
             android:hint="# 태그 작성"
             android:textColor="@color/green3"
+            android:singleLine="true"
+            android:inputType="text"
             android:textColorHint="@color/green1"
             android:textCursorDrawable="@drawable/ic_custom_cursor"
             android:textSize="14sp"
