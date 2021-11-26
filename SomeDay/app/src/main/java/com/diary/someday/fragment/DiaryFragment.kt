@@ -290,8 +290,10 @@ class DiaryFragment : Fragment() {
             val content = binding.contextEditText.text.toString()
             val tag = binding.tagEditText.text.toString()
 
-            if (content.isEmpty() || tag.isEmpty()) {
-//                showDialog()
+            if (content.isEmpty() || tag.isEmpty() || tag == "#") {
+                DiaryDialogFragment().show(
+                    parentFragmentManager, "DiaryDialog"
+                )
             } else {
                 if (!editState) {
                     viewModel.callCreateDiary(requestDiary())
