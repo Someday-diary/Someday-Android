@@ -107,13 +107,18 @@
 
                 <TextView
                     android:id="@+id/list_tag"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:gravity="start"
+                    android:maxLines="1"
                     android:textColor="@color/green3"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:ellipsize="end"
                     app:layout_constraintBottom_toBottomOf="@id/list_date"
+                    app:layout_constraintEnd_toStartOf="@id/list_edit"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@id/list_date"
                     app:layout_constraintTop_toTopOf="@id/list_date"
                     tools:text="# 태그" />
