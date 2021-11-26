@@ -273,6 +273,9 @@ class DiaryFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val c = binding.tagEditText.text.toString()
+                if  (c.isEmpty()) {
+                    binding.tagEditText.append("#")
+                }
                 if (("" + c[binding.tagEditText.length() - 1]).equals(" ")) {
                     binding.tagEditText.append("#")
                 }
