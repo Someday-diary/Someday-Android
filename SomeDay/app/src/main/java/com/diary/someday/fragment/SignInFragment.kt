@@ -47,7 +47,7 @@ class SignInFragment : Fragment() {
 
         binding.signupButton.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
-            signInViewModel.clickToast("회원가입 버튼", activity as Context)
+//            signInViewModel.clickToast("회원가입 버튼", activity as Context)
         }
 
         signInViewModel.emailError.observe(activity as LifecycleOwner, Observer {
@@ -72,7 +72,7 @@ class SignInFragment : Fragment() {
                 when (responseState) {
                     ResponseState.OKAY -> {
                         PreferenceUtils.token = token
-                        signInViewModel.clickToast("로그인 버튼", activity as Context)
+//                        signInViewModel.clickToast("로그인 버튼", activity as Context)
 //                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
                         Application.signInCheck.signIn()
                         val intent = Intent(requireContext(), MainActivity::class.java)

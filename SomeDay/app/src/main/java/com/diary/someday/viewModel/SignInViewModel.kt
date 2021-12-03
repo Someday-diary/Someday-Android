@@ -45,9 +45,9 @@ class SignInViewModel : ViewModel() {
         _buttonState.value = false
     }
 
-    fun clickToast(type: String, context: Context) {
-        Toast.makeText(context, "${type}이 클릭되었습니다.", Toast.LENGTH_SHORT).show()
-    }
+//    fun clickToast(type: String, context: Context) {
+//        Toast.makeText(context, "${type}이 클릭되었습니다.", Toast.LENGTH_SHORT).show()
+//    }
 
     fun checkEmail(email: String) {
         val pattern = Pattern.matches(emailValidation, email) // 서로 패턴이 맞닝?
