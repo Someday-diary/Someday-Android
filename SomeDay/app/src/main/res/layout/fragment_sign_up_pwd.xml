@@ -112,6 +112,18 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/viewTerms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이용약관 확인하기"
+        android:textSize="12sp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white_dark_text"
+        app:layout_constraintTop_toBottomOf="@id/checkBox_layout"
+        app:layout_constraintStart_toStartOf="@id/checkBox_layout"
+        app:layout_constraintEnd_toEndOf="@id/checkBox_layout"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_signup"

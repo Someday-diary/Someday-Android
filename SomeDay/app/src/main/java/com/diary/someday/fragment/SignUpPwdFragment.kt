@@ -1,5 +1,7 @@
 package com.diary.someday.Fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -58,6 +60,13 @@ class SignUpPwdFragment : Fragment() {
                 binding.buttonSignup.isEnabled = false
             }
         })
+
+        binding.viewTerms.setOnClickListener {
+            val intent: Intent = Intent(Intent.ACTION_VIEW)
+            val uri: Uri = Uri.parse("https://someday-diary.notion.site/855a03b33c1f4f5ba32dfa63c09cab67")
+            intent.data = uri
+            startActivity(intent)
+        }
 
         binding.checkBoxLayout.setOnClickListener {
             binding.checkbox.isChecked = !binding.checkbox.isChecked
