@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/themeSetting"
+        android:icon="@drawable/ic_theme_drawer_blue"
+        android:title="테마 설정" />
+
+    <item
+        android:id="@+id/alarmSetting"
+        android:icon="@drawable/ic_alarm_drawer_blue"
+        android:title="일기 알림 설정" />
+
+    <item
+        android:id="@+id/lockSetting"
+        android:icon="@drawable/ic_lock_drawer_blue"
+        android:title="잠금 설정" />
+
+    <item
+        android:id="@+id/infoSetting"
+        android:icon="@drawable/ic_info_drawer_blue"
+        android:title="앱 정보" />
+
+    <item
+        android:id="@+id/feedbackSetting"
+        android:icon="@drawable/ic_feedback_drawer_blue"
+        android:title="사용자 피드백" />
+
+</menu>

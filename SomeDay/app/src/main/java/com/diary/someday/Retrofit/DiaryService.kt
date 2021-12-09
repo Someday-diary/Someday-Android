@@ -1,0 +1,39 @@
+package com.diary.someday.Retrofit
+
+import com.diary.someday.Data.request.DiaryRequest
+import com.diary.someday.Data.request.Tag
+import com.diary.someday.Data.request.UpdateDiaryRequest
+import com.diary.someday.Data.response.*
+import retrofit2.Call
+import retrofit2.http.*
+
+interface DiaryService {
+
+    /* 일기 생성 */
+    @POST("/diary")
+    fun createDiary(@Body diaries: DiaryRequest) : Call<Code>
+
+    /* 전체 일기 가져오기 */
+    @GET("/diary")
+    fun getDiary(@Query("tags") tags: List<String>? = null) : Call<DiaryListResponse>
+
+    /* 일기 가져오기 (post_id) */
+    @GET("/diary/{post_id}")
+    fun getDiaryWithPostId(@Path("post_id") post_id: String) : Call<DiaryResponse>
+
+    /*일기 가져오기 (month)*/
+    @GET("/diary/month")
+    fun getMonthDiary(@Query("year") year: Int, @Query("month") month: Int): Call<MonthDiaryResponse>
+
+    /* 일기 가져오기 (date)*/
+    @GET("diary/date")
+    fun getDateDiary(@Query("year") year: Int, @Query("month") month: Int, @Query("day") day: Int) : Call<DateDiaryResponse>
+
+    /* 일기 수정 */
+    @PATCH("/diary/{post_id}")
+    fun updateDiary(@Path("post_id") post_id: String, @Body updateDiaryRequest: UpdateDiaryRequest) : Call<Code>
+
+    /* 일기 삭제 */
+    @DELETE("/diary/{post_id}")
+    fun deleteDiary(@Path("post_id") post_id: String) : Call<Code>
+}
