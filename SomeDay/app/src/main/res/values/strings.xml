@@ -3,4 +3,6 @@
     <string name="singup"><u>회원가입하기</u></string>
     <string name="checkText">오늘 하루 <u>이용약관</u> 및 <u>개인정보 취급방침</u>에 대한\n내용을 모두 확인하였으며, 이에 동의합니다.</string>
     <string name="signin"><u>로그인하기</u></string>
+    <string name="not_exist_diary">일기가 존재하지 않습니다.</string>
+    <string name="not_exist_tag">태그 추가</string>
 </resources>

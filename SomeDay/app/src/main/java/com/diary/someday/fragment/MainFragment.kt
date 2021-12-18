@@ -474,6 +474,9 @@ class MainFragment : Fragment() {
             initContents()
             if (it?.post == null) {
                 binding.calendarLayout.listEdit.text = "일기 작성"
+                binding.calendarLayout.listTag.text = getString(R.string.not_exist_tag)
+                binding.calendarLayout.listContent.text = getString(R.string.not_exist_diary)
+                return@observe
             } else {
                 binding.calendarLayout.listEdit.text = "수정"
             }
