@@ -122,7 +122,7 @@ class SearchFragment : Fragment() {
         }
 
         binding.searchBackButton.setOnClickListener {
-            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToMainFragment())
+            findNavController().popBackStack()
         }
 
         binding .searchClearButton.setOnClickListener {
