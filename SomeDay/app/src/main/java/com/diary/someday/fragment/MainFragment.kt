@@ -159,6 +159,10 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.background_bottom_sheet_green
                 )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_green
+                )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity as Context,
@@ -190,6 +194,10 @@ class MainFragment : Fragment() {
                 binding.calendarLayout.bottomSheet.background = ContextCompat.getDrawable(
                     activity as Context,
                     R.drawable.background_bottom_sheet_blue
+                )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_blue
                 )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -223,6 +231,10 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.background_bottom_sheet_purple
                 )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_purple
+                )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity as Context,
@@ -255,6 +267,10 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.background_bottom_sheet_yellow
                 )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_yellow
+                )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity as Context,
@@ -286,6 +302,10 @@ class MainFragment : Fragment() {
                 binding.calendarLayout.bottomSheet.background = ContextCompat.getDrawable(
                     activity as Context,
                     R.drawable.background_bottom_sheet_red
+                )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_red
                 )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -454,6 +474,9 @@ class MainFragment : Fragment() {
             initContents()
             if (it?.post == null) {
                 binding.calendarLayout.listEdit.text = "일기 작성"
+                binding.calendarLayout.listTag.text = getString(R.string.not_exist_tag)
+                binding.calendarLayout.listContent.text = getString(R.string.not_exist_diary)
+                return@observe
             } else {
                 binding.calendarLayout.listEdit.text = "수정"
             }
