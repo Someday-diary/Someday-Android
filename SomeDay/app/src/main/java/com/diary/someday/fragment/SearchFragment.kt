@@ -124,6 +124,10 @@ class SearchFragment : Fragment() {
         binding.searchBackButton.setOnClickListener {
             findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToMainFragment())
         }
+
+        binding .searchClearButton.setOnClickListener {
+            binding.searchEditText.setText("")
+        }
     }
 
 }
