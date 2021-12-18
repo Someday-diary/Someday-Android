@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.diary.someday.databinding.FragmentSearchBinding
 import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diary.someday.Data.SearchDate
 import com.diary.someday.Data.SearchMonth
@@ -118,6 +119,10 @@ class SearchFragment : Fragment() {
                 setDisplayShowTitleEnabled(false)
                 setDisplayHomeAsUpEnabled(false)
             }
+        }
+
+        binding.searchBackButton.setOnClickListener {
+            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToMainFragment())
         }
     }
 
