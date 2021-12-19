@@ -68,6 +68,9 @@ class SearchFragment : Fragment() {
             var dateList = mutableListOf<SearchDate>()
             if (diary?.posts != null) {
                 binding.errorMsg.visibility = View.GONE
+                binding.recentSearchLayout.visibility = View.GONE
+                binding.searchResultLayout.visibility = View.VISIBLE
+                binding.searchTag.text = "#" + binding.searchEditText.text
 
                 val diaryList = diary.posts.sortedBy { it.date }
                 Log.d("diaryList", diaryList.toString())
@@ -76,9 +79,6 @@ class SearchFragment : Fragment() {
                 var dateSplit: List<String> = listOf()
                 var cursor = split[1]
 
-                binding.searchTag.text = "#" + binding.searchEditText.text
-                binding.searchTag.visibility = View.VISIBLE
-                binding.searchRecyclerView.visibility = View.VISIBLE
 
                 for (i in diaryList.indices) {
                     dateSplit = diaryList[i].date.split("-")
@@ -103,8 +103,10 @@ class SearchFragment : Fragment() {
                 Log.d("monthList", monthList.toString())
 
             } else {
-                binding.searchTag.visibility = View.GONE
-                binding.searchRecyclerView.visibility = View.GONE
+//                binding.searchTag.visibility = View.GONE
+//                binding.searchRecyclerView.visibility = View.GONE
+                binding.recentSearchLayout.visibility = View.GONE
+                binding.searchResultLayout.visibility = View.GONE
                 binding.errorMsg.visibility = View.VISIBLE
             }
         })
@@ -118,6 +120,14 @@ class SearchFragment : Fragment() {
             supportActionBar?.apply {
                 setDisplayShowTitleEnabled(false)
                 setDisplayHomeAsUpEnabled(false)
+            }
+        }
+
+        binding.searchEditText.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.recentSearchLayout.visibility = View.VISIBLE
+                binding.searchResultLayout.visibility = View.GONE
+                binding.errorMsg.visibility = View.GONE
             }
         }
 
