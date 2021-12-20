@@ -29,5 +29,10 @@ class Application : Application() {
         signInCheck = SignInCheck(applicationContext)
         PreferenceUtils.init(applicationContext)
         super.onCreate()
+        startKoin {
+            androidLogger(Level.ERROR)
+            androidContext(this@Application)
+            modules()
+        }
     }
 }
