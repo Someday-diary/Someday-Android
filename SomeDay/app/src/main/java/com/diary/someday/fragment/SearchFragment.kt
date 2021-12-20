@@ -15,18 +15,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diary.someday.Data.SearchDate
 import com.diary.someday.Data.SearchMonth
-import com.diary.someday.Data.response.DiaryListResponse
-import com.diary.someday.Data.response.DiaryResponse
 import com.diary.someday.adapter.RecyclerViewMonthSearchAdapter
+import com.diary.someday.adapter.RecyclerViewRecentSearchAdapter
+import com.diary.someday.db.Search
 import com.diary.someday.decoration.RecyclerViewDecoration
 import com.diary.someday.viewModel.DiaryViewModel
+import com.diary.someday.viewModel.SearchViewModel
 
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-    private val viewModel: DiaryViewModel by viewModels()
-    private lateinit var recyclerViewAdapter: RecyclerViewMonthSearchAdapter
+    private val diaryViewModel: DiaryViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by viewModels()
+    private lateinit var recyclerViewMonthSearchAdapter: RecyclerViewMonthSearchAdapter
+    private lateinit var recyclerViewRecentSearchAdapter: RecyclerViewRecentSearchAdapter
     private lateinit var listData: MutableList<SearchMonth>
 
     override fun onCreateView(
@@ -43,6 +46,7 @@ class SearchFragment : Fragment() {
         binding.searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 setRecyclerView()
+//                searchViewModel.insert(Search(binding.searchEditText.text.toString()))
                 return@OnEditorActionListener true
             }
             false
@@ -55,15 +59,25 @@ class SearchFragment : Fragment() {
         val decoration: RecyclerViewDecoration = RecyclerViewDecoration(40)
         binding.searchRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            recyclerViewAdapter = RecyclerViewMonthSearchAdapter(context)
-            adapter = recyclerViewAdapter
+            recyclerViewMonthSearchAdapter = RecyclerViewMonthSearchAdapter(context)
+            adapter = recyclerViewMonthSearchAdapter
             addItemDecoration(decoration)
+        }
+
+        binding.recentSearchRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            recyclerViewRecentSearchAdapter = RecyclerViewRecentSearchAdapter()
+            adapter = recyclerViewRecentSearchAdapter
+            addItemDecoration(decoration)
+            searchViewModel.allSearches.observe(viewLifecycleOwner, {
+                recyclerViewRecentSearchAdapter.setData(it)
+            })
         }
     }
 
     private fun setRecyclerView() {
-        viewModel.callGetDiaryWithTag(listOf(binding.searchEditText.text.toString()))
-        viewModel.diaryListLiveData.observe(viewLifecycleOwner, { diary ->
+        diaryViewModel.callGetDiaryWithTag(listOf(binding.searchEditText.text.toString()))
+        diaryViewModel.diaryListLiveData.observe(viewLifecycleOwner, { diary ->
             val monthList = mutableListOf<SearchMonth>()
             var dateList = mutableListOf<SearchDate>()
             if (diary?.posts != null) {
@@ -97,7 +111,7 @@ class SearchFragment : Fragment() {
                 }
                 monthList.add(SearchMonth(dateSplit[0], cursor, dateList))
                 listData.addAll(monthList)
-                recyclerViewAdapter.setData(listData)
+                recyclerViewMonthSearchAdapter.setData(listData)
                 Log.d("listData", listData.toString())
                 listData.clear()
                 Log.d("monthList", monthList.toString())

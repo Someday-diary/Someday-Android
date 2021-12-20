@@ -26,6 +26,7 @@
         app:layout_constraintStart_toEndOf="@id/item_search_img"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/item_search_delete"
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:background="@drawable/ic_clear"
