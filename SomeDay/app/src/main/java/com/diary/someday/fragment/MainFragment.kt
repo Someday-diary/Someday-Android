@@ -77,9 +77,9 @@ class MainFragment : Fragment() {
                 R.id.themeSetting -> {
                     findNavController().navigate(R.id.action_mainFragment_to_themeFragment)
                 }
-                R.id.alarmSetting -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_alarmFragment)
-                }
+//                R.id.alarmSetting -> {
+//                    findNavController().navigate(R.id.action_mainFragment_to_alarmFragment)
+//                }
                 R.id.lockSetting -> {
                     findNavController().navigate(R.id.action_mainFragment_to_lockFragment)
                 }
