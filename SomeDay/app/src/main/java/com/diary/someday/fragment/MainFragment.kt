@@ -2,6 +2,7 @@ package com.diary.someday.fragment
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -77,11 +78,17 @@ class MainFragment : Fragment() {
                 R.id.themeSetting -> {
                     findNavController().navigate(R.id.action_mainFragment_to_themeFragment)
                 }
-                R.id.alarmSetting -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_alarmFragment)
-                }
+//                R.id.alarmSetting -> {
+//                    findNavController().navigate(R.id.action_mainFragment_to_alarmFragment)
+//                }
                 R.id.lockSetting -> {
                     findNavController().navigate(R.id.action_mainFragment_to_lockFragment)
+                }
+                R.id.feedbackSetting -> {
+                    sendEmail()
+                }
+                R.id.infoSetting -> {
+                    findNavController().navigate(R.id.action_mainFragment_to_appInfoFragment)
                 }
             }
             false
@@ -493,6 +500,15 @@ class MainFragment : Fragment() {
     private fun initContents() {
         binding.calendarLayout.listContent.text = ""
         binding.calendarLayout.listTag.text = ""
+    }
+
+    private fun sendEmail() {
+        val email = Intent(Intent.ACTION_SEND)
+        email.type = "plain/text"
+        val address = arrayOf("somedayteam2021@gmail.com")
+        email.putExtra(Intent.EXTRA_EMAIL, address)
+        email.putExtra(Intent.EXTRA_SUBJECT, "[안드로이드]")
+        startActivity(email)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
