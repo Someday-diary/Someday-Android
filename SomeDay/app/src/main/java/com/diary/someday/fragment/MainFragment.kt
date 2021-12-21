@@ -507,6 +507,7 @@ class MainFragment : Fragment() {
         email.type = "plain/text"
         val address = arrayOf("somedayteam2021@gmail.com")
         email.putExtra(Intent.EXTRA_EMAIL, address)
+        email.putExtra(Intent.EXTRA_SUBJECT, "[안드로이드]")
         startActivity(email)
     }
 
