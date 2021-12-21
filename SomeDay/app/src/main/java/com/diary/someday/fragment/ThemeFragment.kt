@@ -33,27 +33,27 @@ class ThemeFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-//        binding.systemLayout.setOnClickListener {
-//            Application.themeSetting.themeType(1)
-//            Log.d("TAG", "themetype1: sharedpreference: ${Application.themeSetting.getThemeType()}")
-//            Log.d("TAG", "")
-//            changedSelectedForTheme(1)
-//        }
-//
-//        binding.lightLayout.setOnClickListener {
-//            Application.themeSetting.themeType(2)
-//            Log.d("TAG", "themetype2: sharedpreference: ${Application.themeSetting.getThemeType()}")
-//            Log.d("TAG", "")
-//            changedSelectedForTheme(2)
-//        }
-//
-//
-//        binding.darkLayout.setOnClickListener {
-//            Application.themeSetting.themeType(3)
-//            Log.d("TAG", "themetype3: sharedpreference: ${Application.themeSetting.getThemeType()}")
-//            Log.d("TAG", "")
-//            changedSelectedForTheme(3)
-//        }
+        binding.systemLayout.setOnClickListener {
+            Application.themeSetting.themeType(1)
+            Log.d("TAG", "themetype1: sharedpreference: ${Application.themeSetting.getThemeType()}")
+            Log.d("TAG", "")
+            changedSelectedForTheme(1)
+        }
+
+        binding.lightLayout.setOnClickListener {
+            Application.themeSetting.themeType(2)
+            Log.d("TAG", "themetype2: sharedpreference: ${Application.themeSetting.getThemeType()}")
+            Log.d("TAG", "")
+            changedSelectedForTheme(2)
+        }
+
+
+        binding.darkLayout.setOnClickListener {
+            Application.themeSetting.themeType(3)
+            Log.d("TAG", "themetype3: sharedpreference: ${Application.themeSetting.getThemeType()}")
+            Log.d("TAG", "")
+            changedSelectedForTheme(3)
+        }
 
         binding.mintChocoLayout.setOnClickListener {
             Application.themeSettingColor.themeTypeColor(1)
@@ -89,17 +89,17 @@ class ThemeFragment : Fragment() {
         super.onStart()
         Log.d("TAG", "onStart: sharedpreference: ${Application.themeSetting.getThemeType()}")
         Log.d("TAG", "")
-//        when (Application.themeSetting.getThemeType()) {
-//            1 -> {
-//                changedSelectedForTheme(1, true)
-//            }
-//            2 -> {
-//                changedSelectedForTheme(2, true)
-//            }
-//            3 -> {
-//                changedSelectedForTheme(3, true)
-//            }
-//        }
+        when (Application.themeSetting.getThemeType()) {
+            1 -> {
+                changedSelectedForTheme(1, true)
+            }
+            2 -> {
+                changedSelectedForTheme(2, true)
+            }
+            3 -> {
+                changedSelectedForTheme(3, true)
+            }
+        }
         Log.d("TAG", "onCreateView: systembutton: ${binding.systemButton.isChecked}")
         Log.d("TAG", "onCreateView: lightbutton: ${binding.lightButton.isChecked}")
         Log.d("TAG", "onCreateView: darkButton: ${binding.darkButton.isChecked}")

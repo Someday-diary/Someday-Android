@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.diary.someday.Data.SearchDate
 import com.diary.someday.R
 
 class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearchAdapter.ViewHolder>() {
 
+    private var mode: Int = 1
     private val data = mutableListOf<SearchDate>()
 
-    fun setData(data: List<SearchDate>) {
+    fun setData(data: List<SearchDate>, mode: Int) {
         this.data.clear()
         this.data.addAll(data)
+        this.mode = mode
         notifyDataSetChanged()
     }
 
@@ -24,7 +27,8 @@ class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearc
         val content = view.findViewById<TextView>(R.id.item_content)
         val tag = view.findViewById<TextView>(R.id.item_tag)
 
-        fun bind(data: SearchDate) {
+        fun bind(data: SearchDate, mode: Int) {
+            changeModeColor(mode)
             day.text = data.day.toString()
             content.text = data.content
 
@@ -33,6 +37,46 @@ class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearc
                 tag.append(i.tag_name + " ")
             }
 
+        }
+
+        private fun changeModeColor(number: Int){
+            when (number) {
+                1 -> {
+                    day.background = ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.circle_selected_green
+                    )
+                    tag.setTextColor(ContextCompat.getColor(itemView.context, R.color.green3))
+                }
+                2 -> {
+                    day.background = ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.circle_selected_blue
+                    )
+                    tag.setTextColor(ContextCompat.getColor(itemView.context, R.color.blue3))
+                }
+                3 -> {
+                    day.background = ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.circle_selected_purple
+                    )
+                    tag.setTextColor(ContextCompat.getColor(itemView.context, R.color.purple3 ))
+                }
+                4 -> {
+                    day.background = ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.circle_selected_yellow
+                    )
+                    tag.setTextColor(ContextCompat.getColor(itemView.context, R.color.yellow3))
+                }
+                5 -> {
+                    day.background = ContextCompat.getDrawable(
+                        itemView.context,
+                        R.drawable.circle_selected_red
+                    )
+                    tag.setTextColor(ContextCompat.getColor(itemView.context, R.color.red3))
+                }
+            }
         }
     }
 
@@ -52,8 +96,10 @@ class RecyclerViewDateSearchAdapter : RecyclerView.Adapter<RecyclerViewDateSearc
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d("Adapter", "onBindViewHolder:")
-        holder.bind(data[position])
+        holder.bind(data[position], mode)
     }
 
     override fun getItemCount() = data.size
+
+
 }
