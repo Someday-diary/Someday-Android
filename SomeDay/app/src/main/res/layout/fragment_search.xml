@@ -7,10 +7,10 @@
     tools:context=".fragment.SearchFragment">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -21,18 +21,49 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/search_editText"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:hint="검색어를 입력하세요"
-                android:singleLine="true"
-                android:padding="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/custom_search_edittext"
-                android:textSize="16sp"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/search_back_button"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/ic_back_green"
+                    app:layout_constraintBottom_toBottomOf="@id/search_editText"
+                    app:layout_constraintStart_toStartOf="@id/search_editText"
+                    app:layout_constraintTop_toTopOf="@id/search_editText" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/search_clear_button"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_clear"
+                    app:layout_constraintBottom_toBottomOf="@id/search_editText"
+                    app:layout_constraintEnd_toEndOf="@id/search_editText"
+                    app:layout_constraintTop_toTopOf="@id/search_editText" />
+
+                <EditText
+                    android:id="@+id/search_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/custom_search_edittext_green"
+                    android:hint="검색어를 입력하세요"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:paddingStart="45dp"
+                    android:singleLine="true"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -40,12 +71,12 @@
             android:id="@+id/search_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:textColor="@color/green3"
             android:textSize="34sp"
             android:textStyle="bold"
             android:visibility="gone"
-            android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -55,28 +86,28 @@
             android:id="@+id/errorMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="100dp"
             android:text="# 검색 결과가 없습니다."
             android:textColor="@color/black"
             android:textSize="15sp"
             android:visibility="gone"
-            android:layout_gravity="center_horizontal|center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recyclerView"
-            android:layout_marginHorizontal="32dp"
-            tools:listitem="@layout/item_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="32dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_tag"
-            android:layout_marginTop="32dp" />
+            tools:listitem="@layout/item_month" />
 
     </LinearLayout>
 

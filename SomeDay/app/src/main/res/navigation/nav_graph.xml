@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_mainFragment_to_editPwdFragment"
             app:destination="@id/editPwdFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_appInfoFragment"
+            app:destination="@id/appInfoFragment" />
     </fragment>
 
     <fragment
@@ -93,6 +96,15 @@
         android:id="@+id/searchFragment"
         android:name="com.diary.someday.fragment.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appInfoFragment"
+        android:name="com.diary.someday.fragment.AppInfoFragment"
+        android:label="fragment_app_info"
+        tools:layout="@layout/fragment_app_info" />
 
 </navigation>

@@ -2,6 +2,7 @@ package com.diary.someday.fragment
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -77,11 +78,17 @@ class MainFragment : Fragment() {
                 R.id.themeSetting -> {
                     findNavController().navigate(R.id.action_mainFragment_to_themeFragment)
                 }
-                R.id.alarmSetting -> {
-                    findNavController().navigate(R.id.action_mainFragment_to_alarmFragment)
-                }
+//                R.id.alarmSetting -> {
+//                    findNavController().navigate(R.id.action_mainFragment_to_alarmFragment)
+//                }
                 R.id.lockSetting -> {
                     findNavController().navigate(R.id.action_mainFragment_to_lockFragment)
+                }
+                R.id.feedbackSetting -> {
+                    sendEmail()
+                }
+                R.id.infoSetting -> {
+                    findNavController().navigate(R.id.action_mainFragment_to_appInfoFragment)
                 }
             }
             false
@@ -159,6 +166,10 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.background_bottom_sheet_green
                 )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_green
+                )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity as Context,
@@ -190,6 +201,10 @@ class MainFragment : Fragment() {
                 binding.calendarLayout.bottomSheet.background = ContextCompat.getDrawable(
                     activity as Context,
                     R.drawable.background_bottom_sheet_blue
+                )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_blue
                 )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -223,6 +238,10 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.background_bottom_sheet_purple
                 )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_purple
+                )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity as Context,
@@ -255,6 +274,10 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.drawable.background_bottom_sheet_yellow
                 )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_yellow
+                )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity as Context,
@@ -286,6 +309,10 @@ class MainFragment : Fragment() {
                 binding.calendarLayout.bottomSheet.background = ContextCompat.getDrawable(
                     activity as Context,
                     R.drawable.background_bottom_sheet_red
+                )
+                binding.calendarLayout.view.background = ContextCompat.getDrawable(
+                    activity as Context,
+                    R.drawable.background_bottom_sheet_handle_red
                 )
                 binding.calendarLayout.decorationImageView.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -454,6 +481,9 @@ class MainFragment : Fragment() {
             initContents()
             if (it?.post == null) {
                 binding.calendarLayout.listEdit.text = "일기 작성"
+                binding.calendarLayout.listTag.text = getString(R.string.not_exist_tag)
+                binding.calendarLayout.listContent.text = getString(R.string.not_exist_diary)
+                return@observe
             } else {
                 binding.calendarLayout.listEdit.text = "수정"
             }
@@ -470,6 +500,15 @@ class MainFragment : Fragment() {
     private fun initContents() {
         binding.calendarLayout.listContent.text = ""
         binding.calendarLayout.listTag.text = ""
+    }
+
+    private fun sendEmail() {
+        val email = Intent(Intent.ACTION_SEND)
+        email.type = "plain/text"
+        val address = arrayOf("somedayteam2021@gmail.com")
+        email.putExtra(Intent.EXTRA_EMAIL, address)
+        email.putExtra(Intent.EXTRA_SUBJECT, "[안드로이드]")
+        startActivity(email)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
