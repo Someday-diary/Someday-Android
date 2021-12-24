@@ -89,7 +89,8 @@ class MainFragment : Fragment() {
                     findNavController().navigate(R.id.action_mainFragment_to_lockFragment)
                 }
                 R.id.feedbackSetting -> {
-                    sendEmail()
+//                    sendEmail()
+                    findNavController().navigate(R.id.action_mainFragment_to_feedbackFragment)
                 }
                 R.id.infoSetting -> {
                     findNavController().navigate(R.id.action_mainFragment_to_appInfoFragment)
