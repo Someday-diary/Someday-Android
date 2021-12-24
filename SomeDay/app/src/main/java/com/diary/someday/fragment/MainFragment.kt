@@ -29,6 +29,9 @@ import androidx.fragment.app.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.Constants.PWD_TYPE
+import com.diary.someday.Enum.ResponseState
+import com.diary.someday.Retrofit.RetrofitManager
+import com.diary.someday.activity.LoginActivity
 import com.diary.someday.databinding.DrawerLayoutBinding
 import com.diary.someday.decoration.CalendarDecorator
 import com.diary.someday.viewModel.DiaryViewModel
@@ -36,6 +39,7 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.diary.someday.application.Application
 import java.util.concurrent.Executor
+import com.diary.someday.activity.MainActivity
 
 class MainFragment : Fragment() {
 
@@ -92,6 +96,10 @@ class MainFragment : Fragment() {
                 }
             }
             false
+        }
+
+        binding.logout.setOnClickListener {
+            logout()
         }
 
 
@@ -184,6 +192,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.color.green1
                 )
+                binding.logoutImg.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_logout_green
+                    )
+                )
                 binding.navigationView.menu.clear()
                 binding.navigationView.inflateMenu(R.menu.navi_menu_green)
             }
@@ -219,6 +233,12 @@ class MainFragment : Fragment() {
                 binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
                     activity as Context,
                     R.color.blue1
+                )
+                binding.logoutImg.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_logout_blue
+                    )
                 )
                 binding.navigationView.menu.clear()
                 binding.navigationView.inflateMenu(R.menu.navi_menu_blue)
@@ -256,6 +276,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.color.purple1
                 )
+                binding.logoutImg.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_logout_purple
+                    )
+                )
                 binding.navigationView.menu.clear()
                 binding.navigationView.inflateMenu(R.menu.navi_menu_purple)
             }
@@ -292,6 +318,12 @@ class MainFragment : Fragment() {
                     activity as Context,
                     R.color.yellow1
                 )
+                binding.logoutImg.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_logout_yellow
+                    )
+                )
                 binding.navigationView.menu.clear()
                 binding.navigationView.inflateMenu(R.menu.navi_menu_yellow)
             }
@@ -327,6 +359,12 @@ class MainFragment : Fragment() {
                 binding.calendarLayout.calendarView.selectionColor = ContextCompat.getColor(
                     activity as Context,
                     R.color.red1
+                )
+                binding.logoutImg.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        activity as Context,
+                        R.drawable.ic_logout_red
+                    )
                 )
                 binding.navigationView.menu.clear()
                 binding.navigationView.inflateMenu(R.menu.navi_menu_red)
@@ -509,6 +547,22 @@ class MainFragment : Fragment() {
         email.putExtra(Intent.EXTRA_EMAIL, address)
         email.putExtra(Intent.EXTRA_SUBJECT, "[안드로이드]")
         startActivity(email)
+    }
+
+    private fun logout() {
+        RetrofitManager.instance.logout() { responseState, i ->
+            when (responseState) {
+                ResponseState.OKAY -> {
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    startActivity(intent)
+                }
+                ResponseState.FAIL -> {
+                    Toast.makeText(activity, "로그아웃 실패 = $i", Toast.LENGTH_SHORT).show()
+                    return@logout
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
