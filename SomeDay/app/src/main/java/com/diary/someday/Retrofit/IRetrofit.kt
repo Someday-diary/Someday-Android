@@ -1,12 +1,11 @@
 package com.diary.someday.Retrofit
 
 
+import com.diary.someday.Data.*
+import com.diary.someday.Data.request.Feedback
 import com.google.gson.JsonElement
-import com.diary.someday.Data.EmailSend
-import com.diary.someday.Data.SignIn
-import com.diary.someday.Data.EmailSendCheck
-import com.diary.someday.Data.SignUp
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface IRetrofit {
@@ -25,4 +24,7 @@ interface IRetrofit {
 
     @DELETE("user/logout")
     fun logout() :Call<JsonElement>
+
+    @POST("feedback")
+    fun feedback(@Body feedback: Feedback): Call<Void>
 }
