@@ -45,7 +45,6 @@
                         android:textSize="18sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:text="로그아웃"/>
 
                     <ImageView
