@@ -2,6 +2,7 @@ package com.diary.someday.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,19 @@ import com.diary.someday.databinding.FragmentFeedbackBinding
 
 import androidx.core.content.ContextCompat
 
-import android.graphics.drawable.GradientDrawable
-import android.view.ContextThemeWrapper
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.diary.someday.Data.request.Feedback
 import com.diary.someday.R
 import com.diary.someday.application.Application
+import com.diary.someday.viewModel.FeedbackViewModel
 
 
 class FeedbackFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedbackBinding
+    private val viewModel: FeedbackViewModel by viewModels()
     private var colorId = R.color.green1
 
     override fun onCreateView(
@@ -32,25 +36,8 @@ class FeedbackFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        binding.feedbackTitleEditText.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                binding.feedbackTitle.setTextColor(ContextCompat.getColor(requireContext(), colorId))
-            } else {
-                binding.feedbackTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            }
-        }
-        binding.feedbackContentEditText.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                binding.feedbackContent.setTextColor(ContextCompat.getColor(requireContext(), colorId))
-            } else {
-                binding.feedbackContent.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            }
-        }
+        feedback()
+        bindingView()
     }
 
     override fun onResume() {
@@ -134,6 +121,54 @@ class FeedbackFragment : Fragment() {
                     activity as Context,
                     R.drawable.ic_login_button_abled_red
                 )
+            }
+        }
+    }
+
+    private fun bindingView() {
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.feedbackTitleEditText.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.feedbackTitle.setTextColor(ContextCompat.getColor(requireContext(), colorId))
+            } else {
+                binding.feedbackTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            }
+        }
+        binding.feedbackContentEditText.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.feedbackContent.setTextColor(ContextCompat.getColor(requireContext(), colorId))
+            } else {
+                binding.feedbackContent.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            }
+        }
+    }
+
+    private fun feedback() {
+        binding.feedbackSubmit.setOnClickListener {
+            when {
+                binding.feedbackTitleEditText.text.isNullOrEmpty() -> {
+                    Toast.makeText(activity, "제목이 비어있어요.", Toast.LENGTH_SHORT)
+                }
+                binding.feedbackContentEditText.text.isNullOrEmpty() -> {
+                    Toast.makeText(requireContext(), "내용이 비어있어요.", Toast.LENGTH_SHORT)
+                }
+                else -> {
+                    viewModel.sendFeedback(Feedback(binding.feedbackTitleEditText.text.toString(), binding.feedbackContentEditText.text.toString()))
+                    viewModel.isSuccess.observe(viewLifecycleOwner, {
+                        when (it) {
+                            "Success" -> {
+                                Toast.makeText(requireContext(), "피드백이 접수되었습니다.", Toast.LENGTH_SHORT)
+                                findNavController().popBackStack()
+                            }
+                            "Failure" -> {
+                                Toast.makeText(requireContext(), "서버 통신 오류", Toast.LENGTH_SHORT)
+                            }
+                        }
+                    })
+                }
             }
         }
     }
