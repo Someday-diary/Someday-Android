@@ -3,6 +3,7 @@ package com.diary.someday.Retrofit
 
 import android.util.Log
 import com.diary.someday.util.TokenInterceptor
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
@@ -45,6 +46,7 @@ object RetrofitClient {
             retrofitClient = Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.createAsync())
                 .client(client.build())
                 .build()
         }
