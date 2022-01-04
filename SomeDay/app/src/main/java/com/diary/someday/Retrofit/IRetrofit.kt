@@ -1,6 +1,8 @@
 package com.diary.someday.Retrofit
 
 
+import com.diary.someday.Data.*
+import com.diary.someday.Data.request.Feedback
 import com.google.gson.JsonElement
 import com.diary.someday.Data.EmailSend
 import com.diary.someday.Data.SignIn
@@ -28,4 +30,7 @@ interface IRetrofit {
 
     @DELETE("user/logout")
     fun logout() :Observable<Response<JsonElement>>
+
+    @POST("feedback")
+    fun feedback(@Body feedback: Feedback): Call<Void>
 }
