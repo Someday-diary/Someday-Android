@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     style="@style/background_lock"
     android:orientation="vertical"
-    tools:context=".fragment.EditPwdFragment">
+    tools:context=".view.fragment.EditPwdFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

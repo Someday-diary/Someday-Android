@@ -3,7 +3,7 @@ package com.diary.someday.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.diary.someday.Constants.PWD_TYPE
+import com.diary.someday.model.network.util.Constants.PWD_TYPE
 import com.diary.someday.application.Application
 
 class EditPwdViewModel : ViewModel() {

@@ -1,13 +1,9 @@
 package com.diary.someday.application
 
 import android.app.Application
-import com.diary.someday.SharedPreferences.SignInCheck
-import com.diary.someday.util.PreferenceUtils
+import com.diary.someday.model.sharedpreferences.SignInCheck
+import com.diary.someday.model.network.util.PreferenceUtils
 import com.yademos.someday.SharedPreferences.*
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
 
 class Application : Application() {
 

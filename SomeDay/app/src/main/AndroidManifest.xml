@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SomeDay">
         <activity
-            android:name="com.diary.someday.activity.SplashActivity"
+            android:name="com.diary.someday.view.activity.SplashActivity"
             android:exported="true" />
         <activity
-            android:name="com.diary.someday.activity.LoginActivity"
+            android:name="com.diary.someday.view.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.diary.someday.activity.MainActivity"
+            android:name="com.diary.someday.view.activity.MainActivity"
             android:exported="true">
 
         </activity>

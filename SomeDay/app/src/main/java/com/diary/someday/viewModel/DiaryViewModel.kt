@@ -1,20 +1,15 @@
 package com.diary.someday.viewModel
 
 import androidx.lifecycle.*
-import com.diary.someday.Constants.API
-import com.diary.someday.Data.request.DiaryRequest
-import com.diary.someday.Data.request.Tag
-import com.diary.someday.Data.request.UpdateDiaryRequest
-import com.diary.someday.Data.response.*
-import com.diary.someday.Retrofit.DiaryService
-import com.diary.someday.Retrofit.RetrofitClient
+import com.diary.someday.model.network.util.Constants.API
+import com.diary.someday.model.network.dto.request.diary.DiaryRequest
+import com.diary.someday.model.network.dto.request.diary.UpdateDiaryRequest
+import com.diary.someday.model.network.dto.response.*
+import com.diary.someday.model.network.dao.DiaryService
+import com.diary.someday.model.network.RetrofitClient
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import okhttp3.internal.notify
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DiaryViewModel() : ViewModel() {
 
