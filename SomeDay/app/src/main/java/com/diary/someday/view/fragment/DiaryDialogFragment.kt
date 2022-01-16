@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.diary.someday.R
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentDiaryDialogBinding
 
 class DiaryDialogFragment : DialogFragment() {

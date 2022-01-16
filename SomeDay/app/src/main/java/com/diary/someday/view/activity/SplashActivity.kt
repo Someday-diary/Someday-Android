@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.core.content.ContextCompat
 import com.diary.someday.R
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {

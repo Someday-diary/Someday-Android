@@ -22,7 +22,8 @@ import androidx.navigation.fragment.findNavController
 import com.diary.someday.model.network.dto.request.diary.DiaryRequest
 import com.diary.someday.model.network.dto.request.diary.Tag
 import com.diary.someday.model.network.dto.request.diary.UpdateDiaryRequest
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 
 class DiaryFragment : Fragment() {

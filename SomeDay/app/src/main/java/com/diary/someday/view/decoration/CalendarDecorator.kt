@@ -6,7 +6,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.diary.someday.R
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 
 class CalendarDecorator(context: Activity?, currentDay: CalendarDay) : DayViewDecorator {
     private val drawableGreen: Drawable = context?.getDrawable(R.drawable.select_circle_green)!!

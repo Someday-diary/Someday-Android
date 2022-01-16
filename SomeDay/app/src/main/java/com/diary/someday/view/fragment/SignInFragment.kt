@@ -22,7 +22,7 @@ import com.diary.someday.R
 import com.diary.someday.model.network.RetrofitManager
 import com.diary.someday.Viewmodel.SignInViewModel
 import com.diary.someday.view.activity.MainActivity
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentSignInBinding
 import com.diary.someday.model.network.util.PreferenceUtils
 

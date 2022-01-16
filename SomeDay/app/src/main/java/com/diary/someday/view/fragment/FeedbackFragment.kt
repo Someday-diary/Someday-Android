@@ -15,7 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.model.network.dto.request.user.Feedback
 import com.diary.someday.R
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 import com.diary.someday.viewModel.FeedbackViewModel
 
 

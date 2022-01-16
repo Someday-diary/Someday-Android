@@ -5,7 +5,7 @@ import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.diary.someday.R
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

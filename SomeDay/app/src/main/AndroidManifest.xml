@@ -9,7 +9,7 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
-        android:name="com.diary.someday.application.Application"
+        android:name="com.diary.someday.di.application.Application"
         android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"

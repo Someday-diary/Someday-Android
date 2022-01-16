@@ -32,7 +32,8 @@ import com.diary.someday.view.activity.LoginActivity
 import com.diary.someday.databinding.DrawerLayoutBinding
 import com.diary.someday.view.decoration.CalendarDecorator
 import com.diary.someday.viewModel.DiaryViewModel
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.Executor
 
 class MainFragment : Fragment() {

@@ -21,7 +21,7 @@ import com.diary.someday.model.network.util.Enum.ResponseState
 import com.diary.someday.R
 import com.diary.someday.model.network.RetrofitManager
 import com.diary.someday.Viewmodel.SignUpViewModel
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentSignUpPwdBinding
 
 class SignUpPwdFragment : Fragment() {

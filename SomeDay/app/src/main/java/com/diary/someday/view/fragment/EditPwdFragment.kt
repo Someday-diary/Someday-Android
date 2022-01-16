@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.model.network.util.Constants.PWD_TYPE
 import com.diary.someday.R
-import com.diary.someday.application.Application
+import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentEditPwdBinding
 import com.diary.someday.viewModel.EditPwdViewModel
 
