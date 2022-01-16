@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.diary.someday.fragment.MainFragment"
+        android:name="com.diary.someday.view.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/diaryFragment"
-        android:name="com.diary.someday.fragment.DiaryFragment"
+        android:name="com.diary.someday.view.fragment.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" >
         <action
@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.diary.someday.fragment.SearchFragment"
+        android:name="com.diary.someday.view.fragment.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -106,12 +106,12 @@
     </fragment>
     <fragment
         android:id="@+id/appInfoFragment"
-        android:name="com.diary.someday.fragment.AppInfoFragment"
+        android:name="com.diary.someday.view.fragment.AppInfoFragment"
         android:label="fragment_app_info"
         tools:layout="@layout/fragment_app_info" />
     <fragment
         android:id="@+id/feedbackFragment"
-        android:name="com.diary.someday.fragment.FeedbackFragment"
+        android:name="com.diary.someday.view.fragment.FeedbackFragment"
         android:label="fragment_feedback"
         tools:layout="@layout/fragment_feedback" />
 

@@ -73,10 +73,6 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
 
-    // Koin
-    implementation "org.koin:koin-android:2.2.2"
-    implementation "org.koin:koin-android-viewmodel:2.2.2"
-
     // LiveData
     def livedata_version = "2.4.0-rc01"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version"
@@ -99,5 +95,13 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.0.6'
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+
+    // Koin
+    def koin_version = "3.1.5"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
 
 }
