@@ -30,5 +30,5 @@ interface UserService {
     fun logout() :Observable<Response<JsonElement>>
 
     @POST("feedback")
-    fun feedback(@Body feedback: Feedback): Call<Void>
+    fun feedback(@Body feedback: Feedback): Observable<Response<Void>>
 }
