@@ -22,12 +22,13 @@ import com.diary.someday.view.adapter.RecyclerViewMonthSearchAdapter
 import com.diary.someday.di.application.Application
 import com.diary.someday.view.decoration.RecyclerViewDecoration
 import com.diary.someday.viewModel.DiaryViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-    private val viewModel: DiaryViewModel by viewModels()
+    private val viewModel: DiaryViewModel by viewModel()
     private lateinit var recyclerViewAdapter: RecyclerViewMonthSearchAdapter
     private lateinit var listData: MutableList<SearchMonth>
 

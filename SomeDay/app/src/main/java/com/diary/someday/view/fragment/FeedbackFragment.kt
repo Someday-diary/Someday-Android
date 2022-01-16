@@ -17,12 +17,13 @@ import com.diary.someday.model.network.dto.request.user.Feedback
 import com.diary.someday.R
 import com.diary.someday.di.application.Application
 import com.diary.someday.viewModel.FeedbackViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class FeedbackFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedbackBinding
-    private val viewModel: FeedbackViewModel by viewModels()
+    private val viewModel: FeedbackViewModel by viewModel()
     private var colorId = R.color.green1
 
     override fun onCreateView(

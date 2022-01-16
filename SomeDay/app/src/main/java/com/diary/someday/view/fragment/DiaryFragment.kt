@@ -31,7 +31,7 @@ class DiaryFragment : Fragment() {
     private lateinit var binding: FragmentDiaryBinding
 
     private val args: DiaryFragmentArgs by navArgs()
-    private val viewModel: DiaryViewModel by viewModels()
+    private val viewModel: DiaryViewModel by viewModel()
     private var postId = ""
     private var editState = false
 

@@ -40,7 +40,7 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var drawerBinding: DrawerLayoutBinding
-    private val viewModel: DiaryViewModel by viewModels()
+    private val viewModel: DiaryViewModel by viewModel()
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
