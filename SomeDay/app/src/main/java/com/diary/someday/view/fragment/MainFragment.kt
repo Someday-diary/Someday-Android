@@ -396,10 +396,11 @@ class MainFragment : Fragment() {
             selectedDate = today
 
             existDayDiary(today)
-            existMonthDiary(today.year, today.month) // 이번달 일기들 표시
+            calendarDecorator()
+//            existMonthDiary(today.year, today.month) // 이번달 일기들 표시
             setOnMonthChangedListener { _, date -> // 그 다음달부터 달력 넘겼을때
                 setCalendarViewTitle()
-                existMonthDiary(date.year, date.month)
+//                existMonthDiary(date.year, date.month)
             }
             setOnDateChangedListener { _, date, _ ->
                 binding.calendarLayout.listDate.text = date.day.toString()
@@ -509,6 +510,22 @@ class MainFragment : Fragment() {
         })
     }
 
+    private fun calendarDecorator() {
+        viewModel.callGetAllDiary()
+        viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
+            it?.posts?.forEach { posts ->
+                val day = Date(posts.date)
+                val cDay = CalendarDay(day)
+                binding.calendarLayout.calendarView.addDecorators(
+                    CalendarDecorator(
+                        requireActivity(),
+                        cDay
+                    )
+                )
+            }
+        })
+    }
+
     private fun existDayDiary(date: CalendarDay) {
         viewModel.callGetDateDiary(date.year, date.month + 1, date.day)
         viewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
@@ -534,15 +551,6 @@ class MainFragment : Fragment() {
     private fun initContents() {
         binding.calendarLayout.listContent.text = ""
         binding.calendarLayout.listTag.text = ""
-    }
-
-    private fun sendEmail() {
-        val email = Intent(Intent.ACTION_SEND)
-        email.type = "plain/text"
-        val address = arrayOf("somedayteam2021@gmail.com")
-        email.putExtra(Intent.EXTRA_EMAIL, address)
-        email.putExtra(Intent.EXTRA_SUBJECT, "[안드로이드]")
-        startActivity(email)
     }
 
     private fun logout() {
