@@ -23,6 +23,10 @@ class DiaryRepository(private val service: DiaryService) {
         return service.getDiary(tags)
     }
 
+    fun callGetAllDiary(): Observable<Response<DiaryListResponse>> {
+        return service.getDiary()
+    }
+
     fun callGetMonthDiary(year: Int, month: Int): Observable<Response<MonthDiaryResponse>> {
         return service.getMonthDiary(year, month)
     }

@@ -1,5 +1,6 @@
 package com.diary.someday.viewModel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.diary.someday.model.network.util.Constants.API
 import com.diary.someday.model.network.dto.request.diary.DiaryRequest
@@ -70,6 +71,19 @@ class DiaryViewModel(private val repo: DiaryRepository) : ViewModel() {
                 }
         }, {
                 diaryListLiveData.postValue(null)
+        }).apply { disposable.add(this) }
+    }
+
+    fun callGetAllDiary() {
+        repo.callGetAllDiary().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe({
+             if (it.isSuccessful) {
+                 diaryListLiveData.postValue(it.body())
+             } else {
+                 diaryListLiveData.postValue(null)
+             }
+        }, {
+            Log.d("ErrorMessage", it.message.toString())
+            diaryListLiveData.postValue(null)
         }).apply { disposable.add(this) }
     }
 
