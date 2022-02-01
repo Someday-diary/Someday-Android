@@ -2,6 +2,7 @@ package com.diary.someday.di.application
 
 import android.app.Application
 import com.diary.someday.di.repositoryModule
+import com.diary.someday.di.roomModule
 import com.diary.someday.di.serviceModule
 import com.diary.someday.di.viewModelModule
 import com.diary.someday.model.sharedpreferences.SignInCheck
@@ -34,7 +35,7 @@ class Application : Application() {
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@Application)
-            modules(listOf(serviceModule, repositoryModule, viewModelModule))
+            modules(listOf(serviceModule, roomModule, repositoryModule, viewModelModule))
         }
         super.onCreate()
     }

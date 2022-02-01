@@ -30,6 +30,9 @@ val roomModule = module {
         SearchDatabase.getDatabase(androidContext())
     }
     single {
+        get<SearchDatabase>().searchDao()
+    }
+    single {
         SearchRepository(get())
     }
     viewModel {
