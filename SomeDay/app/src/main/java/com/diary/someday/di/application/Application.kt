@@ -37,10 +37,5 @@ class Application : Application() {
             modules(listOf(serviceModule, repositoryModule, viewModelModule))
         }
         super.onCreate()
-        startKoin {
-            androidLogger(Level.ERROR)
-            androidContext(this@Application)
-            modules()
-        }
     }
 }
