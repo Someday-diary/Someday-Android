@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.DiaryDialogFragment"
+    tools:context=".view.fragment.DiaryDialogFragment"
     android:background="@drawable/background_dialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
