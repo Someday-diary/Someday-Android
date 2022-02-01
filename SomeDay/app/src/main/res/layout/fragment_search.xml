@@ -106,6 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 tools:listitem="@layout/item_search"
+                android:overScrollMode="never"
                 android:layout_marginHorizontal="30dp"
                 app:layout_constraintTop_toBottomOf="@id/recent_search_title"
                 app:layout_constraintStart_toStartOf="parent"
