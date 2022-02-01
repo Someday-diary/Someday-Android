@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 class SearchViewModel(private val repository: SearchRepository): ViewModel() {
     private val search = MutableLiveData<List<Search>?>()
 
+    fun searchObserve() = search
+
     fun getAll() {
         repository.getAll()!!.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
             .subscribe({
