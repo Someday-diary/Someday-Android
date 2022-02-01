@@ -1,8 +1,8 @@
 package com.diary.someday.viewModel.repository
 
 import androidx.annotation.WorkerThread
-import com.diary.someday.db.Search
-import com.diary.someday.db.SearchDao
+import com.diary.someday.model.db.Search
+import com.diary.someday.model.db.SearchDao
 
 class SearchRepository(private val searchDao: SearchDao) {
     val allSearches = searchDao.getAllSearches()

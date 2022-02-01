@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.diary.someday.R
-import com.diary.someday.db.Search
+import com.diary.someday.model.db.Search
 
 class RecyclerViewRecentSearchAdapter: RecyclerView.Adapter<RecyclerViewRecentSearchAdapter.ViewHolder>() {
 

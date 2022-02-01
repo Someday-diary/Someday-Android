@@ -1,4 +1,4 @@
-package com.diary.someday.db
+package com.diary.someday.model.db
 
 import androidx.room.Dao
 import androidx.room.Insert

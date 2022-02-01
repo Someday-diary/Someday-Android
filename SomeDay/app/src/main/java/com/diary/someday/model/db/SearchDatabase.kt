@@ -1,4 +1,4 @@
-package com.diary.someday.db
+package com.diary.someday.model.db
 
 import android.content.Context
 import androidx.room.Database

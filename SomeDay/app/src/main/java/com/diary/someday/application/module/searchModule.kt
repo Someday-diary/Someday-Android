@@ -1,6 +1,6 @@
 package com.diary.someday.application.module
 
-import com.diary.someday.db.SearchDatabase
+import com.diary.someday.model.db.SearchDatabase
 import com.diary.someday.viewModel.SearchViewModel
 import com.diary.someday.viewModel.repository.SearchRepository
 import org.koin.android.ext.koin.androidApplication
