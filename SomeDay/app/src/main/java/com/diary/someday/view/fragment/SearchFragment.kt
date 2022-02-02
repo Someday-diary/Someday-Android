@@ -8,11 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.diary.someday.databinding.FragmentSearchBinding
 import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.diary.someday.view.adapter.data.SearchDate
@@ -37,6 +37,7 @@ class SearchFragment : Fragment() {
     private lateinit var recyclerViewAdapter: RecyclerViewMonthSearchAdapter
     private lateinit var searchRecyclerviewAdapter: RecyclerViewRecentSearchAdapter
     private lateinit var listData: MutableList<SearchMonth>
+    private var imm: InputMethodManager?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,16 +50,10 @@ class SearchFragment : Fragment() {
         initToolbar()
         initSearchRecyclerView()
         initRecyclerView()
-
-        binding.searchEditText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                search(binding.searchEditText.text.toString())
-                return@OnEditorActionListener true
-            }
-            false
-        })
+        bindingSearchEditText()
 
         return binding.root
+
     }
 
     override fun onResume() {
@@ -126,7 +121,25 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun bindingSearchEditText() {
+        binding.searchEditText.apply {
+            setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search(binding.searchEditText.text.toString())
+                    return@OnEditorActionListener true
+                }
+                false
+            })
+            setOnClickListener {
+                binding.recentSearchLayout.visibility = View.VISIBLE
+                binding.searchResultLayout.visibility = View.GONE
+                binding.errorMsg.visibility = View.GONE
+            }
+        }
+    }
+
     private fun search(searches: String) {
+        keyboardDown()
         binding.recentSearchLayout.visibility = View.GONE
         searchViewModel.insert(Search(searches))
         viewModel.callGetDiaryWithTag(listOf(searches))
@@ -141,6 +154,11 @@ class SearchFragment : Fragment() {
                 binding.errorMsg.visibility = View.VISIBLE
             }
         })
+    }
+
+    private fun keyboardDown() {
+        imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm?.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
     }
 
     private fun initSearchRecyclerView() {
