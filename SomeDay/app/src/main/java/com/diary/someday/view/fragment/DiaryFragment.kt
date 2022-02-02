@@ -255,7 +255,7 @@ class DiaryFragment : Fragment() {
         binding.toolbarTitle.text = String.format("%s년 %s월 %s일", args.year, args.month, args.day)
 
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigate(DiaryFragmentDirections.actionDiaryFragmentToMainFragment())
+            findNavController().popBackStack()
         }
     }
 

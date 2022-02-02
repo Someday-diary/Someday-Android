@@ -64,6 +64,7 @@ dependencies {
     // Room
     implementation "androidx.room:room-runtime:2.3.0"
     implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.room:room-rxjava3:2.4.1"
     kapt 'androidx.room:room-compiler:2.3.0'
     kapt "android.arch.persistence.room:compiler:1.1.1"
 
@@ -103,5 +104,9 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
     implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
+    implementation('androidx.work:work-runtime:2.7.0') {
+        because '''androidx.work:work-runtime:2.1.0 pulled from play-services-ads has a bug using PendingIntent without FLAG_IMMUTABLE or FLAG_MUTABLE and will fail in Apps targeting S+.'''
+    }
 
 }
