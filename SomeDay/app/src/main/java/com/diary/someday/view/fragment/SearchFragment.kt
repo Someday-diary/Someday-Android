@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.diary.someday.view.adapter.data.SearchDate
 import com.diary.someday.view.adapter.data.SearchMonth
 import com.diary.someday.R
-import com.diary.someday.adapter.RecyclerViewRecentSearchAdapter
+import com.diary.someday.view.adapter.RecyclerViewRecentSearchAdapter
 import com.diary.someday.view.adapter.RecyclerViewMonthSearchAdapter
 import com.diary.someday.di.application.Application
 import com.diary.someday.model.db.Search

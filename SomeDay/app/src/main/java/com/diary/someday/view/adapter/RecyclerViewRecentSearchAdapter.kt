@@ -1,4 +1,4 @@
-package com.diary.someday.adapter
+package com.diary.someday.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
