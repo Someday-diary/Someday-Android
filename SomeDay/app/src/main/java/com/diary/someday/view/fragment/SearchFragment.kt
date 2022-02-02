@@ -51,6 +51,7 @@ class SearchFragment : Fragment() {
         initSearchRecyclerView()
         initRecyclerView()
         bindingSearchEditText()
+        deleteAll()
 
         return binding.root
 
@@ -135,6 +136,13 @@ class SearchFragment : Fragment() {
                 binding.searchResultLayout.visibility = View.GONE
                 binding.errorMsg.visibility = View.GONE
             }
+        }
+    }
+
+    private fun deleteAll() {
+        binding.recentDeleteAll.setOnClickListener {
+            searchViewModel.deleteAll()
+            searchRecyclerviewAdapter.notifyDataSetChanged()
         }
     }
 
