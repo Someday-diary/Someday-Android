@@ -12,28 +12,60 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_diaryFragment"
-            app:destination="@id/diaryFragment" />
+            app:destination="@id/diaryFragment"
+            app:enterAnim="@anim/transition_slide_in"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out"    />
         <action
             android:id="@+id/action_mainFragment_to_themeFragment"
-            app:destination="@id/themeFragment" />
+            app:destination="@id/themeFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_alarmFragment"
-            app:destination="@id/alarmFragment" />
+            app:destination="@id/alarmFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_lockFragment"
-            app:destination="@id/lockFragment" />
+            app:destination="@id/lockFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/transition_slide_up"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_down" />
         <action
             android:id="@+id/action_mainFragment_to_editPwdFragment"
-            app:destination="@id/editPwdFragment" />
+            app:destination="@id/editPwdFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_appInfoFragment"
-            app:destination="@id/appInfoFragment" />
+            app:destination="@id/appInfoFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_feedbackFragment"
-            app:destination="@id/feedbackFragment" />
+            app:destination="@id/feedbackFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
     </fragment>
 
     <fragment
@@ -102,7 +134,11 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/transition_slide_in"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out" />
     </fragment>
     <fragment
         android:id="@+id/appInfoFragment"
