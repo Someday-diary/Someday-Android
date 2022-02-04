@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/transition_fade_in"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_fade_out"/>
 <!--        <action-->
 <!--            android:id="@+id/action_signInFragment_to_mainFragment2"-->
 <!--            app:destination="@id/mainFragment2"/>-->
@@ -24,10 +28,18 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/transition_fade_in"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_fade_out" />
         <action
             android:id="@+id/action_signUpFragment_to_signUpPwdFragment"
-            app:destination="@id/signUpPwdFragment" />
+            app:destination="@id/signUpPwdFragment"
+            app:enterAnim="@anim/transition_slide_in"
+            app:exitAnim="@anim/transition_slide_out_left"
+            app:popEnterAnim="@anim/transition_slide_in_left"
+            app:popExitAnim="@anim/transition_slide_out"/>
     </fragment>
 <!--    <fragment-->
 <!--        android:id="@+id/mainFragment2"-->
@@ -45,10 +57,20 @@
         tools:layout="@layout/fragment_sign_up_pwd" >
         <action
             android:id="@+id/action_signUpPwdFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_slide_out"
+            app:popEnterAnim="@anim/transition_slide_in"
+            app:popExitAnim="@anim/transition_slide_out_left"
+            />
         <action
             android:id="@+id/action_signUpPwdFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/transition_fade_in"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_fade_out"
+            />
         <argument
             android:name="email"
             app:argType="string"

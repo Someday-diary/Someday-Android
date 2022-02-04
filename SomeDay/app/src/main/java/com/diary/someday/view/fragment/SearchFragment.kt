@@ -1,5 +1,7 @@
 package com.diary.someday.view.fragment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +42,7 @@ class SearchFragment : Fragment() {
     private lateinit var searchRecyclerviewAdapter: RecyclerViewRecentSearchAdapter
     private lateinit var listData: MutableList<SearchMonth>
     private var imm: InputMethodManager?= null
+    private var shortAnimationDuration: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +57,8 @@ class SearchFragment : Fragment() {
         initRecyclerView()
         bindingSearchEditText()
         deleteAll()
+
+        shortAnimationDuration = resources.getInteger(android.R.integer.config_longAnimTime)
 
         return binding.root
 
@@ -126,17 +133,26 @@ class SearchFragment : Fragment() {
         binding.searchEditText.apply {
             setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    binding.searchEditText.clearFocus()
                     search(binding.searchEditText.text.toString())
                     return@OnEditorActionListener true
                 }
                 false
             })
-            setOnClickListener {
-                binding.recentSearchLayout.visibility = View.VISIBLE
-                binding.searchResultLayout.visibility = View.GONE
-                binding.errorMsg.visibility = View.GONE
+            setOnFocusChangeListener { _, isFocus ->
+                if (isFocus) {
+                    animation(binding.recentSearchLayout)
+                    binding.searchResultLayout.visibility = View.GONE
+                    binding.errorMsg.visibility = View.GONE
+                }
             }
         }
+    }
+
+    private fun animation(view: View) {
+        val anim: Animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.transition_fade_in)
+        view.startAnimation(anim)
+        view.visibility = View.VISIBLE
     }
 
     private fun deleteAll() {
@@ -149,17 +165,18 @@ class SearchFragment : Fragment() {
     private fun search(searches: String) {
         keyboardDown()
         binding.recentSearchLayout.visibility = View.GONE
+        binding.searchResultLayout.visibility = View.GONE
         searchViewModel.insert(Search(searches))
         viewModel.callGetDiaryWithTag(listOf(searches))
         viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
             if (it?.posts != null) {
+                animation(binding.searchResultLayout)
                 binding.searchTag.text = "#" + searches
-                binding.searchResultLayout.visibility = View.VISIBLE
                 binding.errorMsg.visibility = View.GONE
                 setRecyclerView(it)
             } else {
                 binding.searchResultLayout.visibility = View.GONE
-                binding.errorMsg.visibility = View.VISIBLE
+                animation(binding.errorMsg)
             }
         })
     }
@@ -192,6 +209,7 @@ class SearchFragment : Fragment() {
                 }
                 2 -> {
                     search(searches)
+                    binding.searchEditText.clearFocus()
                 }
             }
         }
@@ -254,7 +272,8 @@ class SearchFragment : Fragment() {
         }
 
         binding.searchBackButton.setOnClickListener {
-            findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToMainFragment())
+            keyboardDown()
+            findNavController().popBackStack()
         }
 
         binding .searchClearButton.setOnClickListener {
