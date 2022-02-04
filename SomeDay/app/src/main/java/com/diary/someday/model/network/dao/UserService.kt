@@ -1,6 +1,7 @@
 package com.diary.someday.model.network.dao
 
 
+import com.diary.someday.model.network.dto.SignInResponse
 import com.diary.someday.model.network.dto.request.user.Feedback
 import com.google.gson.JsonElement
 import com.diary.someday.model.network.dto.request.user.EmailSend
@@ -15,7 +16,7 @@ import retrofit2.http.*
 interface UserService {
 
     @POST("user/login")
-    fun signIn(@Body signIn: SignIn): Observable<Response<JsonElement>>
+    fun signIn(@Body signIn: SignIn): Observable<Response<SignInResponse>>
 
     @POST("user/sign_up")
     fun signUp(@Body signUp: SignUp) : Observable<Response<JsonElement>>

@@ -1,6 +1,5 @@
 package com.diary.someday.Fragment
 
-
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,79 +12,82 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.model.network.util.Enum.ResponseState
 import com.diary.someday.R
+import com.diary.someday.viewModel.SignInViewModel
 import com.diary.someday.model.network.RetrofitManager
-import com.diary.someday.Viewmodel.SignInViewModel
 import com.diary.someday.view.activity.MainActivity
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentSignInBinding
+import com.diary.someday.model.network.dto.request.user.SignIn
 import com.diary.someday.model.network.util.PreferenceUtils
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment() {
 
-    lateinit var signInViewModel: SignInViewModel
-    lateinit var binding: FragmentSignInBinding
-
-    override fun onStart() {
-        super.onStart()
-        changeModeColor(Application.themeSettingColor.getThemeTypeColor())
-    }
-
+    private val signInViewModel: SignInViewModel by viewModel()
+    private lateinit var binding: FragmentSignInBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignInBinding.inflate(inflater, container, false)
-        signInViewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
 
+        return binding.root
+    }
 
-        binding.signupButton.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
-//            signInViewModel.clickToast("회원가입 버튼", activity as Context)
-        }
+    override fun onStart() {
+        super.onStart()
+        changeModeColor(Application.themeSettingColor.getThemeTypeColor())
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        bindingButton()
+        errorCheck()
+        loginCheck()
+        observe()
+    }
 
-        signInViewModel.emailError.observe(activity as LifecycleOwner, Observer {
-            binding.emailErrorText.text = it.toString()
-        })
-
-        signInViewModel.passwordError.observe(activity as LifecycleOwner, Observer {
-            binding.passwordErrorText.text = it.toString()
-        })
-
+    private fun observe() {
         signInViewModel.buttonState.observe(activity as LifecycleOwner, Observer {
             changedButton(it)
         })
+        signInViewModel.code.observe(viewLifecycleOwner, {
+            when (it) {
+                200 -> {
+                    startActivity(Intent(activity, MainActivity::class.java))
+                }
+                106 -> {
+                    Toast.makeText(activity, "유저 정보가 없는 계정입니다", Toast.LENGTH_SHORT).show()
+                }
+                107 -> {
+                    Toast.makeText(activity, "이메일 인증이 되지 않은 계정입니다.", Toast.LENGTH_SHORT).show()
+                }
+                108 -> {
+                    Toast.makeText(activity, "이메일 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun bindingButton() {
+        binding.signupButton.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        }
 
         binding.buttonSignin.setOnClickListener {
             Log.d("TAG", "버튼 클릭")
-            RetrofitManager.instance.signIn(
-                binding.email.text.toString(),
-                binding.password.text.toString()
-            ) { responseState, msg, token ->
-                Log.d("TAG", "서버 결과 -> $responseState $msg")
-                when (responseState) {
-                    ResponseState.OKAY -> {
-                        PreferenceUtils.token = token
-//                        signInViewModel.clickToast("로그인 버튼", activity as Context)
-//                        findNavController().navigate(R.id.action_signInFragment_to_mainFragment2)
-                        Application.signInCheck.signIn()
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                    }
-                    ResponseState.FAIL -> {
-                        Toast.makeText(activity, "$msg", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-//            startActivity(Intent(activity, MainActivity::class.java))
+            signInViewModel.signIn(SignIn(binding.email.text.toString(), binding.password.text.toString()))
         }
+    }
 
+    private fun loginCheck() {
         binding.email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
 
@@ -107,9 +109,16 @@ class SignInFragment : Fragment() {
                 signInViewModel.checkPassword(password)
             }
         })
+    }
 
+    private fun errorCheck() {
+        signInViewModel.emailError.observe(activity as LifecycleOwner, Observer {
+            binding.emailErrorText.text = it.toString()
+        })
 
-        return binding.root
+        signInViewModel.passwordError.observe(activity as LifecycleOwner, Observer {
+            binding.passwordErrorText.text = it.toString()
+        })
     }
 
     private fun changeModeColor(number: Int) {
@@ -189,8 +198,7 @@ class SignInFragment : Fragment() {
         }
     }
 
-
-    fun changedButton(check: Boolean) {
+    private fun changedButton(check: Boolean) {
         if (check) {
             when (Application.themeSettingColor.getThemeTypeColor()) {
                 1 -> {
