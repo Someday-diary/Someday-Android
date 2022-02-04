@@ -40,7 +40,7 @@
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="이메일을 입력하세요."
@@ -49,7 +49,6 @@
             android:textColor="@color/black_app"
             android:textColorHint="#B3C1CF"
             android:textCursorDrawable="@drawable/ic_custom_cursor"
-            android:textSelectHandle="@color/black_app"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -89,7 +88,6 @@
         android:textColor="@color/black_app"
         android:textColorHint="#B3C1CF"
         android:textCursorDrawable="@drawable/ic_custom_cursor"
-        android:textSelectHandle="@color/black_app"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
