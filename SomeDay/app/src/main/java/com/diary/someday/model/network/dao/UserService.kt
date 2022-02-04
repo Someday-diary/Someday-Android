@@ -28,7 +28,7 @@ interface UserService {
     fun emailSendCheck(@Body emailSendCheck: EmailSendCheck): Observable<Response<Code>>
 
     @DELETE("user/logout")
-    fun logout() :Observable<Response<JsonElement>>
+    fun logout() :Observable<Response<Code>>
 
     @POST("feedback")
     fun feedback(@Body feedback: Feedback): Observable<Response<Void>>
