@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     tools:context=".Fragment.SignInFragment">
 
 
@@ -42,7 +42,6 @@
         android:textColor="@color/black_app"
         android:textColorHint="#B3C1CF"
         android:textCursorDrawable="@drawable/ic_custom_cursor"
-        android:textSelectHandle="@color/black_app"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +69,6 @@
         android:textColor="@color/black_app"
         android:textColorHint="#B3C1CF"
         android:textCursorDrawable="@drawable/ic_custom_cursor"
-        android:textSelectHandle="@color/black_app"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

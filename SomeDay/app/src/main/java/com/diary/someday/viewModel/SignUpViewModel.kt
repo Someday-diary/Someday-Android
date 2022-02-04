@@ -1,11 +1,22 @@
-package com.diary.someday.Viewmodel
+package com.diary.someday.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.diary.someday.model.network.dto.request.user.EmailSend
+import com.diary.someday.model.network.dto.request.user.EmailSendCheck
+import com.diary.someday.model.network.dto.request.user.SignUp
+import com.diary.someday.model.repository.SignUpRepository
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.regex.Pattern
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel(private val repo: SignUpRepository) : ViewModel() {
+    val emailSendCode = MutableLiveData<Int>()
+    val emailSendCheckCode = MutableLiveData<Int>()
+    val signUpCode = MutableLiveData<Int>()
+
     private val emailValidation =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
 
@@ -29,7 +40,34 @@ class SignUpViewModel : ViewModel() {
     private var emailType = TYPE.EMAILFAIL
     private var sendType = TYPE.SENDFAIL
 
-    fun checkEmail(email: String) {
+    fun signUp(signUp: SignUp) {
+        repo.signUp(signUp).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                signUpCode.postValue(it.body()?.code)
+            }, {
+                Log.d("Error", it.message.toString())
+            })
+    }
+
+    fun emailSend(emailSend: EmailSend) {
+        repo.emailSend(emailSend).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                emailSendCode.postValue(it.body()?.code)
+            }, {
+                Log.d("Error", it.message.toString())
+            })
+    }
+
+    fun emailSendCheck(emailSendCheck: EmailSendCheck) {
+        repo.emailSendCheck(emailSendCheck).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                emailSendCheckCode.postValue(it.body()?.code)
+            }, {
+                Log.d("Error", it.message.toString())
+            })
+    }
+
+    fun checkEmailPattern(email: String) {
         val pattern = Pattern.matches(emailValidation, email) // 서로 패턴이 맞닝?
         if (pattern) {
             emailType = TYPE.EMAILOK
@@ -40,7 +78,7 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
-    fun checkSend(send: String) {
+    fun checkCode(send: String) {
         if (send.length >= 6) {
             sendType = TYPE.SENDOK
             _buttonState.value = checkAll()

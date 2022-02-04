@@ -23,16 +23,14 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.model.network.util.Constants.PWD_TYPE
-import com.diary.someday.model.network.util.Enum.ResponseState
-import com.diary.someday.model.network.RetrofitManager
-import com.diary.someday.view.activity.LoginActivity
 import com.diary.someday.databinding.DrawerLayoutBinding
 import com.diary.someday.view.decoration.CalendarDecorator
 import com.diary.someday.viewModel.DiaryViewModel
 import com.diary.someday.di.application.Application
+import com.diary.someday.view.activity.LoginActivity
+import com.diary.someday.viewModel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.Executor
 
@@ -40,7 +38,8 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var drawerBinding: DrawerLayoutBinding
-    private val viewModel: DiaryViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModel()
+    private val diaryViewModel: DiaryViewModel by viewModel()
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
@@ -147,7 +146,7 @@ class MainFragment : Fragment() {
         promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("생체 정보로 인증해주세요")
             .setNegativeButtonText("비밀번호로 인증")
-            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.BIOMETRIC_WEAK)
             .build()
 
         biometricPrompt.authenticate(promptInfo)
@@ -494,8 +493,8 @@ class MainFragment : Fragment() {
     }
 
     private fun existMonthDiary(year: Int, month: Int) {
-        viewModel.callGetMonthDiary(year, month + 1)
-        viewModel.monthDiaryLiveData.observe(viewLifecycleOwner, {
+        diaryViewModel.callGetMonthDiary(year, month + 1)
+        diaryViewModel.monthDiaryLiveData.observe(viewLifecycleOwner, {
             if (it != null) {
                 for (i in it!!.posts) {
                     val cDay = CalendarDay(i.date)
@@ -511,8 +510,8 @@ class MainFragment : Fragment() {
     }
 
     private fun calendarDecorator() {
-        viewModel.callGetAllDiary()
-        viewModel.diaryListLiveData.observe(viewLifecycleOwner, {
+        diaryViewModel.callGetAllDiary()
+        diaryViewModel.diaryListLiveData.observe(viewLifecycleOwner, {
             it?.posts?.forEach { posts ->
                 val day = Date(posts.date)
                 val cDay = CalendarDay(day)
@@ -527,8 +526,8 @@ class MainFragment : Fragment() {
     }
 
     private fun existDayDiary(date: CalendarDay) {
-        viewModel.callGetDateDiary(date.year, date.month + 1, date.day)
-        viewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
+        diaryViewModel.callGetDateDiary(date.year, date.month + 1, date.day)
+        diaryViewModel.dateDiaryLiveData.observe(viewLifecycleOwner, {
             initContents()
             if (it?.post == null) {
                 binding.calendarLayout.listEdit.text = "일기 작성"
@@ -554,19 +553,20 @@ class MainFragment : Fragment() {
     }
 
     private fun logout() {
-        RetrofitManager.instance.logout() { responseState, i ->
-            when (responseState) {
-                ResponseState.OKAY -> {
+        viewModel.logout()
+        viewModel.code.observe(viewLifecycleOwner, {
+            when (it) {
+                200 -> {
+                    Toast.makeText(activity, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
                     val intent = Intent(requireContext(), LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     startActivity(intent)
                 }
-                ResponseState.FAIL -> {
-                    Toast.makeText(activity, "로그아웃 실패 = $i", Toast.LENGTH_SHORT).show()
-                    return@logout
+                112 -> {
+                    Toast.makeText(activity, "이미 로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -1,10 +1,16 @@
-package com.diary.someday.Viewmodel
+package com.diary.someday.viewModel
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.diary.someday.model.network.dto.request.user.SignIn
+import com.diary.someday.model.network.util.PreferenceUtils
+import com.diary.someday.model.repository.SignInRepository
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.regex.Pattern
 
 enum class TYPE {
@@ -20,9 +26,11 @@ enum class TYPE {
     PWD2FAIL
 }
 
-class SignInViewModel : ViewModel() {
+class SignInViewModel(private val repo: SignInRepository) : ViewModel() {
     private val emailValidation =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+
+    val code = MutableLiveData<Int>()
 
     private val _buttonState = MutableLiveData<Boolean>()
     val buttonState: LiveData<Boolean>
@@ -45,9 +53,19 @@ class SignInViewModel : ViewModel() {
         _buttonState.value = false
     }
 
-//    fun clickToast(type: String, context: Context) {
-//        Toast.makeText(context, "${type}이 클릭되었습니다.", Toast.LENGTH_SHORT).show()
-//    }
+    fun signIn(signIn: SignIn) {
+        repo.signIn(signIn).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (it.isSuccessful) {
+                    code.postValue(it.body()?.code)
+                    PreferenceUtils.token = it.body()?.token
+                } else {
+                    code.postValue(it.body()?.code)
+                }
+            }, {
+                Log.d("Error", it.message.toString())
+            })
+    }
 
     fun checkEmail(email: String) {
         val pattern = Pattern.matches(emailValidation, email) // 서로 패턴이 맞닝?
