@@ -1,21 +1,17 @@
 package com.diary.someday.model.repository
 
 import com.diary.someday.model.network.dao.DiaryService
-import com.diary.someday.model.network.dao.UserService
 import com.diary.someday.model.network.dto.request.diary.DiaryRequest
 import com.diary.someday.model.network.dto.request.diary.UpdateDiaryRequest
-import com.diary.someday.model.network.dto.response.Code
+import com.diary.someday.model.network.dto.response.PostIdResponse
 import com.diary.someday.model.network.dto.response.DateDiaryResponse
 import com.diary.someday.model.network.dto.response.DiaryListResponse
 import com.diary.someday.model.network.dto.response.MonthDiaryResponse
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
-import org.koin.androidx.compose.inject
 import retrofit2.Response
 
 class DiaryRepository(private val service: DiaryService) {
-    fun callCreateDiary(diaries: DiaryRequest) : Observable<Response<Code>> {
+    fun callCreateDiary(diaries: DiaryRequest) : Observable<Response<PostIdResponse>> {
         return service.createDiary(diaries)
     }
 
@@ -35,11 +31,11 @@ class DiaryRepository(private val service: DiaryService) {
         return service.getDateDiary(year, month, day)
     }
 
-    fun callUpdateDiary(post_id: String, updateDiaryRequest: UpdateDiaryRequest): Observable<Response<Code>> {
+    fun callUpdateDiary(post_id: String, updateDiaryRequest: UpdateDiaryRequest): Observable<Response<PostIdResponse>> {
         return service.updateDiary(post_id, updateDiaryRequest)
     }
 
-    fun callDeleteDiary(post_id: String): Observable<Response<Code>> {
+    fun callDeleteDiary(post_id: String): Observable<Response<PostIdResponse>> {
         return service.deleteDiary(post_id)
     }
 }

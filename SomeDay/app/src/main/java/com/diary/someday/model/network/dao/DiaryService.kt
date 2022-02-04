@@ -11,7 +11,7 @@ interface DiaryService {
 
     /* 일기 생성 */
     @POST("/diary")
-    fun createDiary(@Body diaries: DiaryRequest) : Observable<Response<Code>>
+    fun createDiary(@Body diaries: DiaryRequest) : Observable<Response<PostIdResponse>>
 
     /* 전체 일기 가져오기 */
     @GET("/diary")
@@ -31,9 +31,9 @@ interface DiaryService {
 
     /* 일기 수정 */
     @PATCH("/diary/{post_id}")
-    fun updateDiary(@Path("post_id") post_id: String, @Body updateDiaryRequest: UpdateDiaryRequest) : Observable<Response<Code>>
+    fun updateDiary(@Path("post_id") post_id: String, @Body updateDiaryRequest: UpdateDiaryRequest) : Observable<Response<PostIdResponse>>
 
     /* 일기 삭제 */
     @DELETE("/diary/{post_id}")
-    fun deleteDiary(@Path("post_id") post_id: String) : Observable<Response<Code>>
+    fun deleteDiary(@Path("post_id") post_id: String) : Observable<Response<PostIdResponse>>
 }

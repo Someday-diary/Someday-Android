@@ -1,9 +1,8 @@
 package com.diary.someday.model.repository
 
 import com.diary.someday.model.network.dao.UserService
-import com.diary.someday.model.network.dto.SignInResponse
+import com.diary.someday.model.network.dto.response.SignInResponse
 import com.diary.someday.model.network.dto.request.user.SignIn
-import com.google.gson.JsonElement
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Response
 

@@ -2,12 +2,9 @@ package com.diary.someday.viewModel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.diary.someday.model.network.util.Constants.API
 import com.diary.someday.model.network.dto.request.diary.DiaryRequest
 import com.diary.someday.model.network.dto.request.diary.UpdateDiaryRequest
 import com.diary.someday.model.network.dto.response.*
-import com.diary.someday.model.network.dao.DiaryService
-import com.diary.someday.model.network.RetrofitClient
 import com.diary.someday.model.repository.DiaryRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -19,7 +16,7 @@ class DiaryViewModel(private val repo: DiaryRepository) : ViewModel() {
     val diaryListLiveData = MutableLiveData<DiaryListResponse?>()
     val monthDiaryLiveData = MutableLiveData<MonthDiaryResponse?>()
     val dateDiaryLiveData = MutableLiveData<DateDiaryResponse?>()
-    val code = MutableLiveData<Code?>()
+    val code = MutableLiveData<PostIdResponse?>()
 
     private val disposable: CompositeDisposable by lazy {
         CompositeDisposable()
