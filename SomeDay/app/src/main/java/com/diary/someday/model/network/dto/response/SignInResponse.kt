@@ -1,4 +1,4 @@
-package com.diary.someday.model.network.dto
+package com.diary.someday.model.network.dto.response
 
 data class SignInResponse(
     val code: Int,
