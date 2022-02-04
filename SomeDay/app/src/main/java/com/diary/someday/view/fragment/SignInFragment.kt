@@ -12,20 +12,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.diary.someday.model.network.util.Enum.ResponseState
 import com.diary.someday.R
 import com.diary.someday.viewModel.SignInViewModel
-import com.diary.someday.model.network.RetrofitManager
 import com.diary.someday.view.activity.MainActivity
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentSignInBinding
 import com.diary.someday.model.network.dto.request.user.SignIn
-import com.diary.someday.model.network.util.PreferenceUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment() {
