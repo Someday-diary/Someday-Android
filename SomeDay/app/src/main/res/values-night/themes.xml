@@ -16,6 +16,7 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">false</item>
         <item name="colorControlActivated">@color/main_dark</item>
+        <item name="android:windowBackground">@color/background_darkMode</item>
     </style>
     <style name="TextColorLightDrawer">
         <item name="android:textColor">@color/light_textColor_drawer</item>
