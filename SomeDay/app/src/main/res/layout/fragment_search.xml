@@ -74,7 +74,6 @@
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginTop="100dp"
             android:text="# 검색 결과가 없습니다."
-            android:textColor="@color/black"
             android:textSize="15sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
