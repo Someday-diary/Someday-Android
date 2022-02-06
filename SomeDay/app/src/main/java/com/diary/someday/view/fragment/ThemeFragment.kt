@@ -123,19 +123,19 @@ class ThemeFragment : Fragment() {
                 binding.systemText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.main_theme
+                        R.color.green3
                     )
                 )
                 binding.lightText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.darkText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.system.setImageDrawable(
@@ -165,19 +165,19 @@ class ThemeFragment : Fragment() {
                 binding.systemText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.lightText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.main_theme
+                        R.color.green3
                     )
                 )
                 binding.darkText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.system.setImageDrawable(
@@ -207,19 +207,19 @@ class ThemeFragment : Fragment() {
                 binding.systemText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.lightText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.darkText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.main_theme
+                        R.color.green3
                     )
                 )
                 binding.system.setImageDrawable(
@@ -262,25 +262,25 @@ class ThemeFragment : Fragment() {
                 binding.blueLemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueBerryaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.lemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.grapefruitText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
             }
@@ -293,7 +293,7 @@ class ThemeFragment : Fragment() {
                 binding.mintChocoText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueLemonaidText.setTextColor(
@@ -305,19 +305,19 @@ class ThemeFragment : Fragment() {
                 binding.blueBerryaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.lemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.grapefruitText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
             }
@@ -330,13 +330,13 @@ class ThemeFragment : Fragment() {
                 binding.mintChocoText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueLemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueBerryaidText.setTextColor(
@@ -348,13 +348,13 @@ class ThemeFragment : Fragment() {
                 binding.lemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.grapefruitText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
             }
@@ -367,19 +367,19 @@ class ThemeFragment : Fragment() {
                 binding.mintChocoText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueLemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueBerryaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.lemonaidText.setTextColor(
@@ -391,7 +391,7 @@ class ThemeFragment : Fragment() {
                 binding.grapefruitText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
             }
@@ -404,25 +404,25 @@ class ThemeFragment : Fragment() {
                 binding.mintChocoText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueLemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.blueBerryaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.lemonaidText.setTextColor(
                     ContextCompat.getColor(
                         activity as Context,
-                        R.color.light_textColor_drawer
+                        R.color.text_color
                     )
                 )
                 binding.grapefruitText.setTextColor(

@@ -224,7 +224,7 @@ class SignInFragment : Fragment() {
             binding.buttonSignin.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
-                    R.color.white_dark
+                    R.color.text_color
                 )
             )
             binding.buttonSignin.isEnabled = false

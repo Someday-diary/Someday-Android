@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun getTheme(): Resources.Theme {
-        var theme = super.getTheme()
+        val theme = super.getTheme()
         when (Application.themeSettingColor.getThemeTypeColor()) {
             1 -> {
                 theme.applyStyle(R.style.GreenTheme, true)

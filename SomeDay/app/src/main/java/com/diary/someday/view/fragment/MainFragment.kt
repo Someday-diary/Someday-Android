@@ -2,6 +2,7 @@ package com.diary.someday.view.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -424,12 +425,22 @@ class MainFragment : Fragment() {
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState != BottomSheetBehavior.STATE_COLLAPSED) {
+                    if (Application.themeSetting.getThemeType() == 3) {
+                        binding.calendarLayout.listEdit.setTextColor(
+                            Color.WHITE
+                        )
+                    }
                     bottomSheet.background = ResourcesCompat.getDrawable(
                         resources,
                         R.drawable.background_bottom_sheet_sliding,
                         null
                     )
                 } else {
+                    if (Application.themeSetting.getThemeType() == 3) {
+                        binding.calendarLayout.listEdit.setTextColor(
+                            Color.BLACK
+                        )
+                    }
                     when (Application.themeSettingColor.getThemeTypeColor()) {
                         1 -> {
                             bottomSheet.background = ResourcesCompat.getDrawable(

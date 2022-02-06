@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".Fragment.SignUpFragment">
 
     <ImageView
@@ -25,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:text="이메일"
-        android:textColor="#B3C1CF"
+        android:textColor="@color/text_color"
         android:textSize="10dp"
         app:layout_constraintBottom_toTopOf="@+id/email_layout"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,8 +46,8 @@
             android:hint="이메일을 입력하세요."
             android:inputType="textEmailAddress"
             android:paddingStart="5dp"
-            android:textColor="@color/black_app"
-            android:textColorHint="#B3C1CF"
+            android:textColor="@color/text_color"
+            android:textColorHint="@color/text_color"
             android:textCursorDrawable="@drawable/ic_custom_cursor"
             android:textSize="16sp" />
 
@@ -72,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:text="인증번호"
-        android:textColor="#B3C1CF"
+        android:textColor="@color/text_color"
         android:textSize="10dp"
         app:layout_constraintBottom_toTopOf="@+id/sendNumber"
         app:layout_constraintStart_toStartOf="parent" />
@@ -86,8 +85,8 @@
         android:hint="인증번호를 입력하세요."
         android:inputType="number"
         android:paddingStart="5dp"
-        android:textColor="@color/black_app"
-        android:textColorHint="#B3C1CF"
+        android:textColor="@color/text_color"
+        android:textColorHint="@color/text_color"
         android:textCursorDrawable="@drawable/ic_custom_cursor"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +104,7 @@
         android:enabled="false"
         android:stateListAnimator="@null"
         android:text="다음"
-        android:textColor="@color/white_dark"
+        android:textColor="@color/text_color"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
