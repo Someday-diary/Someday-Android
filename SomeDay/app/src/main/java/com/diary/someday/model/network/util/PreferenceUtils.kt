@@ -11,6 +11,10 @@ object PreferenceUtils {
         preferences = context.getSharedPreferences("token", MODE_PRIVATE)
     }
 
+    fun delete() {
+        preferences.edit().clear().commit()
+    }
+
     var token: String?
         get() =
             preferences.getString("token", null)

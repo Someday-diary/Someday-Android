@@ -21,6 +21,7 @@ import com.diary.someday.view.activity.MainActivity
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentSignInBinding
 import com.diary.someday.model.network.dto.request.user.SignIn
+import com.diary.someday.model.network.util.PreferenceUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment() {
@@ -43,10 +44,17 @@ class SignInFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        autoLogin()
         bindingButton()
         errorCheck()
         loginCheck()
         observe()
+    }
+
+    private fun autoLogin() {
+        if (!PreferenceUtils.token.isNullOrEmpty()) {
+            startActivity(Intent(activity, MainActivity::class.java))
+        }
     }
 
     private fun observe() {
