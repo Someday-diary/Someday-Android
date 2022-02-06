@@ -134,14 +134,14 @@ class FeedbackFragment : Fragment() {
             if (hasFocus) {
                 binding.feedbackTitle.setTextColor(ContextCompat.getColor(requireContext(), colorId))
             } else {
-                binding.feedbackTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                binding.feedbackTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
             }
         }
         binding.feedbackContentEditText.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 binding.feedbackContent.setTextColor(ContextCompat.getColor(requireContext(), colorId))
             } else {
-                binding.feedbackContent.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                binding.feedbackContent.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_color))
             }
         }
     }

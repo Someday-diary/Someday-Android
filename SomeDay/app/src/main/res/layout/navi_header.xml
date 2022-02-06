@@ -12,8 +12,8 @@
         android:layout_marginBottom="30dp"
         android:layout_marginTop="95dp"
         android:fontFamily="@font/scdream4"
+        android:textColor="@color/text_color"
         android:text="오늘하루"
-        android:textColor="@color/black_app"
         android:textSize="26sp" />
 
 

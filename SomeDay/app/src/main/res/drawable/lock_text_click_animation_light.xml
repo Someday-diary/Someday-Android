@@ -11,7 +11,7 @@
                 android:height="60dp"/>
 
             <solid
-                android:color="@color/lock_background_color_light"/>
+                android:color="@color/background_color"/>
         </shape>
     </item>
 

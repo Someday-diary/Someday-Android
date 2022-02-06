@@ -118,7 +118,7 @@ class SignUpFragment : Fragment() {
                 binding.buttonSignup.setTextColor(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.white_dark
+                        R.color.text_color
                     )
                 )
                 binding.buttonSignup.isEnabled = false

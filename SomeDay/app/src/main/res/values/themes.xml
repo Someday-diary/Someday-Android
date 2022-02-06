@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SomeDay" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SomeDay" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/white</item>
@@ -15,23 +15,23 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">true</item>
-        <item name="colorControlActivated">@color/main_dark</item>
+        <item name="colorControlActivated">#64BDAA</item>
     </style>
     <style name="TextColorLightDrawer">
-        <item name="android:textColor">@color/light_textColor_drawer</item>
+        <item name="android:textColor">@color/textColor_drawer</item>
     </style>
     <style name="BackButtonStroke">
         <item name="android:strokeColor">@color/back_buttonColor_drawer</item>
     </style>
     <style name="TextColorDarkDrawer">
-        <item name="android:textColor">@color/dark_textColor_drawer</item>
+        <item name="android:textColor">@color/textColor_drawer</item>
     </style>
 
     <style name="LineForDrawer">
-        <item name="android:background">@color/line_lightMode_drawer</item>
+        <item name="android:background">@color/line_drawer</item>
     </style>
     <style name="BackgroundApp">
-        <item name="android:background">@color/background_lightMode</item>
+        <item name="android:background">@color/background_color</item>
     </style>
 
     <style name="AlarmAddButton">
@@ -50,11 +50,6 @@
     </style>
 
 
-
-
-
-
-
     <style name="toolbar_lock">
         <item name="android:background">@drawable/ic_back_light</item>
     </style>
@@ -65,15 +60,15 @@
 
     <style name="text_lock">
         <item name="android:background">@drawable/lock_text_click_animation_light</item>
-        <item name="android:textColor">@color/lock_text_light</item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <style name="text_lock_center">
-        <item name="android:textColor">@color/lock_text_light</item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <style name="background_lock">
-        <item name="android:background">@color/lock_background_color_light</item>
+        <item name="android:background">@color/background_color</item>
     </style>
 
     <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >

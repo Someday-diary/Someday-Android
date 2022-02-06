@@ -3,9 +3,9 @@
     <style name="Theme.SomeDay" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/background_darkMode</item>
-        <item name="colorOnPrimary">@color/background_darkMode</item>
-        <item name="colorPrimaryDark">@color/background_darkMode</item>
+        <item name="colorPrimaryVariant">@color/background_color</item>
+        <item name="colorOnPrimary">@color/background_color</item>
+        <item name="colorPrimaryDark">@color/background_color</item>
         <item name="navigationIcon">@drawable/ic_back_dark</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -15,11 +15,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">false</item>
-        <item name="colorControlActivated">@color/main_dark</item>
-        <item name="android:windowBackground">@color/background_darkMode</item>
+        <item name="colorControlActivated">#64BDAA</item>
+        <item name="android:windowBackground">@color/background_color</item>
     </style>
     <style name="TextColorLightDrawer">
-        <item name="android:textColor">@color/light_textColor_drawer</item>
+        <item name="android:textColor">@color/textColor_drawer</item>
     </style>
     <style name="BackButtonStroke">
         <item name="android:strokeColor">@color/back_buttonColor_drawer</item>
@@ -29,10 +29,10 @@
     </style>
 
     <style name="LineForDrawer">
-        <item name="android:background">@color/line_darkMode_drawer</item>
+        <item name="android:background">@color/line_drawer</item>
     </style>
     <style name="BackgroundApp">
-        <item name="android:background">@color/background_darkMode</item>
+        <item name="android:background">@color/background_color</item>
     </style>
 
     <style name="AlarmAddButton">
@@ -49,12 +49,6 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
     </style>
-
-
-
-
-
-
 
     <style name="toolbar_lock">
         <item name="android:background">@drawable/ic_back_dark</item>
@@ -74,7 +68,7 @@
     </style>
 
     <style name="background_lock">
-        <item name="android:background">@color/lock_background_color_dark</item>
+        <item name="android:background">@color/background_color</item>
     </style>
 
 </resources>
