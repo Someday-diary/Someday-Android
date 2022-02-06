@@ -30,6 +30,7 @@ import com.diary.someday.databinding.DrawerLayoutBinding
 import com.diary.someday.view.decoration.CalendarDecorator
 import com.diary.someday.viewModel.DiaryViewModel
 import com.diary.someday.di.application.Application
+import com.diary.someday.model.network.util.PreferenceUtils
 import com.diary.someday.view.activity.LoginActivity
 import com.diary.someday.viewModel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -569,6 +570,7 @@ class MainFragment : Fragment() {
             when (it) {
                 200 -> {
                     Toast.makeText(activity, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+                    PreferenceUtils.delete()
                     val intent = Intent(requireContext(), LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     startActivity(intent)
