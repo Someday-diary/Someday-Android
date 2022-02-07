@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -42,11 +43,12 @@ class MainFragment : Fragment() {
     private lateinit var drawerBinding: DrawerLayoutBinding
     private val viewModel: MainViewModel by viewModel()
     private val diaryViewModel: DiaryViewModel by viewModel()
+    private var backKeyPressedTime: Long = 0
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
-
+    private lateinit var callBack: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -612,5 +614,29 @@ class MainFragment : Fragment() {
         super.onDestroy()
         Log.d("TAG", "\n\n\nonDestroy: ")
         Application.lockNumber.delete()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callBack = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
+                    backKeyPressedTime = System.currentTimeMillis()
+                    Toast.makeText(activity, "뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
+                    activity?.moveTaskToBack(true)
+                    activity?.finishAndRemoveTask()
+                    android.os.Process.killProcess(android.os.Process.myPid())
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callBack.remove()
     }
 }
