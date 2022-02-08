@@ -2,6 +2,7 @@ package com.diary.someday.view.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -44,6 +45,7 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModel()
     private val diaryViewModel: DiaryViewModel by viewModel()
     private var backKeyPressedTime: Long = 0
+    val nightModeFlags = context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
@@ -428,7 +430,7 @@ class MainFragment : Fragment() {
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState != BottomSheetBehavior.STATE_COLLAPSED) {
-                    if (Application.themeSetting.getThemeType() == 3) {
+                    if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
                         binding.calendarLayout.listEdit.setTextColor(
                             Color.WHITE
                         )
@@ -439,7 +441,7 @@ class MainFragment : Fragment() {
                         null
                     )
                 } else {
-                    if (Application.themeSetting.getThemeType() == 3) {
+                    if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
                         binding.calendarLayout.listEdit.setTextColor(
                             Color.BLACK
                         )
