@@ -527,8 +527,9 @@ class MainFragment : Fragment() {
         diaryViewModel.callGetAllDiary()
         diaryViewModel.diaryListLiveData.observe(viewLifecycleOwner, {
             it?.posts?.forEach { posts ->
-                val day = Date(posts.date)
-                val cDay = CalendarDay(day)
+                val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+                val date: Date = formatter.parse(posts.date)
+                val cDay: CalendarDay = CalendarDay.from(date)
                 binding.calendarLayout.calendarView.addDecorators(
                     CalendarDecorator(
                         requireActivity(),
