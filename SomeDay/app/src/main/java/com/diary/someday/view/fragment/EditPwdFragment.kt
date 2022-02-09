@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.model.network.util.Constants.PWD_TYPE
 import com.diary.someday.R
@@ -23,7 +23,7 @@ import java.util.concurrent.Executor
 
 class EditPwdFragment : Fragment() {
     private lateinit var binding: FragmentEditPwdBinding
-    private lateinit var editPwdViewModel: EditPwdViewModel
+    private val editPwdViewModel: EditPwdViewModel by viewModels()
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
@@ -41,13 +41,24 @@ class EditPwdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEditPwdBinding.inflate(inflater, container, false)
-        editPwdViewModel = ViewModelProvider(this).get(EditPwdViewModel::class.java)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        changePassword()
+        bindingToolbar()
+        observe()
+        numberButton()
+    }
+
+    private fun changePassword() {
         if (Application.lockNumber.getAddType() == PWD_TYPE.CHANGE_LOCK) {
             binding.lockText.text = "기존의 비밀번호를 입력하세요."
         }
+    }
 
-
+    private fun bindingToolbar() {
         binding.toolbar.setNavigationOnClickListener {
             when (Application.lockNumber.getAddType()) {
                 PWD_TYPE.ENABLE_LOCK -> {
@@ -66,22 +77,23 @@ class EditPwdFragment : Fragment() {
                 }
             }
         }
+    }
 
-        editPwdViewModel.num1State.observe(activity as LifecycleOwner, {
+    private fun observe() = with(editPwdViewModel) {
+
+        num1State.observe(activity as LifecycleOwner, {
             changeCircle(1)
         })
 
-
-
-        editPwdViewModel.num2State.observe(activity as LifecycleOwner, {
+        num2State.observe(activity as LifecycleOwner, {
             changeCircle(2)
         })
 
-        editPwdViewModel.num3State.observe(activity as LifecycleOwner, {
+        num3State.observe(activity as LifecycleOwner, {
             changeCircle(3)
         })
 
-        editPwdViewModel.num4State.observe(activity as LifecycleOwner, {
+        num4State.observe(activity as LifecycleOwner, {
             when (Application.lockNumber.getAddType()) {
                 PWD_TYPE.ENABLE_LOCK -> {
                     editPwdViewModel.setPreference()
@@ -106,43 +118,43 @@ class EditPwdFragment : Fragment() {
             }
         })
 
-        editPwdViewModel.num1StateDelete.observe(activity as LifecycleOwner, {
+        num1StateDelete.observe(activity as LifecycleOwner, {
             changeCircle(0)
         })
 
-
-
-        editPwdViewModel.num2StateDelete.observe(activity as LifecycleOwner, {
+        num2StateDelete.observe(activity as LifecycleOwner, {
             changeCircle(1)
         })
 
-        editPwdViewModel.num3StateDelete.observe(activity as LifecycleOwner, {
+        num3StateDelete.observe(activity as LifecycleOwner, {
             changeCircle(2)
         })
 
-        editPwdViewModel.setAll.observe(activity as LifecycleOwner, {
+        setAll.observe(activity as LifecycleOwner, {
             Application.switchState.settingAll()
             findNavController().popBackStack()
         })
 
-        editPwdViewModel.changeText.observe(activity as LifecycleOwner, {
+        changeText.observe(activity as LifecycleOwner, {
             binding.lockText.text = it
         })
 
-        editPwdViewModel.changeTextError.observe(activity as LifecycleOwner, {
+        changeTextError.observe(activity as LifecycleOwner, {
             binding.lockText.text = it
         })
 
-        editPwdViewModel.check.observe(activity as LifecycleOwner, {
+        check.observe(activity as LifecycleOwner, {
             binding.lockText.text = "비밀번호를 입력하세요."
             changeCircle(0)
         })
 
-        editPwdViewModel.checkMain.observe(activity as LifecycleOwner, {
+        checkMain.observe(activity as LifecycleOwner, {
             Toast.makeText(activity, "인증했습니다.", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         })
+    }
 
+    private fun numberButton() {
         binding.number0.setOnClickListener { add(0) }
 
         binding.number1.setOnClickListener { add(1) }
@@ -164,8 +176,6 @@ class EditPwdFragment : Fragment() {
         binding.number9.setOnClickListener { add(9) }
 
         binding.eraseButton.setOnClickListener { remove() }
-
-        return binding.root
     }
 
     private fun add(num: Int) {
