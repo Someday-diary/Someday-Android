@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.diary.someday.R
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentThemeBinding
+import com.diary.someday.view.activity.MainActivity
+import android.content.Intent
 
 class ThemeFragment : Fragment() {
     lateinit var binding: FragmentThemeBinding
@@ -440,19 +442,29 @@ class ThemeFragment : Fragment() {
             1 -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    restartApp()
                 }
                 // 안드로이드 10 미만
                 else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
+                    restartApp()
                 }
             }
             2 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                restartApp()
             }
             3 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                restartApp()
             }
         }
+    }
+
+    private fun restartApp() {
+        val intent = Intent(activity!!.applicationContext, MainActivity::class.java)
+        startActivity(intent)
+        activity!!.finish()
     }
 
 
