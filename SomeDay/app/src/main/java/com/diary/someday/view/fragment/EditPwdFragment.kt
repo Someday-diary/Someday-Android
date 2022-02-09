@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
@@ -27,6 +28,8 @@ class EditPwdFragment : Fragment() {
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private var backKeyPressedTime: Long = 0
+    private lateinit var callBack: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -257,5 +260,34 @@ class EditPwdFragment : Fragment() {
             .build()
 
         biometricPrompt.authenticate(promptInfo)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callBack = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (Application.lockNumber.getAddType() == PWD_TYPE.CHECK_LOCK_MAIN) {
+                    if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
+                        backKeyPressedTime = System.currentTimeMillis()
+                        Toast.makeText(activity, "뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        return
+                    }
+                    if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
+                        activity?.moveTaskToBack(true)
+                        activity?.finishAndRemoveTask()
+                        android.os.Process.killProcess(android.os.Process.myPid())
+                    }
+                } else {
+                    findNavController().popBackStack()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callBack.remove()
     }
 }
