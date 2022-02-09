@@ -45,21 +45,13 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModel()
     private val diaryViewModel: DiaryViewModel by viewModel()
     private var backKeyPressedTime: Long = 0
-
-    private lateinit var executor: Executor
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private lateinit var callBack: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Application.switchState.getSettingAll()) {
-            if (Application.switchState.getBioSwitch()) {
-                biometric()
-            } else {
-                Application.lockNumber.addType(PWD_TYPE.CHECK_LOCK_MAIN)
-                findNavController().navigate(R.id.action_mainFragment_to_editPwdFragment)
-            }
+            Application.lockNumber.addType(PWD_TYPE.CHECK_LOCK_MAIN)
+            findNavController().navigate(R.id.action_mainFragment_to_editPwdFragment)
         }
     }
 
@@ -134,27 +126,6 @@ class MainFragment : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
-    }
-
-    private fun biometric() {
-        executor = ContextCompat.getMainExecutor(activity as Context)
-        biometricPrompt = BiometricPrompt(
-            requireActivity(), executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    Toast.makeText(activity as Context, "성공했어요.", Toast.LENGTH_SHORT).show()
-                    Application.lockNumber.done()
-                }
-            })
-
-        promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("생체 정보로 인증해주세요")
-            .setNegativeButtonText("비밀번호로 인증")
-            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.BIOMETRIC_WEAK)
-            .build()
-
-        biometricPrompt.authenticate(promptInfo)
     }
 
     private fun changeModeColor(number: Int) {

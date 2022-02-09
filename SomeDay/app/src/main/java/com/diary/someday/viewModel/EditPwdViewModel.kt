@@ -66,6 +66,10 @@ class EditPwdViewModel : ViewModel() {
         _num4.value = -1
     }
 
+    fun biometric() {
+        _checkMain.value = true
+    }
+
     fun addNumber(num: Int) {
         if (_num3.value != -1) {
             _num4.value = num

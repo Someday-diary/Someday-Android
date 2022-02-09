@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -17,14 +19,21 @@ import com.diary.someday.R
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentEditPwdBinding
 import com.diary.someday.viewModel.EditPwdViewModel
+import java.util.concurrent.Executor
 
 class EditPwdFragment : Fragment() {
     private lateinit var binding: FragmentEditPwdBinding
     private lateinit var editPwdViewModel: EditPwdViewModel
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Application.switchState.cancelNav()
+        if (Application.switchState.getBioSwitch()) {
+            biometric()
+        }
     }
 
     override fun onCreateView(
@@ -159,15 +168,15 @@ class EditPwdFragment : Fragment() {
         return binding.root
     }
 
-    fun add(num: Int) {
+    private fun add(num: Int) {
         editPwdViewModel.addNumber(num)
     }
 
-    fun remove() {
+    private fun remove() {
         editPwdViewModel.deleteNumber()
     }
 
-    fun changeCircle(num: Int) {
+    private fun changeCircle(num: Int) {
         Log.d("TAG", "changeCircle: 동그라미 수 $num")
         when (num) {
             0 -> {
@@ -215,5 +224,26 @@ class EditPwdFragment : Fragment() {
                 )
             }
         }
+    }
+
+    private fun biometric() {
+        executor = ContextCompat.getMainExecutor(activity as Context)
+        biometricPrompt = BiometricPrompt(
+            requireActivity(), executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    editPwdViewModel.biometric()
+                    Application.lockNumber.done()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("생체 정보로 인증해주세요")
+            .setNegativeButtonText("비밀번호로 인증")
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            .build()
+
+        biometricPrompt.authenticate(promptInfo)
     }
 }
