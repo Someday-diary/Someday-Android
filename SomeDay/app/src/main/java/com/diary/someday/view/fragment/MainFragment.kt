@@ -45,7 +45,6 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModel()
     private val diaryViewModel: DiaryViewModel by viewModel()
     private var backKeyPressedTime: Long = 0
-    val nightModeFlags = context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
@@ -426,6 +425,7 @@ class MainFragment : Fragment() {
 
     private fun bindingBottomSheetBehavior() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.calendarLayout.bottomSheet)
+        val nightModeFlags = context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
