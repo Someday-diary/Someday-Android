@@ -32,7 +32,9 @@ class EditPwdFragment : Fragment() {
         super.onCreate(savedInstanceState)
         Application.switchState.cancelNav()
         if (Application.switchState.getBioSwitch()) {
-            biometric()
+            if (Application.lockNumber.getAddType() == PWD_TYPE.CHECK_LOCK_MAIN) {
+                biometric()
+            }
         }
     }
 
