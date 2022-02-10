@@ -2,6 +2,7 @@ package com.diary.someday.view.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -44,21 +45,13 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModel()
     private val diaryViewModel: DiaryViewModel by viewModel()
     private var backKeyPressedTime: Long = 0
-
-    private lateinit var executor: Executor
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private lateinit var callBack: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Application.switchState.getSettingAll()) {
-            if (Application.switchState.getBioSwitch()) {
-                biometric()
-            } else {
-                Application.lockNumber.addType(PWD_TYPE.CHECK_LOCK_MAIN)
-                findNavController().navigate(R.id.action_mainFragment_to_editPwdFragment)
-            }
+            Application.lockNumber.addType(PWD_TYPE.CHECK_LOCK_MAIN)
+            findNavController().navigate(R.id.action_mainFragment_to_editPwdFragment)
         }
     }
 
@@ -133,27 +126,6 @@ class MainFragment : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
-    }
-
-    private fun biometric() {
-        executor = ContextCompat.getMainExecutor(activity as Context)
-        biometricPrompt = BiometricPrompt(
-            requireActivity(), executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    Toast.makeText(activity as Context, "성공했어요.", Toast.LENGTH_SHORT).show()
-                    Application.lockNumber.done()
-                }
-            })
-
-        promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("생체 정보로 인증해주세요")
-            .setNegativeButtonText("비밀번호로 인증")
-            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.BIOMETRIC_WEAK)
-            .build()
-
-        biometricPrompt.authenticate(promptInfo)
     }
 
     private fun changeModeColor(number: Int) {
@@ -424,11 +396,12 @@ class MainFragment : Fragment() {
 
     private fun bindingBottomSheetBehavior() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.calendarLayout.bottomSheet)
+        val nightModeFlags = context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState != BottomSheetBehavior.STATE_COLLAPSED) {
-                    if (Application.themeSetting.getThemeType() == 3) {
+                    if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
                         binding.calendarLayout.listEdit.setTextColor(
                             Color.WHITE
                         )
@@ -439,7 +412,7 @@ class MainFragment : Fragment() {
                         null
                     )
                 } else {
-                    if (Application.themeSetting.getThemeType() == 3) {
+                    if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
                         binding.calendarLayout.listEdit.setTextColor(
                             Color.BLACK
                         )
@@ -527,8 +500,9 @@ class MainFragment : Fragment() {
         diaryViewModel.callGetAllDiary()
         diaryViewModel.diaryListLiveData.observe(viewLifecycleOwner, {
             it?.posts?.forEach { posts ->
-                val day = Date(posts.date)
-                val cDay = CalendarDay(day)
+                val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+                val date: Date = formatter.parse(posts.date)
+                val cDay: CalendarDay = CalendarDay.from(date)
                 binding.calendarLayout.calendarView.addDecorators(
                     CalendarDecorator(
                         requireActivity(),

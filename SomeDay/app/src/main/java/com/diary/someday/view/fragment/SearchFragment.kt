@@ -133,8 +133,10 @@ class SearchFragment : Fragment() {
         binding.searchEditText.apply {
             setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    binding.searchEditText.clearFocus()
-                    search(binding.searchEditText.text.toString())
+                    if (!binding.searchEditText.text.isNullOrBlank()) {
+                        binding.searchEditText.clearFocus()
+                        search(binding.searchEditText.text.toString())
+                    }
                     return@OnEditorActionListener true
                 }
                 false

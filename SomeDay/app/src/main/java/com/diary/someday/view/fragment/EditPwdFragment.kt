@@ -8,23 +8,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.diary.someday.model.network.util.Constants.PWD_TYPE
 import com.diary.someday.R
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentEditPwdBinding
 import com.diary.someday.viewModel.EditPwdViewModel
+import java.util.concurrent.Executor
 
 class EditPwdFragment : Fragment() {
     private lateinit var binding: FragmentEditPwdBinding
-    private lateinit var editPwdViewModel: EditPwdViewModel
+    private val editPwdViewModel: EditPwdViewModel by viewModels()
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private var backKeyPressedTime: Long = 0
+    private lateinit var callBack: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Application.switchState.cancelNav()
+        if (Application.switchState.getBioSwitch()) {
+            if (Application.lockNumber.getAddType() == PWD_TYPE.CHECK_LOCK_MAIN) {
+                biometric()
+            }
+        }
     }
 
     override fun onCreateView(
@@ -32,13 +46,24 @@ class EditPwdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEditPwdBinding.inflate(inflater, container, false)
-        editPwdViewModel = ViewModelProvider(this).get(EditPwdViewModel::class.java)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        changePassword()
+        bindingToolbar()
+        observe()
+        numberButton()
+    }
+
+    private fun changePassword() {
         if (Application.lockNumber.getAddType() == PWD_TYPE.CHANGE_LOCK) {
             binding.lockText.text = "기존의 비밀번호를 입력하세요."
         }
+    }
 
-
+    private fun bindingToolbar() {
         binding.toolbar.setNavigationOnClickListener {
             when (Application.lockNumber.getAddType()) {
                 PWD_TYPE.ENABLE_LOCK -> {
@@ -57,22 +82,23 @@ class EditPwdFragment : Fragment() {
                 }
             }
         }
+    }
 
-        editPwdViewModel.num1State.observe(activity as LifecycleOwner, {
+    private fun observe() = with(editPwdViewModel) {
+
+        num1State.observe(activity as LifecycleOwner, {
             changeCircle(1)
         })
 
-
-
-        editPwdViewModel.num2State.observe(activity as LifecycleOwner, {
+        num2State.observe(activity as LifecycleOwner, {
             changeCircle(2)
         })
 
-        editPwdViewModel.num3State.observe(activity as LifecycleOwner, {
+        num3State.observe(activity as LifecycleOwner, {
             changeCircle(3)
         })
 
-        editPwdViewModel.num4State.observe(activity as LifecycleOwner, {
+        num4State.observe(activity as LifecycleOwner, {
             when (Application.lockNumber.getAddType()) {
                 PWD_TYPE.ENABLE_LOCK -> {
                     editPwdViewModel.setPreference()
@@ -97,43 +123,43 @@ class EditPwdFragment : Fragment() {
             }
         })
 
-        editPwdViewModel.num1StateDelete.observe(activity as LifecycleOwner, {
+        num1StateDelete.observe(activity as LifecycleOwner, {
             changeCircle(0)
         })
 
-
-
-        editPwdViewModel.num2StateDelete.observe(activity as LifecycleOwner, {
+        num2StateDelete.observe(activity as LifecycleOwner, {
             changeCircle(1)
         })
 
-        editPwdViewModel.num3StateDelete.observe(activity as LifecycleOwner, {
+        num3StateDelete.observe(activity as LifecycleOwner, {
             changeCircle(2)
         })
 
-        editPwdViewModel.setAll.observe(activity as LifecycleOwner, {
+        setAll.observe(activity as LifecycleOwner, {
             Application.switchState.settingAll()
             findNavController().popBackStack()
         })
 
-        editPwdViewModel.changeText.observe(activity as LifecycleOwner, {
+        changeText.observe(activity as LifecycleOwner, {
             binding.lockText.text = it
         })
 
-        editPwdViewModel.changeTextError.observe(activity as LifecycleOwner, {
+        changeTextError.observe(activity as LifecycleOwner, {
             binding.lockText.text = it
         })
 
-        editPwdViewModel.check.observe(activity as LifecycleOwner, {
+        check.observe(activity as LifecycleOwner, {
             binding.lockText.text = "비밀번호를 입력하세요."
             changeCircle(0)
         })
 
-        editPwdViewModel.checkMain.observe(activity as LifecycleOwner, {
+        checkMain.observe(activity as LifecycleOwner, {
             Toast.makeText(activity, "인증했습니다.", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         })
+    }
 
+    private fun numberButton() {
         binding.number0.setOnClickListener { add(0) }
 
         binding.number1.setOnClickListener { add(1) }
@@ -155,19 +181,17 @@ class EditPwdFragment : Fragment() {
         binding.number9.setOnClickListener { add(9) }
 
         binding.eraseButton.setOnClickListener { remove() }
-
-        return binding.root
     }
 
-    fun add(num: Int) {
+    private fun add(num: Int) {
         editPwdViewModel.addNumber(num)
     }
 
-    fun remove() {
+    private fun remove() {
         editPwdViewModel.deleteNumber()
     }
 
-    fun changeCircle(num: Int) {
+    private fun changeCircle(num: Int) {
         Log.d("TAG", "changeCircle: 동그라미 수 $num")
         when (num) {
             0 -> {
@@ -215,5 +239,55 @@ class EditPwdFragment : Fragment() {
                 )
             }
         }
+    }
+
+    private fun biometric() {
+        executor = ContextCompat.getMainExecutor(activity as Context)
+        biometricPrompt = BiometricPrompt(
+            requireActivity(), executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    editPwdViewModel.biometric()
+                    Application.lockNumber.done()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("생체 정보로 인증해주세요")
+            .setNegativeButtonText("비밀번호로 인증")
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.BIOMETRIC_WEAK)
+            .build()
+
+        biometricPrompt.authenticate(promptInfo)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callBack = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (Application.lockNumber.getAddType() == PWD_TYPE.CHECK_LOCK_MAIN) {
+                    if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
+                        backKeyPressedTime = System.currentTimeMillis()
+                        Toast.makeText(activity, "뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        return
+                    }
+                    if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
+                        activity?.moveTaskToBack(true)
+                        activity?.finishAndRemoveTask()
+                        android.os.Process.killProcess(android.os.Process.myPid())
+                    }
+                } else {
+                    findNavController().popBackStack()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callBack.remove()
     }
 }

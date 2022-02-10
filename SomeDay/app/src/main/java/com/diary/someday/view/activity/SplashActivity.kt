@@ -1,8 +1,10 @@
 package com.diary.someday.view.activity
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.diary.someday.R
 import com.diary.someday.di.application.Application
@@ -17,6 +19,7 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        changeMode()
         changeModeColor(Application.themeSettingColor.getThemeTypeColor())
 
         startLoading()
@@ -77,6 +80,26 @@ class SplashActivity : AppCompatActivity() {
                     )
                 )
                 binding.splashText.setTextColor(ContextCompat.getColor(this, R.color.red3))
+            }
+        }
+    }
+
+    private fun changeMode() {
+        when (Application.themeSetting.getThemeType()) {
+            1 -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
+                // 안드로이드 10 미만
+                else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
+                }
+            }
+            2 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            3 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
     }
