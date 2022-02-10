@@ -80,12 +80,21 @@
         <entry key="..\:/Users/Dubu/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/navi_menu_yellow.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/Dubu/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/toolbar_menu_diary.xml" value="0.34791666666666665" />
         <entry key="..\:/Users/Dubu/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/toolbar_menu_main.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/animation.xml" value="0.3194444444444444" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_dark.xml" value="0.396875" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_handle_blue.xml" value="0.41510416666666666" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_handle_purple.xml" value="0.40260416666666665" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_handle_red.xml" value="0.40260416666666665" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_handle_yello.xml" value="0.40260416666666665" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_sliding.xml" value="0.40260416666666665" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_view.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet_yellow.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_dialog.xml" value="0.33055555555555555" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/bluelemonaid_radio.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/checkbox.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/circle_selected_green.xml" value="0.33055555555555555" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/circle_selected_red.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/custom_feedback_edittext.xml" value="0.40260416666666665" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/custom_search_edittext.xml" value="0.12222222222222222" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/custom_search_edittext_blue.xml" value="0.12222222222222222" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/custom_search_edittext_green.xml" value="0.28703703703703703" />
@@ -99,13 +108,79 @@
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_back_purple.xml" value="0.12222222222222222" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_back_yellow.xml" value="0.12222222222222222" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_blueberryaid_theme.xml" value="0.28703703703703703" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_blueberryaid_theme_selected.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_bluelemonaid_theme_selected.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_calendar_decoration_green.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_checkbox_selected.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_checkbox_unselected.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_clear.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_custom_cursor.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_custom_cursor_blue.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_dark.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_dark_selected.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_divider.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_erase_button.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_erase_button_dark.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_erase_button_light.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_feedback_drawer_blue.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_grapefruit_theme.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_icon_red.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_info_drawer_yellow.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_left.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_lemonaid_theme.xml" value="0.3194444444444444" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_light.xml" value="0.3194444444444444" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_lock_drawer_red.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_login_button_abled_blue.xml" value="0.262037037037037" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_login_button_abled_green.xml" value="0.33055555555555555" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_login_button_abled_purple.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_login_button_enabled.xml" value="0.32314814814814813" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_logout_blue.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_logout_purple.xml" value="0.18796296296296297" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_logout_red.xml" value="0.18703703703703703" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_logout_yellow.xml" value="0.18796296296296297" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_memu.xml" value="0.21979166666666666" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_right.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_search.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_send_email.xml" value="0.32314814814814813" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_system.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_system_selected.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_theme_drawer_purple.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_theme_drawer_yellow.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/lock_circle_selected.xml" value="0.26296296296296295" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/lock_text_click_animation_dark.xml" value="0.26296296296296295" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/lock_text_click_animation_light.xml" value="0.26296296296296295" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/red.xml" value="0.12222222222222222" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/selector_feedback_edittext_blue.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/selector_feedback_edittext_green.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/selector_feedback_edittext_purple.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/selector_feedback_edittext_red.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/selector_feedback_edittext_yellow.xml" value="0.40260416666666665" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/switch_thumb.xml" value="0.1" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/switch_track_off.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/switch_track_on.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/switch_track_selector.xml" value="0.384375" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/activity_login.xml" value="0.2046875" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/activity_main.xml" value="0.1879432624113475" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/activity_splash.xml" value="0.36822916666666666" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/drawer_layout.xml" value="0.22" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/drawer_navi.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_add_alarm.xml" value="0.36822916666666666" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_alarm.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_app_info.xml" value="0.1787037037037037" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_diary.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_diary_dialog.xml" value="0.36822916666666666" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_edit_pwd.xml" value="0.22037037037037038" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_feedback.xml" value="0.33" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_lock.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_main.xml" value="0.3401268115942029" />
-        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_search.xml" value="0.15925925925925927" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_search.xml" value="0.33" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_sign_in.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_sign_up.xml" value="0.36822916666666666" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_sign_up_pwd.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_theme.xml" value="0.1787037037037037" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/item_date.xml" value="0.1787037037037037" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/item_month.xml" value="0.36822916666666666" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/item_search.xml" value="0.36231884057971014" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/layout_calendar.xml" value="0.2" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/navi_header.xml" value="0.3401268115942029" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/navi_menu_blue.xml" value="0.38645833333333335" />
@@ -113,7 +188,8 @@
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/navi_menu_purple.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/navi_menu_red.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/navi_menu_yellow.xml" value="0.38645833333333335" />
-        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/toolbar_menu_main.xml" value="0.125" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/toolbar_menu_diary.xml" value="0.21875" />
+        <entry key="..\:/Users/MinHyukJi/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/toolbar_menu_main.xml" value="0.25" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37846153846153846" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/animation.xml" value="0.384375" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/background_bottom_sheet.xml" value="0.37846153846153846" />
@@ -125,8 +201,6 @@
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/circle_selected_green.xml" value="0.2875" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/exist_diary_decorator.xml" value="0.384375" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_calendar_decoration.xml" value="0.36018518518518516" />
-        <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_calendar_decoration_yellow.xml" value="0.21944444444444444" />
-        <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_check.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_icon.xml" value="0.375" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_memu.xml" value="0.37846153846153846" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/drawable/ic_subtract.xml" value="0.384375" />
@@ -142,10 +216,8 @@
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_diary_dialog.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_main.xml" value="0.25" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_search.xml" value="0.36822916666666666" />
-        <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_sign_up_pwd.xml" value="0.36822916666666666" />
-        <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/fragment_theme.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/item_diarylist.xml" value="0.36822916666666666" />
-        <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/layout_calendar.xml" value="0.4432601880877743" />
+        <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/layout_calendar.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/layout/navi_header.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/menu_sidebar.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/Minhyuk/Documents/GitHub/Someday-Android/SomeDay/app/src/main/res/menu/toolbar_menu.xml" value="0.36822916666666666" />

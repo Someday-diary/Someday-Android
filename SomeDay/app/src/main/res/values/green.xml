@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="GreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="GreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/white</item>
@@ -15,8 +15,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">true</item>
-        <item name="colorControlActivated">@color/main_dark</item>
-
+        <item name="colorControlActivated">@color/green3</item>
+        <item name="android:windowBackground">@color/background_color</item>
     </style>
 
 </resources>

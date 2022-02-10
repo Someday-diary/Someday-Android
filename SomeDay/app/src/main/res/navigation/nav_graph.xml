@@ -7,35 +7,70 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.diary.someday.fragment.MainFragment"
+        android:name="com.diary.someday.view.fragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_diaryFragment"
-            app:destination="@id/diaryFragment" />
+            app:destination="@id/diaryFragment"
+            app:enterAnim="@anim/transition_slide_in"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out"    />
         <action
             android:id="@+id/action_mainFragment_to_themeFragment"
-            app:destination="@id/themeFragment" />
+            app:destination="@id/themeFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_alarmFragment"
-            app:destination="@id/alarmFragment" />
+            app:destination="@id/alarmFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_lockFragment"
-            app:destination="@id/lockFragment" />
+            app:destination="@id/lockFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/transition_slide_up"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_down" />
         <action
             android:id="@+id/action_mainFragment_to_editPwdFragment"
-            app:destination="@id/editPwdFragment" />
+            app:destination="@id/editPwdFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_appInfoFragment"
-            app:destination="@id/appInfoFragment" />
+            app:destination="@id/appInfoFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
+        <action
+            android:id="@+id/action_mainFragment_to_feedbackFragment"
+            app:destination="@id/feedbackFragment"
+            app:enterAnim="@anim/transition_slide_in_left"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out_left"/>
     </fragment>
 
     <fragment
         android:id="@+id/diaryFragment"
-        android:name="com.diary.someday.fragment.DiaryFragment"
+        android:name="com.diary.someday.view.fragment.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" >
         <action
@@ -94,17 +129,26 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.diary.someday.fragment.SearchFragment"
+        android:name="com.diary.someday.view.fragment.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/transition_slide_in"
+            app:exitAnim="@anim/transition_fade_out"
+            app:popEnterAnim="@anim/transition_fade_in"
+            app:popExitAnim="@anim/transition_slide_out" />
     </fragment>
     <fragment
         android:id="@+id/appInfoFragment"
-        android:name="com.diary.someday.fragment.AppInfoFragment"
+        android:name="com.diary.someday.view.fragment.AppInfoFragment"
         android:label="fragment_app_info"
         tools:layout="@layout/fragment_app_info" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.diary.someday.view.fragment.FeedbackFragment"
+        android:label="fragment_feedback"
+        tools:layout="@layout/fragment_feedback" />
 
 </navigation>

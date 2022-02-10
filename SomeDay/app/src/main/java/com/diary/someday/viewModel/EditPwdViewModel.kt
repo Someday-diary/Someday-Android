@@ -3,8 +3,8 @@ package com.diary.someday.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.diary.someday.Constants.PWD_TYPE
-import com.diary.someday.application.Application
+import com.diary.someday.model.network.util.Constants.PWD_TYPE
+import com.diary.someday.di.application.Application
 
 class EditPwdViewModel : ViewModel() {
     private val _num1 = MutableLiveData<Int>()
@@ -64,6 +64,10 @@ class EditPwdViewModel : ViewModel() {
         _num2.value = -1
         _num3.value = -1
         _num4.value = -1
+    }
+
+    fun biometric() {
+        _checkMain.value = true
     }
 
     fun addNumber(num: Int) {

@@ -24,8 +24,41 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu_green" >
 
-        app:menu="@menu/navi_menu_green" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logoutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/logout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/logout_txt"
+                        android:textSize="18sp"
+                        android:textColor="@color/text_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="로그아웃"/>
+
+                    <ImageView
+                        android:id="@+id/logout_img"
+                        android:layout_marginStart="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_logout_green"/>
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

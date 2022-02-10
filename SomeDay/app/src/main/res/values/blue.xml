@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="BlueTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="BlueTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/white</item>
@@ -16,7 +16,7 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="colorControlActivated">@color/blue3</item>
-
+        <item name="android:windowBackground">@color/background_color</item>
     </style>
 
 </resources>

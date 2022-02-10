@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.DiaryDialogFragment"
+    tools:context=".view.fragment.DiaryDialogFragment"
     android:background="@drawable/background_dialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +53,7 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="확인"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="7dp"

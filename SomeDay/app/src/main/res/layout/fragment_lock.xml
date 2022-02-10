@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.LockFragment">
+    tools:context=".view.fragment.LockFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="잠금 설정"
-            android:textColor="@color/black_app"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="생체 인증 사용"
-            android:textColor="@color/black_app"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/changePassword"
-        android:background="@drawable/animation"
         android:layout_width="match_parent"
         android:layout_height="41dp">
 
@@ -95,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="비밀번호 변경"
-            android:textColor="@color/black_app"
+            android:textColor="@color/text_color"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

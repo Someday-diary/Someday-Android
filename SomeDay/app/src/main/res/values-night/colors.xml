@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF3C3C3C</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="green1">#89D9C8</color>
+    <color name="green2">#E1F5F1</color>
+    <color name="green3">#64BDAA</color>
+
+    <color name="blue1">#83ADFF</color>
+    <color name="blue2">#E0EBFF</color>
+    <color name="blue3">#588BEF</color>
+
+    <color name="purple1">#B28AF4</color>
+    <color name="purple2">#E4D5FB</color>
+    <color name="purple3">#9158EF</color>
+
+    <color name="yellow1">#F9E370</color>
+    <color name="yellow2">#FDF7D4</color>
+    <color name="yellow3">#F5CE00</color>
+
+    <color name="red1">#F27979</color>
+    <color name="red2">#FBD5D5</color>
+    <color name="red3">#EF5858</color>
+
+    <color name="background_color">#232734</color>
+    <color name="text_color">#B3C1CF</color>
+    <color name="title_text_color">#FFFFFF</color>
+
+    <color name="switch_track_off">#E4E4E4</color>
+
+    <color name="textColor_drawer">#2D475F</color>
+    <color name="back_buttonColor_drawer">#486279</color>
+    <color name="line_drawer">#0E1624</color>
+
+    <color name="alram_main_theme">#5F6D89</color>
+
+</resources>

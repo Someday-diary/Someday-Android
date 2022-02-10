@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.AppInfoFragment">
+    tools:context=".view.fragment.AppInfoFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="앱 정보"
+            android:textColor="@color/title_text_color"
             android:textSize="16sp"
             tools:text="title" />
 
@@ -47,7 +48,7 @@
             android:id="@+id/app_info_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:layout_marginTop="20dp"
             tools:text="앱 버전 : 1.0.1"
             app:layout_constraintTop_toBottomOf="@id/app_info_img"
