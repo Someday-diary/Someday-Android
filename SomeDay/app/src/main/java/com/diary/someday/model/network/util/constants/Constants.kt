@@ -1,4 +1,4 @@
-package com.diary.someday.model.network.util.Constants
+package com.diary.someday.model.network.util.constants
 
 object API {
     const val BASE_URL: String = "http://15.165.88.215:8080/"

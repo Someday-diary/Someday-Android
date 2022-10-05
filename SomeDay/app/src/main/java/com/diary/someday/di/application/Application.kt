@@ -1,10 +1,10 @@
 package com.diary.someday.di.application
 
 import android.app.Application
-import com.diary.someday.di.repositoryModule
-import com.diary.someday.di.roomModule
-import com.diary.someday.di.serviceModule
-import com.diary.someday.di.viewModelModule
+import com.diary.someday.di.module.repositoryModule
+import com.diary.someday.di.module.roomModule
+import com.diary.someday.di.module.serviceModule
+import com.diary.someday.di.module.viewModelModule
 import com.diary.someday.model.sharedpreferences.SignInCheck
 import com.diary.someday.model.network.util.PreferenceUtils
 import com.yademos.someday.SharedPreferences.*

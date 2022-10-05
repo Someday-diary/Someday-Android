@@ -1,4 +1,4 @@
-package com.diary.someday.Fragment
+package com.diary.someday.view.fragment
 
 import android.os.Bundle
 import android.text.Editable

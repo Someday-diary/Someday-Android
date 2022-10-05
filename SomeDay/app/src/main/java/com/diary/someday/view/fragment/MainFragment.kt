@@ -27,13 +27,14 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
-import com.diary.someday.model.network.util.Constants.PWD_TYPE
+import com.diary.someday.model.network.util.constants.PWD_TYPE
 import com.diary.someday.databinding.DrawerLayoutBinding
 import com.diary.someday.view.decoration.CalendarDecorator
 import com.diary.someday.viewModel.DiaryViewModel
 import com.diary.someday.di.application.Application
 import com.diary.someday.model.network.util.PreferenceUtils
 import com.diary.someday.view.activity.LoginActivity
+import com.diary.someday.view.activity.MainActivity
 import com.diary.someday.viewModel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.Executor

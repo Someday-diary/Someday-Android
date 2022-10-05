@@ -1,4 +1,4 @@
-package com.diary.someday.model.network.util.Enum
+package com.diary.someday.model.network.util.enum
 
 enum class AgreeType {
     N,

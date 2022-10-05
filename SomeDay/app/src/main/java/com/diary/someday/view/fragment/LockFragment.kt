@@ -1,4 +1,4 @@
-package com.yademos.someday.fragment
+package com.diary.someday.view.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.navigation.fragment.findNavController
-import com.diary.someday.model.network.util.Constants.PWD_TYPE
+import com.diary.someday.model.network.util.constants.PWD_TYPE
 import com.diary.someday.R
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentLockBinding

@@ -1,4 +1,4 @@
-package com.yademos.someday.fragment
+package com.diary.someday.view.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
-import com.diary.someday.model.network.util.Constants.PWD_TYPE
+import com.diary.someday.model.network.util.constants.PWD_TYPE
 import com.diary.someday.R
 import com.diary.someday.di.application.Application
 import com.diary.someday.databinding.FragmentEditPwdBinding
@@ -86,19 +86,19 @@ class EditPwdFragment : Fragment() {
 
     private fun observe() = with(editPwdViewModel) {
 
-        num1State.observe(activity as LifecycleOwner, {
+        num1State.observe(activity as LifecycleOwner) {
             changeCircle(1)
-        })
+        }
 
-        num2State.observe(activity as LifecycleOwner, {
+        num2State.observe(activity as LifecycleOwner) {
             changeCircle(2)
-        })
+        }
 
-        num3State.observe(activity as LifecycleOwner, {
+        num3State.observe(activity as LifecycleOwner) {
             changeCircle(3)
-        })
+        }
 
-        num4State.observe(activity as LifecycleOwner, {
+        num4State.observe(activity as LifecycleOwner) {
             when (Application.lockNumber.getAddType()) {
                 PWD_TYPE.ENABLE_LOCK -> {
                     editPwdViewModel.setPreference()
@@ -121,42 +121,42 @@ class EditPwdFragment : Fragment() {
                     changeCircle(0)
                 }
             }
-        })
+        }
 
-        num1StateDelete.observe(activity as LifecycleOwner, {
+        num1StateDelete.observe(activity as LifecycleOwner) {
             changeCircle(0)
-        })
+        }
 
-        num2StateDelete.observe(activity as LifecycleOwner, {
+        num2StateDelete.observe(activity as LifecycleOwner) {
             changeCircle(1)
-        })
+        }
 
-        num3StateDelete.observe(activity as LifecycleOwner, {
+        num3StateDelete.observe(activity as LifecycleOwner) {
             changeCircle(2)
-        })
+        }
 
-        setAll.observe(activity as LifecycleOwner, {
+        setAll.observe(activity as LifecycleOwner) {
             Application.switchState.settingAll()
             findNavController().popBackStack()
-        })
+        }
 
-        changeText.observe(activity as LifecycleOwner, {
+        changeText.observe(activity as LifecycleOwner) {
             binding.lockText.text = it
-        })
+        }
 
-        changeTextError.observe(activity as LifecycleOwner, {
+        changeTextError.observe(activity as LifecycleOwner) {
             binding.lockText.text = it
-        })
+        }
 
-        check.observe(activity as LifecycleOwner, {
+        check.observe(activity as LifecycleOwner) {
             binding.lockText.text = "비밀번호를 입력하세요."
             changeCircle(0)
-        })
+        }
 
-        checkMain.observe(activity as LifecycleOwner, {
+        checkMain.observe(activity as LifecycleOwner) {
             Toast.makeText(activity, "인증했습니다.", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
-        })
+        }
     }
 
     private fun numberButton() {

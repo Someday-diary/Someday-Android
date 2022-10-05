@@ -1,4 +1,4 @@
-package com.diary.someday.Fragment
+package com.diary.someday.view.fragment
 
 import android.content.Context
 import android.content.Intent

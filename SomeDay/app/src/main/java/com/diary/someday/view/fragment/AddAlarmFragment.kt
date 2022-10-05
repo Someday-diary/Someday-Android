@@ -1,4 +1,4 @@
-package com.yademos.someday.fragment
+package com.diary.someday.view.fragment
 
 import android.content.Context
 import android.os.Bundle

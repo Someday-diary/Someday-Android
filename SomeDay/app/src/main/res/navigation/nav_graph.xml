@@ -100,7 +100,7 @@
     </fragment>
     <fragment
         android:id="@+id/alarmFragment"
-        android:name="com.yademos.someday.fragment.AlarmFragment"
+        android:name="com.diary.someday.view.fragment.AlarmFragment"
         android:label="fragment_alarm"
         tools:layout="@layout/fragment_alarm" >
         <action
@@ -109,7 +109,7 @@
     </fragment>
     <fragment
         android:id="@+id/lockFragment"
-        android:name="com.yademos.someday.fragment.LockFragment"
+        android:name="com.diary.someday.view.fragment.LockFragment"
         android:label="fragment_lock"
         tools:layout="@layout/fragment_lock" >
         <action
@@ -118,12 +118,12 @@
     </fragment>
     <fragment
         android:id="@+id/addAlarmFragment"
-        android:name="com.yademos.someday.fragment.AddAlarmFragment"
+        android:name="com.diary.someday.view.fragment.AddAlarmFragment"
         android:label="fragment_add_alarm"
         tools:layout="@layout/fragment_add_alarm" />
     <fragment
         android:id="@+id/editPwdFragment"
-        android:name="com.yademos.someday.fragment.EditPwdFragment"
+        android:name="com.diary.someday.view.fragment.EditPwdFragment"
         android:label="fragment_edit_pwd"
         tools:layout="@layout/fragment_edit_pwd" >
     </fragment>
