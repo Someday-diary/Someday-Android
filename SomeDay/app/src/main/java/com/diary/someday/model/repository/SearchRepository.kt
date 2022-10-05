@@ -1,4 +1,4 @@
-package com.diary.someday.viewModel.repository
+package com.diary.someday.model.repository
 
 import androidx.annotation.WorkerThread
 import com.diary.someday.model.db.Search
